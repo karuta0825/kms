@@ -1,0 +1,32 @@
+
+.default {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 400px;
+  background: #e0e0e0;
+  z-index: 9999;
+  transform: translateX(105%);
+  transition: all 300ms 0s ease;
+  overflow-y: scroll;
+}
+
+.open {
+  transform: translateX(0%);
+}
+
+.subheader {
+  display: flex;
+  align-items: center;
+  background: #bdbdbd !important;
+}
+
+.subheaderIcon {
+  font-style: bold;
+}
+
+.subheaderText {
+  font-weight: bold;
+  margin-left: 10px;
+}

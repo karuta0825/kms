@@ -1,0 +1,16 @@
+.wrapper {
+  width: 100%;
+  height: calc(99% - 64px);
+  display: flex;
+}
+
+.userinfo {
+  flex: 1;
+  height: 100%;
+  margin: 0 30px 0 20px;
+}
+
+.memo {
+  width: 300px;
+  height: 100%;
+}

@@ -1,0 +1,22 @@
+.delete {
+  margin-right: 20px !important;
+}
+
+.buttonIcon {
+  margin-right: 10px !important;
+}
+
+.filter {
+  margin-right: 20px !important;
+}
+
+.filterText {
+  position: absolute;
+  left: 5px;
+  top: -22px;
+  margin: 0;
+}
+
+.filterInput__textInput {
+  width: 250px;
+}
