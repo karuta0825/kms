@@ -95,7 +95,7 @@ function KidTable(props: PropsType): React.Node {
       columns={columns}
       filterable
       defaultFilterMethod={(filter, row) => (
-        row[filter.id] && row[filter.id].indexOf(filter.value) !== -1
+        row[filter.id] && String(row[filter.id]).indexOf(filter.value) !== -1
       )}
       defaultPageSize={30}
       style={{
