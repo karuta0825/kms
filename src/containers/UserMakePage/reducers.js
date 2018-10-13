@@ -6,6 +6,7 @@ import {
   POST_MAKE_USER,
   SUCCESSED_MAKE_USER,
   INPUT_KID,
+  TOGGLE_DIALOG,
 } from '../../constants/ActionTypes';
 import initState from '../../initState';
 
@@ -22,6 +23,7 @@ type StateType = {
   showVersion: boolean,
   showServer: boolean,
   showKid: boolean,
+  showDialog: boolean,
   canMakeUser: boolean,
   inputValues: inputType,
 };
@@ -137,11 +139,43 @@ export const showKid = (
   }
 };
 
+export const showDialog = (
+  state: boolean,
+  action: Action,
+): boolean => {
+  const { type, payload } = action;
+  switch (type) {
+    case SUCCESSED_MAKE_USER:
+      return true;
+    case TOGGLE_DIALOG:
+      return payload;
+    default:
+      return state;
+  }
+};
+
+export const showKID = (
+  state: string,
+  action: Action,
+): boolean => {
+  const { type, payload } = action;
+  switch (type) {
+    case SUCCESSED_MAKE_USER:
+      return `${payload}が作成されました`;
+    case TOGGLE_DIALOG:
+      return '';
+    default:
+      return state;
+  }
+}
+
 // reducer結合
 export default (state: StateType = userMakePage, action: Action) => ({
   inputValues: inputValues(state.inputValues, action),
   showVersion: showVersion(state.showVersion, action),
   showServer: showServer(state.showServer, action, state),
   showKid: showKid(state.showKid, action),
+  showDialog: showDialog(state.showDialog, action),
   canMakeUser: canMakeUser(state.canMakeUser, action, state),
+  makedUserKID: showKID(state.makedUserKID, action),
 });

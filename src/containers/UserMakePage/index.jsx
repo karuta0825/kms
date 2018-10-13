@@ -7,6 +7,7 @@ import SelectVersion from './SelectVersion';
 import SelectServer from './SelectServer';
 import InputKid from './InputKid';
 import MakeButton from './MakeButton';
+import Dialog from './DialogFinish';
 import styles from './css/index.css';
 
 type PropsType = {
@@ -33,6 +34,7 @@ const UserMake = (props: PropsType): React.Node => {
           <MakeButton>作成</MakeButton>
         </div>
       </Paper>
+      <Dialog />
     </div>
   );
 };

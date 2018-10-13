@@ -7,6 +7,7 @@ import {
   SHOW_SERVER,
   INPUT_KID,
   POST_MAKE_USER,
+  TOGGLE_DIALOG,
 } from '../../constants/ActionTypes';
 
 
@@ -38,6 +39,11 @@ export const selectServer = (server: string) => ({
 export const inputKid = (kid: string) => ({
   type: INPUT_KID,
   payload: kid,
+});
+
+export const toggleDialog = (isOpen: boolean) => ({
+  type: TOGGLE_DIALOG,
+  payload: isOpen,
 });
 
 // どうやってstateの値を渡せるか?

@@ -33,9 +33,8 @@ type Action = {
 function* makeUser(action: Action)
 : Generator<Object, void, { done: boolean, value: any }> {
   try {
-    // const data = yield call(Api.makeUser, payload);
     yield call(delay, 3000);
-    yield put({ type: SUCCESSED_MAKE_USER });
+    yield put({ type: SUCCESSED_MAKE_USER, payload: 'KID88888' });
   } catch (e) {
     yield put({ type: FAILED_MAKE_USER, e });
   }

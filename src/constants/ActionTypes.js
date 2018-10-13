@@ -17,6 +17,7 @@ export const SELECT_SERVER = 'SELECT_SERVER';
 export const SHOW_VERSION = 'SHOW_VERSION';
 export const SHOW_SERVER = 'SHOW_SERVER';
 export const INPUT_KID = 'INPUT_KID';
+export const TOGGLE_DIALOG = 'TOGGLE_DIALOG';
 
 // REGISTER USER PAGE
 export const READY_FOR_UPLOAD = 'READY_FOR_UPLOAD';
