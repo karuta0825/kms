@@ -85,7 +85,11 @@ export type MobileType = {
 };
 
 export type EnvironmentType = {
-
+  id: number,
+  name: string,
+  system_type: string,
+  version: string,
+  kid: string,
 };
 
 export type EventType = {
@@ -109,10 +113,17 @@ export type PartnerType = {
 };
 
 export type ServerType = {
-
+  id: number,
+  ip: string,
+  name: string,
+  type: string,
+  version: string,
+  connect_db: ?string,
+  domain: ?string,
+  capacity: number,
+  environment_id: number,
 };
 
 export type ServiceType = {
 
 };
-

@@ -11,11 +11,17 @@ import {
   POST_REGISTER_USER,
   SUCCESSED_MAKE_USER,
   SUCCESSED_REGISTER_USER,
+  SUCCESSED_FETCH_KIDS,
+  SUCCESSED_FETCH_ENVIRONMENTS,
+  SUCCESSED_FETCH_SERVERS,
   FAILED_MAKE_USER,
   FAILED_REGISTER_USER,
-  FETCH_KIDS,
-  SUCCESSED_FETCH_KIDS,
   FAILED_FETCH_KIDS,
+  FAILED_FETCH_ENVIRONMENTS,
+  FAILED_FETCH_SERVERS,
+  FETCH_KIDS,
+  FETCH_ENVIRONMENTS,
+  FETCH_SERVERS,
 } from '../constants/ActionTypes';
 import Api from './Api';
 
@@ -56,10 +62,31 @@ function* fetchKids(action: Action)
   }
 }
 
+function* fetchServer(action: Action)
+: Generator<Object, void, { done: boolean, value: any }> {
+  try {
+    const data = yield call(Api.fetchServer);
+    yield put({ type: SUCCESSED_FETCH_SERVERS, payload: data });
+  } catch (e) {
+    yield put({ type: FAILED_FETCH_SERVERS, payload: e });
+  }
+}
+
+function* fetchEnvironment(action: Action)
+: Generator<Object, void, { done: boolean, value: any }> {
+  try {
+    const data = yield call(Api.fetchEnvironment);
+    yield put({ type: SUCCESSED_FETCH_ENVIRONMENTS, payload: data });
+  } catch (e) {
+    yield put({ type: FAILED_FETCH_ENVIRONMENTS, payload: e });
+  }
+}
 
 export default function* rootSage()
 : Generator<Object, void, { done: boolean, value: any }> {
   yield takeEvery(POST_MAKE_USER, makeUser);
   yield takeEvery(POST_REGISTER_USER, registerUser);
   yield takeEvery(FETCH_KIDS, fetchKids);
+  yield takeEvery(FETCH_SERVERS, fetchServer);
+  yield takeEvery(FETCH_ENVIRONMENTS, fetchEnvironment);
 }
