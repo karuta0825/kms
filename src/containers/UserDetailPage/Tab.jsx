@@ -29,7 +29,7 @@ function TabContainer({ children } = {
 const styles = theme => ({
   root: {
     flexGrow: 1,
-    width: '100%',
+    // width: '100%',
     height: 'calc(100% - 50px)',
     backgroundColor: theme.palette.background.paper,
     marginTop: '8px',
@@ -45,7 +45,6 @@ type PropsType = {
 class TabManager extends React.Component<PropsType> {
   render(): React.Node {
     const { classes, value, handleChange } = this.props;
-    console.log(this.props);
 
     return (
       <Paper className={classes.root}>
@@ -60,8 +59,9 @@ class TabManager extends React.Component<PropsType> {
           <Tab label="ライセンス" />
           <Tab label="Fenics" />
           <Tab label="ビジV" />
-          <Tab label="パートナ情報" />
-          <Tab label="モバイル情報" />
+          <Tab label="パートナ" />
+          <Tab label="モバイル" />
+          <Tab label="履歴" />
         </Tabs>
       {value === 0 && <TabContainer>Item One</TabContainer>}
       {value === 1 && <TabContainer>Item Two</TabContainer>}
@@ -70,6 +70,7 @@ class TabManager extends React.Component<PropsType> {
       {value === 4 && <TabContainer>Item Five</TabContainer>}
       {value === 5 && <TabContainer>Item Six</TabContainer>}
       {value === 6 && <TabContainer>Item Seven</TabContainer>}
+      {value === 7 && <TabContainer>Item Eigth</TabContainer>}
       </Paper>
     );
   }

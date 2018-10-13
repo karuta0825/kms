@@ -5,6 +5,7 @@ import ButtonDelete from './ButtonDelete';
 import ButtonFilter from './ButtonFilter';
 import ButtonDownload from './ButtonDownload';
 import FilterInputText from './FilterInputText';
+import Filter from './Filter';
 import styles from './css/table.css';
 
 type PropsType = {
@@ -26,9 +27,9 @@ class UserListPage extends React.Component<PropsType> {
           <ButtonFilter />
         </div>
         <Paper className={styles.table}>
-          <KidTable history={this.props.p}/>
+          <KidTable history={this.props.p} />
         </Paper>
-        <div className={styles.filter}></div>
+        <Filter />
       </div>
     );
   }
