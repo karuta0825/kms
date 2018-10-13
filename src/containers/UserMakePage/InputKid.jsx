@@ -6,6 +6,7 @@ import { inputKid } from './actions';
 
 const mapStateToProps = state => ({
   label: 'KIDの指定',
+  value: state.userMakePage.inputValues.kid,
   placeholder: 'KIDを入力してください',
   helperText: '数値のみ ex)40000',
   styles,

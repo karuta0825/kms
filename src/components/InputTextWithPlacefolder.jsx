@@ -4,6 +4,7 @@ import TextField from '@material-ui/core/TextField';
 
 export type PropsType = {
   label: string,
+  value: string,
   placeholder: string,
   helperText: string,
   styles: { textField: string },
@@ -13,6 +14,7 @@ export type PropsType = {
 const InputTextWithPlacefolder = (props: PropsType): React.Node => {
   const {
     label,
+    value,
     placeholder,
     helperText,
     styles,
@@ -21,6 +23,7 @@ const InputTextWithPlacefolder = (props: PropsType): React.Node => {
   return (
     <TextField
       label={label}
+      value={value}
       className={styles.textField}
       placeholder={placeholder}
       helperText={helperText}
