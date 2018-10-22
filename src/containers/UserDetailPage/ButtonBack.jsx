@@ -7,7 +7,7 @@ import styles from './css/userinfo.css';
 export default function ButtonBack(props) {
   return (
     <Button className={styles.backBtn}>
-      <Link to="/kids" className={styles.backBtnLink}>一覧に戻る</Link>
+      <Link to="/kidList" className={styles.backBtnLink}>一覧に戻る</Link>
     </Button>
   );
 }

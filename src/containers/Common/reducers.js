@@ -1,39 +1,25 @@
 // @flow
 import {
-  BAR_ANCHOR_ELEMENT,
   CHANGE_MENU_TITLE,
-  TOGGLE_DRAWER,
+  CHANGE_LOCATION,
 } from '../../constants/ActionTypes';
+import initState from '../../initState';
 
-type StateType = {
-  anchorEl: ?string;
-};
-
-const initState = {
-  anchorEl: null,
-  menuTitle: 'Kid管理',
-  drawerIsOpen: false,
-};
-
-export const bar = (state: StateType = initState, action) => {
+export const location = (state = initState.location, action) => {
   const { type, payload } = action;
-
   switch (type) {
-    case BAR_ANCHOR_ELEMENT:
-      return {
-        ...state,
-        anchorEl: payload,
-      };
+    case CHANGE_LOCATION:
+      return payload;
+    default:
+      return state;
+  }
+};
+
+export const header = (state = initState.header, action) => {
+  const { type, payload } = action;
+  switch (type) {
     case CHANGE_MENU_TITLE:
-      return {
-        ...state,
-        menuTitle: payload,
-      };
-    case TOGGLE_DRAWER:
-      return {
-        ...state,
-        drawerIsOpen: payload,
-      };
+      return {...state, title: payload};
     default:
       return state;
   }

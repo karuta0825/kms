@@ -1,6 +1,10 @@
 // @flow
 
 export type StateType = {
+  location: string,
+  header: {
+    title: string,
+  },
   topPage: {
     news: {},
     accomadate: {},
@@ -87,10 +91,10 @@ export type StateType = {
 
 
 const initState: StateType = {
-  bar: {},
-  canUploadFile: false,
-  isSideBarOpen: false,
-  userTab: {},
+  location: 'home',
+  header: {
+    title: 'ホーム',
+  },
   topPage: {
 
   },

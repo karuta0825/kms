@@ -20,7 +20,7 @@ const columns = [
     accessor: 'kid',
     fixed: true,
     Cell: (row): React.Node => {
-      const url = `/kids/detail/${row.original.id}`;
+      const url = `/kidList/detail/${row.original.id}`;
       return <Link to={url}>{row.value}</Link>;
     },
   },

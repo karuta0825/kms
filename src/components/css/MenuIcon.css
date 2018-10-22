@@ -1,0 +1,21 @@
+
+.wrapper {
+  margin-bottom: 20px;
+}
+
+.title {
+  position: absolute;
+  bottom: -9px;
+  font-size: 5px;
+  width: 80px;
+  -webkit-transform: scale(0.75);
+  -webkit-transform-origin:1 0;
+}
+
+.isActive {
+  color: white !important;
+}
+
+.nonActive {
+  color: gray !important;
+}
