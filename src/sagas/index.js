@@ -4,6 +4,7 @@ import {
   takeEvery,
   call,
   put,
+  all,
   select,
 } from 'redux-saga/effects';
 import {
@@ -14,14 +15,17 @@ import {
   SUCCESSED_FETCH_KIDS,
   SUCCESSED_FETCH_ENVIRONMENTS,
   SUCCESSED_FETCH_SERVERS,
+  SUCCESSED_FETCH_USERINFO,
   FAILED_MAKE_USER,
   FAILED_REGISTER_USER,
   FAILED_FETCH_KIDS,
   FAILED_FETCH_ENVIRONMENTS,
   FAILED_FETCH_SERVERS,
+  FAILED_FETCH_USERINFO,
   FETCH_KIDS,
   FETCH_ENVIRONMENTS,
   FETCH_SERVERS,
+  FETCH_USERINFO,
 } from '../constants/ActionTypes';
 import Api from './Api';
 
@@ -61,7 +65,7 @@ function* fetchKids(action: Action)
   }
 }
 
-function* fetchServer(action: Action)
+function* fetchServer()
 : Generator<Object, void, { done: boolean, value: any }> {
   try {
     const data = yield call(Api.fetchServer);
@@ -71,13 +75,58 @@ function* fetchServer(action: Action)
   }
 }
 
-function* fetchEnvironment(action: Action)
+function* fetchEnvironment()
 : Generator<Object, void, { done: boolean, value: any }> {
   try {
     const data = yield call(Api.fetchEnvironment);
     yield put({ type: SUCCESSED_FETCH_ENVIRONMENTS, payload: data });
   } catch (e) {
     yield put({ type: FAILED_FETCH_ENVIRONMENTS, payload: e });
+  }
+}
+
+function* fetchUserInfoById(action: Action)
+: Generator<Object, void, { done: boolean, value: any }> {
+  const { payload } = action;
+  console.log(action);
+  try {
+    const [
+      kid,
+      customer,
+      license,
+      client,
+      busiv,
+      fenics,
+      partner,
+      mobile,
+      history,
+    ] = yield all([
+      call(Api.fetchKidsById, payload),
+      call(Api.fetchCustomerById, payload),
+      call(Api.fetchLicenseById, payload),
+      call(Api.fetchClientById, payload),
+      call(Api.fetchBusivById, payload),
+      call(Api.fetchFenicsById, payload),
+      call(Api.fetchPartnerById, payload),
+      call(Api.fetchMobileById, payload),
+      call(Api.fetchHistoryById, payload),
+    ]);
+    yield put({
+      type: SUCCESSED_FETCH_USERINFO,
+      payload: {
+        kid,
+        customer,
+        license,
+        client,
+        busiv,
+        fenics,
+        partner,
+        mobile,
+        history,
+      },
+    });
+  } catch (e) {
+    yield put({ type: FAILED_FETCH_USERINFO, payload: e });
   }
 }
 
@@ -88,4 +137,5 @@ export default function* rootSage()
   yield takeEvery(FETCH_KIDS, fetchKids);
   yield takeEvery(FETCH_SERVERS, fetchServer);
   yield takeEvery(FETCH_ENVIRONMENTS, fetchEnvironment);
+  yield takeEvery(FETCH_USERINFO, fetchUserInfoById);
 }

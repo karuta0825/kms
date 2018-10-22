@@ -1,13 +1,21 @@
 import * as React from 'react';
+import { connect } from 'react-redux';
 import styles from './css/index.css';
 import UserInfo from './UserInfo';
 import Memo from './Memo';
+import { getUserInfo } from './actions';
 
 type PropsType = {
-
+  match: Object,
+  dispatch: () => void,
 };
 
 class UserDetail extends React.Component<PropsType> {
+  componentWillMount() {
+    const { match, dispatch } = this.props;
+    dispatch(getUserInfo(match.params.id));
+  }
+
   render(): React.Node {
     return (
       <div className={styles.wrapper}>
@@ -18,5 +26,4 @@ class UserDetail extends React.Component<PropsType> {
   }
 }
 
-
-export default UserDetail;
+export default connect()(UserDetail);
