@@ -14,7 +14,7 @@
 }
 
 .paper {
-  height: calc(100% - 50px);
+  height: calc(100% - 60px);
   width: 280px;
   margin-top: 8px;
 }

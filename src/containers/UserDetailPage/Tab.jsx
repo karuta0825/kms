@@ -6,6 +6,7 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
+import TabSystem from './TabSystem';
 import { changeTabIndex } from './actions';
 
 function TabContainer({ children } = {
@@ -30,9 +31,9 @@ const styles = theme => ({
   root: {
     flexGrow: 1,
     // width: '100%',
-    height: 'calc(100% - 50px)',
+    height: 'calc(100% - 60px)',
     backgroundColor: theme.palette.background.paper,
-    marginTop: '8px',
+    marginTop: '3px',
   },
 });
 
@@ -45,6 +46,7 @@ type PropsType = {
 class TabManager extends React.Component<PropsType> {
   render(): React.Node {
     const { classes, value, handleChange } = this.props;
+    console.log(this.props);
 
     return (
       <Paper className={classes.root}>
@@ -63,7 +65,7 @@ class TabManager extends React.Component<PropsType> {
           <Tab label="モバイル" />
           <Tab label="履歴" />
         </Tabs>
-      {value === 0 && <TabContainer>Item One</TabContainer>}
+      {value === 0 && <TabSystem />}
       {value === 1 && <TabContainer>Item Two</TabContainer>}
       {value === 2 && <TabContainer>Item Three</TabContainer>}
       {value === 3 && <TabContainer>Item Four</TabContainer>}
