@@ -23,18 +23,20 @@ const UserMake = (props: PropsType): React.Node => {
     showKid,
   } = props;
   return (
-    <div className={styles.wrapper}>
-      <div className={styles.title}>ユーザー作成</div>
-      <Paper className={styles.paper}>
-        <SelectSystemType />
-        { showVersion && <SelectVersion /> }
-        { showServer && <SelectServer /> }
-        { showKid && <InputKid /> }
-        <div className={styles.action}>
-          <MakeButton>作成</MakeButton>
-        </div>
-      </Paper>
-      <Dialog />
+    <div className={styles.body}>
+      <div className={styles.wrapper}>
+        <div className={styles.title}>ユーザー作成</div>
+        <Paper className={styles.paper}>
+          <SelectSystemType />
+          { showVersion && <SelectVersion /> }
+          { showServer && <SelectServer /> }
+          { showKid && <InputKid /> }
+          <div className={styles.action}>
+            <MakeButton>作成</MakeButton>
+          </div>
+        </Paper>
+        <Dialog />
+      </div>
     </div>
   );
 };

@@ -1,9 +1,12 @@
-.wrapper {
+.body {
   display: flex;
-  flex-direction: column;
   justify-content: center;
+  align-items: center;
+  min-height: calc(100% - 64px - 24px);
+}
+
+.wrapper {
   width: 700px;
-  margin: 20px auto;
 }
 
 .title {
@@ -14,7 +17,7 @@
 .paper {
   position: relative;
   width: 100%;
-  height: 600px;
+  height: 500px;
   margin: 10px auto;
   display: flex;
   flex-direction: column;
