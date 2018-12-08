@@ -8,6 +8,9 @@ import UserMake from '../UserMakePage';
 import UserRegister from '../UserRegisterPage';
 import UserList from '../UserListPage';
 import UserDetail from '../UserDetailPage';
+import Setting from '../SettingPage';
+import Home from '../TopPage';
+import Server from '../ServerManagePage';
 
 export default function Frame(props): React.Node {
   return (
@@ -17,11 +20,14 @@ export default function Frame(props): React.Node {
         <main className={styles.body}>
           <Header />
           <Switch>
-            <Route exact path="/" render={(props) => {console.log(props); return null;} } />
+            <Route exact path="/" component={Home} />
+            <Route path="/home" component={Home} />
             <Route path="/makeKid" component={UserMake} />
             <Route path="/registerKid" component={UserRegister} />
             <Route exact path="/kidList" component={UserList} />
             <Route path="/kidList/detail/:id" component={UserDetail} />
+            <Route exact path="/setting" component={Setting} />
+            <Route path="/setting/server" component={Server} />
           </Switch>
         </main>
       </div>

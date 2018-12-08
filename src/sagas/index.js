@@ -88,7 +88,6 @@ function* fetchEnvironment()
 function* fetchUserInfoById(action: Action)
 : Generator<Object, void, { done: boolean, value: any }> {
   const { payload } = action;
-  console.log(action);
   try {
     const [
       kid,
