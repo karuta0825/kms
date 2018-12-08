@@ -1,5 +1,6 @@
 // @flow
 import * as React from 'react';
+import { connect } from 'react-redux';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -8,14 +9,32 @@ import ListSubheader from '@material-ui/core/ListSubheader';
 import { withStyles } from '@material-ui/core/styles';
 import CloudQueueIcon from '@material-ui/icons/CloudQueue';
 import styles from './css/filter.css';
+import { filterSystemType } from './actions';
 
 type PropsType = {
   classes: Object,
+  isOnpre: boolean,
+  isCloud: boolean,
+  isKensyo: boolean,
+  isDemo: boolean,
+  onClickOnpre: (Event) => void,
+  onClickCloud: (Event) => void,
+  onClickKensyo: (Event) => void,
+  onClickDemo: (Event) => void,
 };
 
-
 function FilterSystemtype(props: PropsType): React.Node {
-  const { classes } = props;
+  const {
+    classes,
+    isOnpre,
+    isCloud,
+    isKensyo,
+    isDemo,
+    onClickOnpre,
+    onClickCloud,
+    onClickKensyo,
+    onClickDemo,
+  } = props;
   return (
     <List>
       <ListSubheader className={styles.subheader}>
@@ -29,9 +48,10 @@ function FilterSystemtype(props: PropsType): React.Node {
         dense
         button
         className={classes.listItem}
+        onClick={onClickOnpre}
       >
         <Checkbox
-          checked
+          checked={isOnpre}
           disableRipple
         />
         <ListItemText primary="オンプレ" />
@@ -41,9 +61,10 @@ function FilterSystemtype(props: PropsType): React.Node {
         dense
         button
         className={classes.listItem}
+        onClick={onClickCloud}
       >
         <Checkbox
-          checked
+          checked={isCloud}
           disableRipple
         />
         <ListItemText primary="クラウド" />
@@ -53,9 +74,10 @@ function FilterSystemtype(props: PropsType): React.Node {
         dense
         button
         className={classes.listItem}
+        onClick={onClickDemo}
       >
         <Checkbox
-          checked
+          checked={isDemo}
           disableRipple
         />
         <ListItemText primary="デモ" />
@@ -65,9 +87,10 @@ function FilterSystemtype(props: PropsType): React.Node {
         dense
         button
         className={classes.listItem}
+        onClick={onClickKensyo}
       >
         <Checkbox
-          checked
+          checked={isKensyo}
           disableRipple
         />
         <ListItemText primary="検証" />
@@ -77,4 +100,29 @@ function FilterSystemtype(props: PropsType): React.Node {
   );
 }
 
-export default withStyles({})(FilterSystemtype);
+const mapStateToProps = state => ({
+  isOnpre: state.userListPage.filter.isOnpre,
+  isCloud: state.userListPage.filter.isCloud,
+  isKensyo: state.userListPage.filter.isKensyo,
+  isDemo: state.userListPage.filter.isDemo,
+});
+
+const mapDispatchToProps = dispatch => ({
+  onClickOnpre: () => {
+    dispatch(filterSystemType('onpre'));
+  },
+  onClickCloud: () => {
+    dispatch(filterSystemType('cloud'));
+  },
+  onClickKensyo: () => {
+    dispatch(filterSystemType('kensyo'));
+  },
+  onClickDemo: () => {
+    dispatch(filterSystemType('demo'));
+  },
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(withStyles({})(FilterSystemtype));

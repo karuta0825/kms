@@ -14,7 +14,7 @@ function FilterInputText(props: PropsType): React.Node {
   );
 }
 
-const mapStateToProps = (state): PropsType => ({
+const mapStateToProps = () => ({
   label: '検索',
   placeholder: 'キーワードを入力してください',
   helperText: '',

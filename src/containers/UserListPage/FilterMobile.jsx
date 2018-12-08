@@ -1,5 +1,6 @@
 // @flow
 import * as React from 'react';
+import { connect } from 'react-redux';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -8,13 +9,20 @@ import ListSubheader from '@material-ui/core/ListSubheader';
 import { withStyles } from '@material-ui/core/styles';
 import TabletMacIcon from '@material-ui/icons/TabletMac';
 import styles from './css/filter.css';
+import { filterMobile } from './actions';
 
 type PropsType = {
   classes: Object,
+  hasMobile: boolean,
+  onClickMobile: (Event) => void;
 };
 
 function FilterMobile(props: PropsType): React.Node {
-  const { classes } = props;
+  const {
+    classes,
+    hasMobile,
+    onClickMobile,
+  } = props;
   return (
     <List>
       <ListSubheader className={styles.subheader}>
@@ -26,9 +34,10 @@ function FilterMobile(props: PropsType): React.Node {
         dense
         button
         className={classes.listItem}
+        onClick={onClickMobile}
       >
         <Checkbox
-          checked
+          checked={hasMobile}
           disableRipple
         />
         <ListItemText primary="あり" />
@@ -38,4 +47,17 @@ function FilterMobile(props: PropsType): React.Node {
   );
 }
 
-export default withStyles({})(FilterMobile);
+const mapStateToProps = state => ({
+  hasMobile: state.userListPage.filter.hasMobile,
+});
+
+const mapDispatchToProps = dispatch => ({
+  onClickMobile: () => {
+    dispatch(filterMobile());
+  },
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(withStyles({})(FilterMobile));

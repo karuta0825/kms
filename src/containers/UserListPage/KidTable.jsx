@@ -6,7 +6,7 @@ import withFixedColumns from 'react-table-hoc-fixed-columns';
 import { Link } from 'react-router-dom';
 import type { KidType } from '../../types';
 import 'react-table/react-table.css';
-import { searchByWord } from '../../utils';
+import { searchUser } from '../../utils';
 
 // const CheckAbleTable = checkboxHOC(ReactTable);
 const ReactTableFixedColumns = withFixedColumns(ReactTable);
@@ -112,7 +112,7 @@ function KidTable(props: PropsType): React.Node {
 }
 
 const mapStateToProps = state => ({
-  data: searchByWord(state.data.kids, state.userListPage.filter.keyword),
+  data: searchUser(state.data.kids, state.userListPage.filter),
 });
 
 export default connect(
