@@ -17,6 +17,7 @@
 
 .body {
   flex: 1;
+  background: #f7f7f7;
 }
 
 .content {
