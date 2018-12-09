@@ -1,5 +1,8 @@
 {
-  "extends": "airbnb",
+  "extends": [
+    "airbnb",
+    "plugin:prettier/recommended"
+  ],
   "parser": "babel-eslint",
   "plugins": [
     "flowtype",
@@ -72,6 +75,16 @@
     "flowtype/use-flow-type": 1,
     "flowtype/valid-syntax": 1,
     "flowtype-errors/show-errors": 2,
-    "flowtype-errors/show-warnings": 1
+    "flowtype-errors/show-warnings": 1,
+    "prettier/prettier": [
+      "always",
+      {
+        "singleQuote": true,
+        "trailingComma": true,
+        "tabWidth": 2,
+        "semi": true,
+        "bracketSpacing": true
+      }
+    ]
   }
 }
