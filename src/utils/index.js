@@ -2,30 +2,41 @@
 
 export function getUniqueItemByKey(
   ary: Array<Object>,
-  key: string,
+  key: string
 ): Array<Object> {
-  return ary.filter((value, idx, list) => (
-    (list.findIndex(item => value[key] === item[key])) === idx
-  ));
+  return ary.filter(
+    (value, idx, list) =>
+      list.findIndex(item => value[key] === item[key]) === idx
+  );
 }
 
-export const isContain = (obj: Object, word: string): boolean => (
-  Object.values(obj).some(v => String(v).indexOf(word) !== -1)
-);
+export const isContain = (obj: Object, word: string): boolean =>
+  Object.values(obj).some(v => String(v).indexOf(word) !== -1);
 
-export const searchByWord = (list: Array<Object>, word: string): Array<Object> => {
-  if (word === '') { return list; }
+export const searchByWord = (
+  list: Array<Object>,
+  word: string
+): Array<Object> => {
+  if (word === '') {
+    return list;
+  }
   return list.filter(item => isContain(item, word));
 };
 
 export function searchVersion(
   list: Array<Object>,
   isES: boolean,
-  isLM: boolean,
+  isLM: boolean
 ): Array<Object> {
-  if (isES && isLM) { return list; }
-  if (isES) { return list.filter(item => item.version === 'ES'); }
-  if (isLM) { return list.filter(item => item.version === 'LM'); }
+  if (isES && isLM) {
+    return list;
+  }
+  if (isES) {
+    return list.filter(item => item.version === 'ES');
+  }
+  if (isLM) {
+    return list.filter(item => item.version === 'LM');
+  }
   return list;
 }
 
@@ -34,7 +45,7 @@ export function searchSystemType(
   isOnpre: boolean,
   isCloud: boolean,
   isKensyo: boolean,
-  isDemo: boolean,
+  isDemo: boolean
 ): Array<Object> {
   if (!isOnpre && !isCloud && !isKensyo && !isDemo) {
     return list;
@@ -44,23 +55,26 @@ export function searchSystemType(
     return list;
   }
 
-  const onpreUser = isOnpre ? list.filter(item => item.system_type === 'onpre') : [];
-  const cloudUser = isCloud ? list.filter(item => item.system_type === 'cloud') : [];
-  const kensyoUser = isKensyo ? list.filter(item => item.system_type === 'kensyo') : [];
-  const demoUser = isDemo ? list.filter(item => item.system_type === 'demo') : [];
+  const onpreUser = isOnpre
+    ? list.filter(item => item.system_type === 'onpre')
+    : [];
+  const cloudUser = isCloud
+    ? list.filter(item => item.system_type === 'cloud')
+    : [];
+  const kensyoUser = isKensyo
+    ? list.filter(item => item.system_type === 'kensyo')
+    : [];
+  const demoUser = isDemo
+    ? list.filter(item => item.system_type === 'demo')
+    : [];
 
-  return [
-    ...onpreUser,
-    ...cloudUser,
-    ...kensyoUser,
-    ...demoUser,
-  ];
+  return [...onpreUser, ...cloudUser, ...kensyoUser, ...demoUser];
 }
 
 export function searchNetwork(
   list: Array<Object>,
   hasFenics: boolean,
-  hasBusiv: boolean,
+  hasBusiv: boolean
 ): Array<Object> {
   let ary;
   if (hasFenics && hasBusiv) {
@@ -83,7 +97,10 @@ export function searchNetwork(
   return list;
 }
 
-export function searchHasMobile(list:Array<Object>, hasMobile: boolean): Array<Object> {
+export function searchHasMobile(
+  list: Array<Object>,
+  hasMobile: boolean
+): Array<Object> {
   if (hasMobile) {
     return list.filter(item => item.has_mobile === 1);
   }
@@ -109,8 +126,6 @@ export function searchUser(list: Array<Object>, filter: Object): Array<Object> {
 
   // モバイル検索
   ary = searchHasMobile(ary, filter.hasMobile);
-
-  // 個別ユーザー検索
 
   return ary;
 }

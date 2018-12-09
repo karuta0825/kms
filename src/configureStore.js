@@ -15,14 +15,10 @@ const sagaMiddleware = createSagaMiddleware();
 const store = createStore(
   reducers,
   initState,
-  composeWithDevTools(
-    applyMiddleware(sagaMiddleware),
-  ),
+  composeWithDevTools(applyMiddleware(sagaMiddleware))
 );
 
-store.subscribe(() =>
-  console.log(store.getState())
-);
+store.subscribe(() => console.log(store.getState()));
 
 sagaMiddleware.run(rootSaga);
 
