@@ -3,7 +3,10 @@ import {
   FAILED_FETCH_USERINFO,
 } from '../constants/ActionTypes';
 
-export default (state, action) => {
+export default (
+  state: Array<HistoryType>,
+  action: Action
+): Array<History> => {
   const { type, payload } = action;
   switch (type) {
     case SUCCESSED_FETCH_USERINFO:

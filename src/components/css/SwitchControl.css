@@ -1,0 +1,30 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+  height: 55.67px;
+}
+
+.title {
+  display: inline-block;
+  width: 20%;
+  margin: 10px -15px 0 15px;
+}
+
+.switchWrapper {
+  position: relative;
+  width: 75%;
+  height: 100%;
+}
+
+.switchState {
+  position: absolute;
+  display: inline-block;
+  top: 20px;
+  width: 100px;
+}
+
+.switch {
+  position: absolute !important;
+  top: 8px;
+  right: 0;
+}

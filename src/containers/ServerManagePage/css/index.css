@@ -1,0 +1,43 @@
+.body {
+  width: 100%;
+  height: 100%;
+}
+
+.wrapper {
+ display: flex;
+ height: calc(100% - 40px);
+}
+
+.environments {
+  width: 250px;
+  border-right: 1px solid #0000001f;
+}
+
+.environments__header {
+  width: 100%;
+  height: 100px;
+}
+
+.environments__list {
+  height: calc(100% - 100px);
+  background: white;
+}
+
+.container {
+  flex: 1;
+}
+
+.actions {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  width: 95%;
+  height: 80px;
+}
+
+.table {
+  width: 90%;
+  margin: 20px auto;
+  height: calc(100% - 80px - 24px);
+  background: red;
+}

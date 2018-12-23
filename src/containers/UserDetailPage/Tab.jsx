@@ -7,11 +7,14 @@ import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import TabSystem from './TabSystem';
+import TabCustomer from './TabCustomer';
 import { changeTabIndex } from './actions';
 
-function TabContainer({ children } = {
-  children: React.Node,
-}): React.Node {
+function TabContainer(
+  { children } = {
+    children: React.Node,
+  }
+): React.Node {
   return (
     <Typography
       component="div"
@@ -46,8 +49,6 @@ type PropsType = {
 class TabManager extends React.Component<PropsType> {
   render(): React.Node {
     const { classes, value, handleChange } = this.props;
-    console.log(this.props);
-
     return (
       <Paper className={classes.root}>
         <Tabs
@@ -65,14 +66,14 @@ class TabManager extends React.Component<PropsType> {
           <Tab label="モバイル" />
           <Tab label="履歴" />
         </Tabs>
-      {value === 0 && <TabSystem />}
-      {value === 1 && <TabContainer>Item Two</TabContainer>}
-      {value === 2 && <TabContainer>Item Three</TabContainer>}
-      {value === 3 && <TabContainer>Item Four</TabContainer>}
-      {value === 4 && <TabContainer>Item Five</TabContainer>}
-      {value === 5 && <TabContainer>Item Six</TabContainer>}
-      {value === 6 && <TabContainer>Item Seven</TabContainer>}
-      {value === 7 && <TabContainer>Item Eigth</TabContainer>}
+        {value === 0 && <TabSystem />}
+        {value === 1 && <TabCustomer />}
+        {value === 2 && <TabContainer>Item Three</TabContainer>}
+        {value === 3 && <TabContainer>Item Four</TabContainer>}
+        {value === 4 && <TabContainer>Item Five</TabContainer>}
+        {value === 5 && <TabContainer>Item Six</TabContainer>}
+        {value === 6 && <TabContainer>Item Seven</TabContainer>}
+        {value === 7 && <TabContainer>Item Eigth</TabContainer>}
       </Paper>
     );
   }
@@ -90,5 +91,5 @@ const mapDispatchToProps = (dispatch): Object => ({
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps,
+  mapDispatchToProps
 )(withStyles(styles)(TabManager));

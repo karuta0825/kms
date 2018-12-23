@@ -1,5 +1,7 @@
 import kids from './kids';
+import baseInfo from './baseInfo';
 import customers from './customers';
+import clients from './clients';
 import license from './license';
 import busivs from './busivs';
 import fenics from './fenics';
@@ -20,7 +22,9 @@ const { data } = initState;
 
 export default (state = data, action) => ({
   kids: kids(state.kids, action),
+  baseInfo: baseInfo(state.baseInfo, action),
   customers: customers(state.customers, action),
+  clients: clients(state.clients, action),
   license: license(state.license, action),
   busivs: busivs(state.buisvs, action),
   fenics: fenics(state.fenics, action),

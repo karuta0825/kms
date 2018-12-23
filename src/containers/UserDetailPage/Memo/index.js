@@ -6,7 +6,7 @@ import AddIcon from '@material-ui/icons/Add';
 import EventNoteIcon from '@material-ui/icons/EventNote';
 import FormControl from '@material-ui/core/FormControl';
 import NativeSelect from '@material-ui/core/NativeSelect';
-import styles from './css/memo.css';
+import styles from '../css/memo.css';
 
 type PropsType = {
   match: Object,

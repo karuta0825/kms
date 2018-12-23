@@ -7,13 +7,11 @@ import theme from './configureTheme';
 import MenuBar from './containers/Common/MenuBar';
 import Menu from './containers/Common';
 
-console.log('******** store.getState()', store.getState());
-
 ReactDOM.render(
   <Provider store={store}>
     <MuiThemeProvider theme={theme}>
       <Menu />
     </MuiThemeProvider>
   </Provider>,
-  document.getElementById('root'),
+  document.getElementById('root')
 );

@@ -1,12 +1,6 @@
 // @flow
 import { delay } from 'redux-saga';
-import {
-  takeEvery,
-  call,
-  put,
-  all,
-  select,
-} from 'redux-saga/effects';
+import { takeEvery, call, put, all, select } from 'redux-saga/effects';
 import {
   POST_MAKE_USER,
   POST_REGISTER_USER,
@@ -29,13 +23,9 @@ import {
 } from '../constants/ActionTypes';
 import Api from './Api';
 
-type Action = {
-  type: string,
-  payload: any,
-};
-
-function* makeUser(action: Action)
-: Generator<Object, void, { done: boolean, value: any }> {
+function* makeUser(
+  action: Action
+): Generator<Object, void, { done: boolean, value: any }> {
   try {
     yield call(delay, 3000);
     yield put({ type: SUCCESSED_MAKE_USER, payload: 'KID88888' });
@@ -44,8 +34,9 @@ function* makeUser(action: Action)
   }
 }
 
-function* registerUser(action: Action)
-: Generator<Object, void, { done: boolean, value: any }> {
+function* registerUser(
+  action: Action
+): Generator<Object, void, { done: boolean, value: any }> {
   try {
     yield call(delay, 3000);
     yield put({ type: SUCCESSED_REGISTER_USER });
@@ -54,8 +45,9 @@ function* registerUser(action: Action)
   }
 }
 
-function* fetchKids(action: Action)
-: Generator<Object, void, { done: boolean, value: any }> {
+function* fetchKids(
+  action: Action
+): Generator<Object, void, { done: boolean, value: any }> {
   const { payload } = action;
   try {
     const data = yield call(Api.fetchKidsById, payload);
@@ -65,8 +57,11 @@ function* fetchKids(action: Action)
   }
 }
 
-function* fetchServer()
-: Generator<Object, void, { done: boolean, value: any }> {
+function* fetchServer(): Generator<
+  Object,
+  void,
+  { done: boolean, value: any }
+> {
   try {
     const data = yield call(Api.fetchServer);
     yield put({ type: SUCCESSED_FETCH_SERVERS, payload: data });
@@ -75,8 +70,11 @@ function* fetchServer()
   }
 }
 
-function* fetchEnvironment()
-: Generator<Object, void, { done: boolean, value: any }> {
+function* fetchEnvironment(): Generator<
+  Object,
+  void,
+  { done: boolean, value: any }
+> {
   try {
     const data = yield call(Api.fetchEnvironment);
     yield put({ type: SUCCESSED_FETCH_ENVIRONMENTS, payload: data });
@@ -85,12 +83,13 @@ function* fetchEnvironment()
   }
 }
 
-function* fetchUserInfoById(action: Action)
-: Generator<Object, void, { done: boolean, value: any }> {
+function* fetchUserInfoById(
+  action: Action
+): Generator<Object, void, { done: boolean, value: any }> {
   const { payload } = action;
   try {
     const [
-      kid,
+      baseInfo,
       customer,
       license,
       client,
@@ -113,7 +112,7 @@ function* fetchUserInfoById(action: Action)
     yield put({
       type: SUCCESSED_FETCH_USERINFO,
       payload: {
-        kid,
+        baseInfo,
         customer,
         license,
         client,
@@ -129,8 +128,11 @@ function* fetchUserInfoById(action: Action)
   }
 }
 
-export default function* rootSage()
-: Generator<Object, void, { done: boolean, value: any }> {
+export default function* rootSage(): Generator<
+  Object,
+  void,
+  { done: boolean, value: any }
+> {
   yield takeEvery(POST_MAKE_USER, makeUser);
   yield takeEvery(POST_REGISTER_USER, registerUser);
   yield takeEvery(FETCH_KIDS, fetchKids);

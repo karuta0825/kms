@@ -16,17 +16,3 @@
   height: calc(100% - 30px);
   overflow-y: scroll;
 }
-
-/* test 入力項目 */
-.item {
-}
-
-.title {
-  display: inline-block;
-  width: 20%;
-  margin: 0 -15px 0 15px;
-}
-
-.text {
-  width: 80%;
-}

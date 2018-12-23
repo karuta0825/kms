@@ -17,14 +17,11 @@ type Action = {
 const { userListPage } = initState;
 
 const isFilterOpen = (state: boolean, action: Action): boolean => {
-  const { type, payload } = action;
+  const { type } = action;
 
   switch (type) {
     case TOGGLE_FILTER_MENU:
-      if (payload === undefined) {
-        return !state;
-      }
-      return payload;
+      return !state;
     default:
       return state;
   }

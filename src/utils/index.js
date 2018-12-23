@@ -68,7 +68,12 @@ export function searchSystemType(
     ? list.filter(item => item.system_type === 'demo')
     : [];
 
-  return [...onpreUser, ...cloudUser, ...kensyoUser, ...demoUser];
+  return [
+    ...onpreUser,
+    ...cloudUser,
+    ...kensyoUser,
+    ...demoUser,
+  ];
 }
 
 export function searchNetwork(
@@ -104,12 +109,15 @@ export function searchHasMobile(
   if (hasMobile) {
     return list.filter(item => item.has_mobile === 1);
   }
-  return list.filter(item => item.has_mobile === 0);
+  return list;
 }
 
 export function searchServer() {}
 
-export function searchUser(list: Array<Object>, filter: Object): Array<Object> {
+export function searchUser(
+  list: Array<Object>,
+  filter: Object
+): Array<Object> {
   let ary = [...list];
   // キーワード検索
   ary = searchByWord(ary, filter.keyword);
@@ -119,7 +127,13 @@ export function searchUser(list: Array<Object>, filter: Object): Array<Object> {
 
   // システムタイプ検索
   const { isOnpre, isCloud, isKensyo, isDemo } = filter;
-  ary = searchSystemType(ary, isOnpre, isCloud, isKensyo, isDemo);
+  ary = searchSystemType(
+    ary,
+    isOnpre,
+    isCloud,
+    isKensyo,
+    isDemo
+  );
 
   // ネットワーク検索
   ary = searchNetwork(ary, filter.hasFenics, filter.hasBusiv);

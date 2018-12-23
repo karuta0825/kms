@@ -5,7 +5,7 @@ import {
   FAILED_FETCH_SERVERS,
 } from '../constants/ActionTypes';
 
-export default (state: Array<ServerType>, action) => {
+export default (state: Array<ServerType>, action): Array<ServerType> => {
   const { type, payload } = action;
   switch (type) {
     case SUCCESSED_FETCH_SERVERS:

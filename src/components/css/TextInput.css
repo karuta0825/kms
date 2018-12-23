@@ -1,0 +1,14 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.title {
+  display: inline-block;
+  width: 20%;
+  margin: 10px -15px 0 15px;
+}
+
+.text {
+  width: 75%;
+}

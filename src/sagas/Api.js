@@ -1,22 +1,4 @@
 // @flow
-import type {
-  KidType,
-  ClientType,
-  CustomerType,
-  BusivType,
-  LicenseType,
-  FenicsType,
-  HistoryType,
-  PartnerType,
-  MemoType,
-  MemoTemplateType,
-  MobileType,
-  ServerType,
-  ServiceType,
-  EventType,
-  EnvironmentType,
-} from '../types';
-
 const host = 'http://localhost:8080';
 
 const Api = {};
@@ -28,12 +10,16 @@ const optionGet = {
 };
 
 Api.fetchKidsById = (id: number): Promise<Array<KidType>> => {
-  const url = id ? `${host}/api/v1/kids/id/${id}` : `${host}/api/v1/kids/id`;
+  const url = id
+    ? `${host}/api/v1/kids/id/${id}`
+    : `${host}/api/v1/kids/id`;
   return fetch(url, optionGet).then(r => r.json());
 };
 
 Api.fetchKidsByKid = (kid: number): Promise<Array<KidType>> => {
-  const url = kid ? `${host}/api/v1/kids/id/${kid}` : `${host}/api/v1/kids/id`;
+  const url = kid
+    ? `${host}/api/v1/kids/id/${kid}`
+    : `${host}/api/v1/kids/id`;
   return fetch(url, optionGet).then(r => r.json());
 };
 
@@ -112,13 +98,17 @@ Api.fetchAvailableUsers = (): Promise<Array<Object>> => {
   return fetch(url, optionGet).then(r => r.json());
 };
 
-Api.fetchEnvironmentById = (id: number): Promise<Array<EnvironmentType>> => {
+Api.fetchEnvironmentById = (
+  id: number
+): Promise<Array<EnvironmentType>> => {
   const url = `${host}/api/v1/environments/${id}`;
   return fetch(url, optionGet).then(r => r.json());
 };
 
-Api.fetchEnvironmentByTypeAndVersion = (type: string, version: string)
-: Promise<Array<EnvironmentType>> => {
+Api.fetchEnvironmentByTypeAndVersion = (
+  type: string,
+  version: string
+): Promise<Array<EnvironmentType>> => {
   const url = `${host}/api/v1/environments/${type}/${version}`;
   return fetch(url, optionGet).then(r => r.json());
 };

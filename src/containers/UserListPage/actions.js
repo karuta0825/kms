@@ -7,9 +7,8 @@ import {
   FILTER_SYSTEM_TYPE,
 } from '../../constants/ActionTypes';
 
-export const toggleFilter = isOpen => ({
+export const toggleFilter = () => ({
   type: TOGGLE_FILTER_MENU,
-  payload: isOpen,
 });
 
 export const searchKeyword = (keyword: string) => ({

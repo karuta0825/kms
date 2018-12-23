@@ -14,20 +14,21 @@ function FilterInputText(props: PropsType): React.Node {
   );
 }
 
-const mapStateToProps = () => ({
+const mapStateToProps = state => ({
   label: '検索',
   placeholder: 'キーワードを入力してください',
   helperText: '',
+  value: state.userListPage.filter.keyword,
   styles: { textField: styles.filterInput__textInput },
 });
 
 const mapDispatchToProps = dispatch => ({
-  onChange: (e) => {
+  onChange: e => {
     dispatch(searchKeyword(e.target.value));
   },
 });
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps,
+  mapDispatchToProps
 )(FilterInputText);
