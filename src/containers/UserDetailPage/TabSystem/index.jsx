@@ -13,13 +13,14 @@ import InputUserName from './InputUserName';
 import InputDBPassword from './InputDBPassword';
 import InputUserkey from './InputUserkey';
 import InputFenicskey from './InputFenicskey';
-import InputRangeId from './InputRangeId';
-import InputNumberId from './InputNumberId';
 import SwitchQA from './SwitchQA';
 import SwitchMobile from './SwitchMobile';
+import InputBusivNum from './InputBusivNum';
+import InputFenicsNum from './InputFenicsNum';
 
 type PropsType = {
   isEdit: boolean,
+  has_busiv: boolean,
   onClickSave: Event => void,
   onClickCancel: Event => void,
   onClickEdit: Event => void,
@@ -28,6 +29,7 @@ type PropsType = {
 function TabSystem(props: PropsType): React.Node {
   const {
     isEdit,
+    has_busiv,
     onClickSave,
     onClickCancel,
     onClickEdit,
@@ -62,14 +64,18 @@ function TabSystem(props: PropsType): React.Node {
         <InputUserkey />
         <InputDBPassword />
         <InputFenicskey />
+        {has_busiv && <InputBusivNum />}
+        <InputFenicsNum />
         <SwitchQA />
       </div>
     </div>
   );
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state: StateType) => ({
   isEdit: state.userDetailPage.baseInfoTab.isEdit,
+  has_busiv:
+    state.userDetailPage.baseInfoTab.inputValues.has_busiv === 1,
 });
 
 const mapDispatchToProps = dispatch => ({

@@ -1,7 +1,4 @@
 // @flow
-/**
- * 入力チェック用の関数を外部から受け取れるよう
- */
 import * as React from 'react';
 import TextField from '@material-ui/core/TextField';
 import styles from './css/TextInput.css';

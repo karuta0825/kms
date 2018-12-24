@@ -1,0 +1,32 @@
+.wrapper {
+  display: flex;
+  height: 60px;
+  align-items: center;
+}
+
+.title {
+  display: inline-block;
+  width: 20%;
+  margin: 10px -10px 0 60px;
+}
+
+.input {
+  width: 55%;
+}
+
+.btn {
+  display: inline-block;
+  margin: 8px 0 0 20px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  color: white;
+}
+
+.addBtn {
+  background: red;
+}
+
+.delBtn {
+  background: blue;
+}

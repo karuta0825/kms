@@ -3,6 +3,7 @@ import {
   TOGGLE_EDIT_MODE,
   SUCCESSED_FETCH_USERINFO,
   CHANGE_BASEINFO_VALUE,
+  ADD_BASEINFO_VALUE,
 } from '../../../constants/ActionTypes';
 
 const isEdit = (
@@ -39,6 +40,15 @@ const inputValues = (
     case CHANGE_BASEINFO_VALUE: {
       const obj = {};
       obj[payload.key] = payload.value;
+      return {
+        ...state,
+        ...obj,
+      };
+    }
+    case ADD_BASEINFO_VALUE: {
+      const obj = {};
+      obj[payload.key] =
+        Number(state[payload.key]) + payload.num;
       return {
         ...state,
         ...obj,
