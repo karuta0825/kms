@@ -1,4 +1,7 @@
 // @flow
+/**
+ * 本メソッドは、すべてテストを行うこと
+ */
 
 export function getUniqueItemByKey(
   ary: Array<Object>,
@@ -142,4 +145,14 @@ export function searchUser(
   ary = searchHasMobile(ary, filter.hasMobile);
 
   return ary;
+}
+
+/**
+ * 文字列から数値のみ抽出して、数値型で渡す
+ * @param {string} str
+ * @return {number}
+ */
+export function convertStN(str: string): number {
+  const result = str.replace(/[^0-9]/g, '');
+  return Number(result);
 }
