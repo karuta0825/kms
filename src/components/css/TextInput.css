@@ -1,15 +1,15 @@
 .wrapper {
   display: flex;
-  height: 58px;
+  height: 60px;
   align-items: center;
 }
 
 .title {
   display: inline-block;
   width: 20%;
-  margin: 10px -15px 0 15px;
+  margin: 10px -10px 0 60px;
 }
 
 .text {
-  width: 75%;
+  width: 68%;
 }
