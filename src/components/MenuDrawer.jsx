@@ -1,6 +1,10 @@
 import React from 'react';
 import classNames from 'classnames';
-import { HashRouter as Router, Route, Switch } from 'react-router-dom';
+import {
+  HashRouter as Router,
+  Route,
+  Switch,
+} from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import AppBar from '@material-ui/core/AppBar';
@@ -11,7 +15,6 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import MyList from './List';
 import UserMake from '../containers/UserMakePage';
 import UserRegister from '../containers/UserRegisterPage';
 import UserList from '../containers/UserListPage';
@@ -22,7 +25,7 @@ type PropsType = {
   theme: any,
   title: string,
   isOpen: boolean,
-  toggleDrawer: (boolean) => void,
+  toggleDrawer: boolean => void,
 };
 
 const drawerWidth = 240;
@@ -106,14 +109,20 @@ class MenuDrawer extends React.Component<PropsType> {
         <div className={classes.root}>
           <AppBar
             position="absolute"
-            className={classNames(classes.appBar, isOpen && classes.appBarShift)}
+            className={classNames(
+              classes.appBar,
+              isOpen && classes.appBarShift
+            )}
           >
             <Toolbar disableGutters={!isOpen}>
               <IconButton
                 color="inherit"
                 aria-label="Open drawer"
                 onClick={() => toggleDrawer(true)}
-                className={classNames(classes.menuButton, isOpen && classes.hide)}
+                className={classNames(
+                  classes.menuButton,
+                  isOpen && classes.hide
+                )}
               >
                 <MenuIcon />
               </IconButton>
@@ -125,27 +134,46 @@ class MenuDrawer extends React.Component<PropsType> {
           <Drawer
             variant="permanent"
             classes={{
-              paper: classNames(classes.drawerPaper, !isOpen && classes.drawerPaperClose),
+              paper: classNames(
+                classes.drawerPaper,
+                !isOpen && classes.drawerPaperClose
+              ),
             }}
             open={isOpen}
           >
             <div className={classes.toolbar}>
               <IconButton onClick={() => toggleDrawer(false)}>
-                {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
+                {theme.direction === 'rtl' ? (
+                  <ChevronRightIcon />
+                ) : (
+                  <ChevronLeftIcon />
+                )}
               </IconButton>
             </div>
             <Divider />
-            <MyList />
             <Divider />
           </Drawer>
           <main className={classes.content}>
             <div className={classes.toolbar} />
             <Switch>
-              <Route exact path="/" render={(props) => {console.log(props); return null;} } />
+              <Route
+                exact
+                path="/"
+                render={props => {
+                  console.log(props);
+                  return null;
+                }}
+              />
               <Route path="/makeKid" component={UserMake} />
-              <Route path="/registerKid" component={UserRegister} />
+              <Route
+                path="/registerKid"
+                component={UserRegister}
+              />
               <Route exact path="/kids" component={UserList} />
-              <Route path="/kids/detail/:id" component={UserDetail} />
+              <Route
+                path="/kids/detail/:id"
+                component={UserDetail}
+              />
             </Switch>
           </main>
         </div>
@@ -154,4 +182,6 @@ class MenuDrawer extends React.Component<PropsType> {
   }
 }
 
-export default withStyles(styles, { withTheme: true })(MenuDrawer);
+export default withStyles(styles, { withTheme: true })(
+  MenuDrawer
+);

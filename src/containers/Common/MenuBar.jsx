@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import MenuDrawer from '../../components/MenuDrawer';
-import toggleDrawer from '../../actions/toggleDrawer';
+import { toggleDrawer } from './actions';
 
 const mapStateToProps = state => ({
   title: state.bar.menuTitle,
@@ -15,5 +15,5 @@ const mapDispatchToProps = dispatch => ({
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps,
+  mapDispatchToProps
 )(MenuDrawer);
