@@ -156,3 +156,13 @@ export function convertStN(str: string): number {
   const result = str.replace(/[^0-9]/g, '');
   return Number(result);
 }
+
+export function filterServer(
+  list: Array<ServerType>,
+  version: string,
+  type: string
+): Array<ServerType> {
+  return list.filter(
+    item => item.version === version && item.type === type
+  );
+}

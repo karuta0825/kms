@@ -3,6 +3,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { changeValue } from './actions';
 import SelectionInput from '../../../components/SelectionInput';
+import { filterServer } from '../../../utils';
 
 type PropsType = {
   title: string,
@@ -20,7 +21,11 @@ const mapStateToProps = state => ({
   title: 'DBサーバ',
   isEdit: state.userDetailPage.baseInfoTab.isEdit,
   value: state.userDetailPage.baseInfoTab.inputValues.server,
-  items: state.data.servers,
+  items: filterServer(
+    state.data.servers,
+    state.data.baseInfo.version,
+    'DB'
+  ),
 });
 
 const mapDispatchToProps = dispatch => ({
