@@ -3,7 +3,7 @@ declare type UserDetailPageType = {
   buttonPrevIsActive: boolean,
   buttonNextIsActive: boolean,
   baseInfoTab: {
-    inputValues: {},
+    inputValues: KidType,
     isEdit: boolean,
   },
   customerTab: {
