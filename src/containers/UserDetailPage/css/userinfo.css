@@ -11,9 +11,11 @@
 .backBtn {
   position: absolute !important;
   left: 0;
+  padding: 0 !important;
 }
 
 .backBtnLink {
+  padding: 8px 16px;
   text-decoration: none;
   color: black;
 }
@@ -23,5 +25,4 @@
 }
 
 .nextBtn {
-
 }
