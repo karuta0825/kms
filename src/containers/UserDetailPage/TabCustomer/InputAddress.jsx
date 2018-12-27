@@ -5,18 +5,24 @@ import TextInput from '../../../components/TextInput';
 import { changeValue } from './actions';
 
 type PropsType = {
+  title: string,
   isEdit: boolean,
   value: string,
   onChange: Event => void,
+  isError: boolean,
+  errMsg: string,
 };
 
 function InputAddress(props: PropsType): React.Node {
-  return <TextInput title="住所" {...props} />;
+  return <TextInput {...props} />;
 }
 
 const mapStateToProps = state => ({
+  title: '住所',
   isEdit: state.userDetailPage.customerTab.isEdit,
   value: state.userDetailPage.customerTab.inputValues.address,
+  isError: false,
+  errMsg: '',
 });
 
 const mapDispatchToProps = dispatch => ({

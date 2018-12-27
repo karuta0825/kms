@@ -9,24 +9,9 @@ type PropsType = {
   isEdit: boolean,
   value: string,
   onChange: Event => void,
-  inputCheck: any => { isError: boolean, msg: string },
+  isError: boolean,
+  errMsg: string,
 };
-
-function inputCheck(value): { isError: boolean, msg: string } {
-  const reg = new RegExp(/^[0-9a-zA-Z-_@\.]+$/);
-
-  if (value === '') {
-    return {
-      isError: false,
-      msg: '',
-    };
-  }
-
-  return {
-    isError: !reg.test(value),
-    msg: '0-9,a-z,A-Z,@,.しか使えないよ',
-  };
-}
 
 function InputEmail(props: PropsType): React.Node {
   return <TextInput {...props} />;
@@ -36,7 +21,8 @@ const mapStateToProps = state => ({
   title: 'Email',
   isEdit: state.userDetailPage.customerTab.isEdit,
   value: state.userDetailPage.customerTab.inputValues.email,
-  inputCheck,
+  isError: state.userDetailPage.customerTab.isInputError.email,
+  errMsg: '0-9,a-z,A-Z,@,.しか使えないよ',
 });
 
 const mapDispatchToProps = dispatch => ({
