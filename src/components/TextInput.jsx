@@ -9,7 +9,8 @@ type PropsType = {
   value: string,
   customProps?: Object,
   onChange: Event => void,
-  inputCheck: any => { isError: boolean, msg: string },
+  isError: boolean,
+  errMsg: string,
 };
 
 const defaultEditProps = {
@@ -22,13 +23,10 @@ export default (props: PropsType): React.Node => {
     title,
     value,
     onChange,
-    inputCheck,
     customProps,
+    isError,
+    errMsg,
   } = props;
-  const { isError, msg } = (inputCheck && inputCheck(value)) || {
-    isError: false,
-    msg: '',
-  };
   const htmlProps =
     (customProps && { ...defaultEditProps, ...customProps }) ||
     defaultEditProps;
@@ -45,7 +43,7 @@ export default (props: PropsType): React.Node => {
           variant="outlined"
           value={(value && value) || ''}
           onChange={onChange}
-          helperText={isError && msg}
+          helperText={isError && errMsg}
         />
       )}
       {!isEdit && (
