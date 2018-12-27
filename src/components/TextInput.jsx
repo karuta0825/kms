@@ -3,11 +3,11 @@ import * as React from 'react';
 import TextField from '@material-ui/core/TextField';
 import styles from './css/TextInput.css';
 
-type PropsType = {
+export type TextInputPropsType = {
   isEdit: boolean,
   title: string,
   value: string,
-  customProps?: Object,
+  customProps: Object,
   onChange: Event => void,
   isError: boolean,
   errMsg: string,
@@ -17,7 +17,7 @@ const defaultEditProps = {
   style: { padding: '9px', background: '#fbfbfb' },
 };
 
-export default (props: PropsType): React.Node => {
+export default (props: TextInputPropsType): React.Node => {
   const {
     isEdit,
     title,

@@ -3,20 +3,18 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import TextInput from '../../../components/TextInput';
 import { changeValue } from './actions';
+import type { TextInputPropsType } from '../../../components/TextInput';
 
-type PropsType = {
-  isEdit: boolean,
-  value: string,
-  onChange: Event => void,
-};
-
-function InputAffliation(props: PropsType): React.Node {
-  return <TextInput title="所属" {...props} />;
+function InputAffliation(props: TextInputPropsType): React.Node {
+  return <TextInput {...props} />;
 }
 
 const mapStateToProps = state => ({
+  title: '所属',
   isEdit: state.userDetailPage.customerTab.isEdit,
   value: state.userDetailPage.customerTab.inputValues.affliation,
+  isError: false,
+  errMsg: '',
 });
 
 const mapDispatchToProps = dispatch => ({

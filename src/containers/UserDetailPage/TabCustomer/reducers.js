@@ -7,13 +7,9 @@ import {
 import inputChecks from '../../../utils/inputChecks';
 
 const inputCheck = {
-  base_name: () => {},
-  postal_cd: () => {},
-  address: () => {},
-  owner: () => {},
-  affliation: () => {},
-  tel: () => {},
-  fax: () => {},
+  postal_cd: inputChecks.telFax,
+  tel: inputChecks.telFax,
+  fax: inputChecks.telFax,
   email: inputChecks.email,
 };
 
@@ -94,6 +90,18 @@ const isInputError = (state, action: Action): Object => {
         ...state,
         ...obj,
       };
+    }
+    case TOGGLE_EDIT_MODE: {
+      if (payload.tabName === 'CUSTOMER' && !payload.isEdit) {
+        return {
+          ...state,
+          postal_cd: false,
+          tel: false,
+          fax: false,
+          email: false,
+        };
+      }
+      return state;
     }
     default:
       return state;

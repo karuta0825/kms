@@ -3,17 +3,9 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import TextInput from '../../../components/TextInput';
 import { changeValue } from './actions';
+import type { TextInputPropsType } from '../../../components/TextInput';
 
-type PropsType = {
-  title: string,
-  isEdit: boolean,
-  value: string,
-  onChange: Event => void,
-  isError: boolean,
-  errMsg: string,
-};
-
-function InputEmail(props: PropsType): React.Node {
+function InputEmail(props: TextInputPropsType): React.Node {
   return <TextInput {...props} />;
 }
 
