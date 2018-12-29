@@ -1,4 +1,23 @@
 declare type UserDetailTabBaseInfoType = {
   isEdit: boolean,
   inputValues: Object,
+  isInputError: {
+    kid: boolean,
+    user_name: boolean,
+    kana: boolean,
+    server: boolean,
+    userkey: boolean,
+    db_password: boolean,
+    fenics_key: boolean,
+    client_number: boolean,
+    number_pc: boolean,
+    license: boolean,
+    number_id: boolean,
+    range_id: boolean,
+    system_type: boolean,
+    version: boolean,
+    mobile_number: boolean,
+    register_on: boolean,
+    end_on: boolean,
+  },
 };

@@ -3,33 +3,9 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import TextInput from '../../../components/TextInput';
 import { changeValue } from './actions';
+import type { TextInputPropsType } from '../../../components/TextInput';
 
-type PropsType = {
-  title: string,
-  isEdit: boolean,
-  value: string,
-  onChange: Event => void,
-  customProps: Object,
-  inputCheck: any => { isError: boolean, msg: string },
-};
-
-function inputCheck(value): { isError: boolean, msg: string } {
-  const reg = new RegExp(/^[0-9a-zA-Z]+$/);
-
-  if (value === '') {
-    return {
-      isError: false,
-      msg: '',
-    };
-  }
-
-  return {
-    isError: !reg.test(value),
-    msg: '半角英数字のみ可能です',
-  };
-}
-
-function InputDBPassword(props: PropsType): React.Node {
+function InputDBPassword(props: TextInputPropsType): React.Node {
   return <TextInput {...props} />;
 }
 
@@ -38,8 +14,10 @@ const mapStateToProps = state => ({
   isEdit: state.userDetailPage.baseInfoTab.isEdit,
   value:
     state.userDetailPage.baseInfoTab.inputValues.db_password,
-  inputCheck,
   customProps: { maxLength: 10 },
+  isError:
+    state.userDetailPage.baseInfoTab.isInputError.db_password,
+  errMsg: '半角大英字と数字しか入力できません',
 });
 
 const mapDispatchToProps = dispatch => ({

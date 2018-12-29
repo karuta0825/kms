@@ -25,8 +25,20 @@ inputChecks.upperAlpha = (value: string): boolean => {
   return !reg.test(value);
 };
 
+inputChecks.upperAlphaNum = (value: string): boolean => {
+  const reg = new RegExp(/^[0-9A-Z]+$/);
+  if (value === '') return false;
+  return !reg.test(value);
+};
+
 inputChecks.lowerAlpha = (value: string): boolean => {
   const reg = new RegExp(/^[a-z]+$/);
+  if (value === '') return false;
+  return !reg.test(value);
+};
+
+inputChecks.lowerAlphaNum = (value: string): boolean => {
+  const reg = new RegExp(/^[0-9a-z]+$/);
   if (value === '') return false;
   return !reg.test(value);
 };

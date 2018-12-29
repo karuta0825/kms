@@ -3,33 +3,9 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import TextInput from '../../../components/TextInput';
 import { changeValue } from './actions';
+import type { TextInputPropsType } from '../../../components/TextInput';
 
-type PropsType = {
-  title: string,
-  isEdit: boolean,
-  value: string,
-  onChange: Event => void,
-  customProps: Object,
-  inputCheck: any => { isError: boolean, msg: string },
-};
-
-function inputCheck(value): { isError: boolean, msg: string } {
-  const reg = new RegExp(/^[a-z]+$/);
-
-  if (value === '') {
-    return {
-      isError: false,
-      msg: '',
-    };
-  }
-
-  return {
-    isError: !reg.test(value),
-    msg: '半角小英字のみ可能です',
-  };
-}
-
-function InputFenicskey(props: PropsType): React.Node {
+function InputFenicskey(props: TextInputPropsType): React.Node {
   return <TextInput {...props} />;
 }
 
@@ -37,8 +13,10 @@ const mapStateToProps = state => ({
   title: 'fenicsキー',
   isEdit: state.userDetailPage.baseInfoTab.isEdit,
   value: state.userDetailPage.baseInfoTab.inputValues.fenics_key,
-  inputCheck,
+  isError:
+    state.userDetailPage.baseInfoTab.isInputError.fenics_key,
   customProps: { maxLength: 6 },
+  errMsg: '半角小英と数字しか入力できません',
 });
 
 const mapDispatchToProps = dispatch => ({
