@@ -4,8 +4,8 @@
 
 ### Task
 
-- [] redux-sage による非同期通信
-- [] redux x material-ui の実装方法
+- [x] redux-sage による非同期通信
+- [x] redux x material-ui の実装方法
 - [] HOC と atomic design によるきれいなコンポーネント設計
 - [] login 処理と redux について
 - [x] flow, ESLint 導入
@@ -22,7 +22,7 @@
     - [] 選択コンポーネントをつくる
       - [] isEdit で disable 制御ができるようにする
       - [] inputValues.has_xxx で class をかえる
-      - [] 排他制御をかけるかどうかを選べる
+      - [] 排他制御をかけるかどうかを選べる - radio
   - [x] 日付
   - [x] 多選択
   - [x] 長さを指定できる
@@ -48,10 +48,13 @@
     - [x] Fenics 利用端末数
           -> DB の設計変更必要(busiv_number, fenics_number をわける)
 - [x] 入力エラー時に保存できない方法を考える
-- [] Customer タブの入力コンポーネントに入力チェックを追加する
+- [x] Customer タブの入力コンポーネントに入力チェックを追加する
 - [x] 一覧にもどったときに参照モードに戻す
-
-- [] 不要な components を削除
+- [] react grid をつかってみる
+- [] System タブを完成させる
+  - [] server 選択時に IP アドレスもつける
+- [] ダウンロード機能の実験
+- [x] 不要な components を削除
 
 ### 実装したい機能
 
