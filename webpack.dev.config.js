@@ -19,27 +19,33 @@ const config = {
     new HtmlWebpackPlugin({
       template: 'src/index.html',
     }),
+    new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
   ],
   devtool: 'source-map',
   module: {
-    rules: [{
-      test: /\.jsx?$/,
-      exclude: path.resolve(__dirname, 'node_modules'),
-      loader: 'babel-loader',
-      options: {
-        presets: ['react', 'env'],
-        plugins: [
-          'react-hot-loader/babel',
-          'transform-class-properties',
-          'transform-object-rest-spread',
-        ],
-        cacheDirectory: true,
+    rules: [
+      {
+        test: /\.jsx?$/,
+        exclude: path.resolve(__dirname, 'node_modules'),
+        loader: 'babel-loader',
+        options: {
+          presets: ['react', 'env'],
+          plugins: [
+            'react-hot-loader/babel',
+            'transform-class-properties',
+            'transform-object-rest-spread',
+          ],
+          cacheDirectory: true,
+        },
       },
-    },
-    {
-      test: /\.css$/,
-      loader: ['style-loader', 'css-loader?modules&localIdentName=[name]__[local]___[hash:base64:5]'],
-    }],
+      {
+        test: /\.css$/,
+        loader: [
+          'style-loader',
+          'css-loader?modules&localIdentName=[name]__[local]___[hash:base64:5]',
+        ],
+      },
+    ],
   },
   resolve: {
     extensions: ['.js', '.jsx'],
