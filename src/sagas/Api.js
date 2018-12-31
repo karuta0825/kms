@@ -23,7 +23,9 @@ Api.fetchKidsByKid = (kid: number): Promise<Array<KidType>> => {
   return fetch(url, optionGet).then(r => r.json());
 };
 
-Api.fetchClientById = (id: number): Promise<Array<ClientType>> => {
+Api.fetchClientById = (
+  id: number
+): Promise<Array<ClientType>> => {
   const url = `${host}/api/v1/clients/id/${id}`;
   return fetch(url, optionGet).then(r => r.json());
 };
@@ -33,7 +35,9 @@ Api.fetchBusivById = (id: number): Promise<Array<BusivType>> => {
   return fetch(url, optionGet).then(r => r.json());
 };
 
-Api.fetchFenicsById = (id: number): Promise<Array<FenicsType>> => {
+Api.fetchFenicsById = (
+  id: number
+): Promise<Array<FenicsType>> => {
   const url = `${host}/api/v1/fenics/id/${id}`;
   return fetch(url, optionGet).then(r => r.json());
 };
@@ -43,7 +47,7 @@ Api.fetchCustomerById = (id: number): Promise<CustomerType> => {
   return fetch(url, optionGet).then(r => r.json());
 };
 
-Api.fetchLicenseById = (id: number): Promise<Array<LicenseType>> => {
+Api.fetchLicenseById = (id: number): Promise<LicenseType> => {
   const url = `${host}/api/v1/licenses/id/${id}`;
   return fetch(url, optionGet).then(r => r.json());
 };
@@ -53,17 +57,23 @@ Api.fetchMemoById = (id: number): Promise<Array<MemoType>> => {
   return fetch(url, optionGet).then(r => r.json());
 };
 
-Api.fetchMobileById = (id: number): Promise<Array<MobileType>> => {
+Api.fetchMobileById = (
+  id: number
+): Promise<Array<MobileType>> => {
   const url = `${host}/api/v1/mobiles/id/${id}`;
   return fetch(url, optionGet).then(r => r.json());
 };
 
-Api.fetchPartnerById = (id: number): Promise<Array<PartnerType>> => {
+Api.fetchPartnerById = (
+  id: number
+): Promise<Array<PartnerType>> => {
   const url = `${host}/api/v1/partners/id/${id}`;
   return fetch(url, optionGet).then(r => r.json());
 };
 
-Api.fetchHistoryById = (id: number): Promise<Array<HistoryType>> => {
+Api.fetchHistoryById = (
+  id: number
+): Promise<Array<HistoryType>> => {
   const url = `${host}/api/v1/historys/id/${id}`;
   return fetch(url, optionGet).then(r => r.json());
 };
@@ -88,7 +98,9 @@ Api.fetchService = (): Promise<Array<ServiceType>> => {
   return fetch(url, optionGet).then(r => r.json());
 };
 
-Api.fetchEvent = (yearMonth: string): Promise<Array<EventType>> => {
+Api.fetchEvent = (
+  yearMonth: string
+): Promise<Array<EventType>> => {
   const url = `${host}/api/v1/events/${yearMonth}`;
   return fetch(url, optionGet).then(r => r.json());
 };
@@ -113,7 +125,9 @@ Api.fetchEnvironmentByTypeAndVersion = (
   return fetch(url, optionGet).then(r => r.json());
 };
 
-Api.fetchAddInfo = (yearMonth: string): Promise<Array<Object>> => {
+Api.fetchAddInfo = (
+  yearMonth: string
+): Promise<Array<Object>> => {
   const url = `${host}/api/v1/addInfo/${yearMonth}`;
   return fetch(url, optionGet).then(r => r.json());
 };

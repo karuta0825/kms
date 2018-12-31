@@ -1,6 +1,12 @@
 // @flow
 import { delay } from 'redux-saga';
-import { takeEvery, call, put, all, select } from 'redux-saga/effects';
+import {
+  takeEvery,
+  call,
+  put,
+  all,
+  select,
+} from 'redux-saga/effects';
 import {
   POST_MAKE_USER,
   POST_REGISTER_USER,
@@ -20,6 +26,9 @@ import {
   FETCH_ENVIRONMENTS,
   FETCH_SERVERS,
   FETCH_USERINFO,
+  FAILED_FETCH_SERVICES,
+  SUCCESSED_FETCH_SERVICES,
+  FETCH_SERVICES,
 } from '../constants/ActionTypes';
 import Api from './Api';
 
@@ -28,7 +37,10 @@ function* makeUser(
 ): Generator<Object, void, { done: boolean, value: any }> {
   try {
     yield call(delay, 3000);
-    yield put({ type: SUCCESSED_MAKE_USER, payload: 'KID88888' });
+    yield put({
+      type: SUCCESSED_MAKE_USER,
+      payload: 'KID88888',
+    });
   } catch (e) {
     yield put({ type: FAILED_MAKE_USER, e });
   }
@@ -70,6 +82,19 @@ function* fetchServer(): Generator<
   }
 }
 
+function* fetchService(): Generator<
+  Object,
+  void,
+  { done: boolean, value: any }
+> {
+  try {
+    const data = yield call(Api.fetchService);
+    yield put({ type: SUCCESSED_FETCH_SERVICES, payload: data });
+  } catch (e) {
+    yield put({ type: FAILED_FETCH_SERVICES, payload: e });
+  }
+}
+
 function* fetchEnvironment(): Generator<
   Object,
   void,
@@ -77,7 +102,10 @@ function* fetchEnvironment(): Generator<
 > {
   try {
     const data = yield call(Api.fetchEnvironment);
-    yield put({ type: SUCCESSED_FETCH_ENVIRONMENTS, payload: data });
+    yield put({
+      type: SUCCESSED_FETCH_ENVIRONMENTS,
+      payload: data,
+    });
   } catch (e) {
     yield put({ type: FAILED_FETCH_ENVIRONMENTS, payload: e });
   }
@@ -137,6 +165,7 @@ export default function* rootSage(): Generator<
   yield takeEvery(POST_REGISTER_USER, registerUser);
   yield takeEvery(FETCH_KIDS, fetchKids);
   yield takeEvery(FETCH_SERVERS, fetchServer);
+  yield takeEvery(FETCH_SERVICES, fetchService);
   yield takeEvery(FETCH_ENVIRONMENTS, fetchEnvironment);
   yield takeEvery(FETCH_USERINFO, fetchUserInfoById);
 }
