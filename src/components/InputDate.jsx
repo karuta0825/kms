@@ -31,6 +31,7 @@ export default (props: PropsType): React.Node => {
       {!isEdit && (
         <TextField
           className={styles.text}
+          type="date"
           margin="normal"
           InputProps={{ readOnly: true }}
           value={(value && value) || ''}
