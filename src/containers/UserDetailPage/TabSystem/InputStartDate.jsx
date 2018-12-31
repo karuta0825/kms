@@ -18,7 +18,8 @@ function InputStartDate(props: PropsType): React.Node {
 const mapStateToProps = state => ({
   title: '受付日',
   isEdit: state.userDetailPage.baseInfoTab.isEdit,
-  value: state.userDetailPage.baseInfoTab.inputValues.start_on,
+  value:
+    state.userDetailPage.baseInfoTab.inputValues.register_on,
 });
 
 const mapDispatchToProps = dispatch => ({
