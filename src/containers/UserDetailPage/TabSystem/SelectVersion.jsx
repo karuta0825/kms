@@ -7,7 +7,7 @@ import styles from '../../../components/css/TextInput.css';
 type PropsType = {
   title: string,
   isEdit: boolean,
-  isSelected: boolean,
+  version: string,
 };
 
 function helperText(isEdit: boolean): React.Node | null {
@@ -16,35 +16,28 @@ function helperText(isEdit: boolean): React.Node | null {
     marginTop: '10px',
   };
   if (isEdit) {
-    return (
-      <span style={styles}>
-        顧客情報タブから変更してください
-      </span>
-    );
+    return <span style={styles}>変更できません</span>;
   }
   return null;
 }
 
-function SwitchMobile(props: PropsType): React.Node {
-  const { title, isEdit, isSelected } = props;
+function SelectVersion(props: PropsType): React.Node {
+  const { title, isEdit, version } = props;
+  const isLM = version === 'LM';
   return (
     <div className={styles.wrapper}>
       <span className={styles.title}>{title}</span>
-      <Switch
-        name="あり"
-        isEdit={false}
-        isSelected={isSelected}
-      />
+      <Switch name="ES" isEdit={false} isSelected={isLM} />
+      <Switch name="LM" isEdit={false} isSelected={!isLM} />
       {helperText(isEdit)}
     </div>
   );
 }
 
 const mapStateToProps = state => ({
-  title: 'モバイル',
+  title: 'バージョン',
   isEdit: state.userDetailPage.baseInfoTab.isEdit,
-  isSelected:
-    state.userDetailPage.baseInfoTab.inputValues.has_mobile,
+  version: state.userDetailPage.baseInfoTab.inputValues.version,
 });
 
-export default connect(mapStateToProps)(SwitchMobile);
+export default connect(mapStateToProps)(SelectVersion);

@@ -17,6 +17,9 @@ import SwitchQA from './SwitchQA';
 import SwitchMobile from './SwitchMobile';
 import InputBusivNum from './InputBusivNum';
 import InputFenicsNum from './InputFenicsNum';
+import SelectNetwork from './SelectNetwork';
+import SelectVersion from './SelectVersion';
+import SelectSystemType from './SelectSystemType';
 
 type PropsType = {
   isEdit: boolean,
@@ -58,6 +61,9 @@ function TabSystem(props: PropsType): React.Node {
         <InputEndDate />
         <InputKid />
         <InputUserName />
+        <SelectSystemType />
+        <SelectVersion />
+        <SelectNetwork />
         <SwitchMobile />
         <SelectAPServer />
         <SelectDBServer />
