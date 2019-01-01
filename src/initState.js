@@ -97,7 +97,12 @@ const initState: StateType = {
         email: false,
       },
     },
-    licenseTab: {},
+    licenseTab: {
+      isEdit: false,
+      inputValues: {},
+      selectedTable: [],
+      selection: [],
+    },
     fenicsTab: {},
     busivTab: {},
     partnerTab: {},

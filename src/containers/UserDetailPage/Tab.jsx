@@ -9,6 +9,7 @@ import Paper from '@material-ui/core/Paper';
 import TabSystem from './TabSystem';
 import TabCustomer from './TabCustomer';
 import { changeTabIndex } from './actions';
+import TabLicense from './TabLicense';
 
 function TabContainer(
   { children } = {
@@ -68,7 +69,7 @@ class TabManager extends React.Component<PropsType> {
         </Tabs>
         {value === 0 && <TabSystem />}
         {value === 1 && <TabCustomer />}
-        {value === 2 && <TabContainer>Item Three</TabContainer>}
+        {value === 2 && <TabLicense />}
         {value === 3 && <TabContainer>Item Four</TabContainer>}
         {value === 4 && <TabContainer>Item Five</TabContainer>}
         {value === 5 && <TabContainer>Item Six</TabContainer>}

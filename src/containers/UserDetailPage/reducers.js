@@ -2,6 +2,7 @@
 import { SET_TAB_POSITION } from '../../constants/ActionTypes';
 import customerTab from './TabCustomer/reducers';
 import baseInfoTab from './TabSystem/reducers';
+import liceseTab from './TabLicense/reducers';
 
 const tabIndex = (state: number, action): number => {
   const { type, payload } = action;
@@ -37,4 +38,5 @@ export default (
   ),
   baseInfoTab: baseInfoTab(state.baseInfoTab, action, data),
   customerTab: customerTab(state.customerTab, action, data),
+  licenseTab: liceseTab(state.licenseTab, action, data),
 });
