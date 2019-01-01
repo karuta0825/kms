@@ -2,9 +2,11 @@ declare type UserDetailPageType = {
   tabIndex: number,
   buttonPrevIsActive: boolean,
   buttonNextIsActive: boolean,
+  isFetching: boolean,
   baseInfoTab: {
     inputValues: KidType,
     isEdit: boolean,
+    isInputError: {},
   },
   customerTab: {
     isEdit: boolean,

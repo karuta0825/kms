@@ -5,6 +5,7 @@ import styles from './css/index.css';
 import UserInfo from './UserInfo';
 import Memo from './Memo';
 import { getUserInfo, toggleEditMode } from './actions';
+import ReadyModal from './ReadyModal';
 
 type PropsType = {
   match: Object,
@@ -28,6 +29,7 @@ class UserDetail extends React.Component<PropsType> {
       <div className={styles.wrapper}>
         <UserInfo className={styles.userinfo} />
         <Memo className={styles.memo} />
+        <ReadyModal />
       </div>
     );
   }

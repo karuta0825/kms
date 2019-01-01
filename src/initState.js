@@ -43,6 +43,7 @@ const initState: StateType = {
   },
   userDetailPage: {
     tabIndex: 0,
+    isFetching: false,
     buttonPrevIsActive: true,
     buttonNextIsActive: true,
     baseInfoTab: {
