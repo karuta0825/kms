@@ -3,11 +3,11 @@ import * as React from 'react';
 import { Select, MenuItem, Input } from '@material-ui/core';
 import styles from './css/TextInput.css';
 
-type PropsType = {
+export type PropsType = {
   isEdit: boolean,
   title: string,
   value: string,
-  items: Array<Object>,
+  items: Array<{ id: number, name: string, value: string }>,
   onChange: Event => void,
 };
 
@@ -26,7 +26,7 @@ export default (props: PropsType): React.Node => {
             <em>なし</em>
           </MenuItem>
           {items.map(item => (
-            <MenuItem value={item.name} key={item.id}>
+            <MenuItem value={item.value} key={item.id}>
               {item.name}
             </MenuItem>
           ))}

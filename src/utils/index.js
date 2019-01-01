@@ -162,7 +162,20 @@ export function filterServer(
   version: string,
   type: string
 ): Array<ServerType> {
-  return list.filter(
-    item => item.version === version && item.type === type
-  );
+  return list
+    .filter(
+      item => item.version === version && item.type === type
+    )
+    .map(server => ({
+      ...server,
+      name: `${server.name}(${server.ip})`,
+      value: `${server.name}`,
+    }));
+}
+
+export function filterService(
+  list: Array<ServiceType>,
+  version: string
+): Array<ServiceType> {
+  return list.filter(item => item.version === version);
 }

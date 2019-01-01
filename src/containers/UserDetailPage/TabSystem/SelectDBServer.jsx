@@ -4,14 +4,7 @@ import { connect } from 'react-redux';
 import { changeValue } from './actions';
 import SelectionInput from '../../../components/SelectionInput';
 import { filterServer } from '../../../utils';
-
-type PropsType = {
-  title: string,
-  isEdit: boolean,
-  value: string,
-  items: Array<ServerType>,
-  onChange: Event => void,
-};
+import type { PropsType } from '../../../components/SelectionInput';
 
 function SelectAPServer(props: PropsType): React.Node {
   return <SelectionInput {...props} />;
