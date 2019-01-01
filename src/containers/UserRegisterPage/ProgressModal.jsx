@@ -1,7 +1,6 @@
 // @flow
 import { connect } from 'react-redux';
 import ProgressModal from '../../components/ProgressModal';
-import { type StateType } from '../../initState';
 
 const mapStateToProps = (state: StateType) => ({
   title: 'ユーザー登録',
@@ -9,6 +8,4 @@ const mapStateToProps = (state: StateType) => ({
   isOpen: state.userRegisterPage.isUploading,
 });
 
-export default connect(
-  mapStateToProps,
-)(ProgressModal);
+export default connect(mapStateToProps)(ProgressModal);
