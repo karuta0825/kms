@@ -1,4 +1,7 @@
-import { SELECT_LICENSE } from '../../../constants/ActionTypes';
+import {
+  SELECT_LICENSE,
+  TOGGLE_EDIT_MODE,
+} from '../../../constants/ActionTypes';
 
 export const toggleEditMode = (
   isEdit: boolean,
