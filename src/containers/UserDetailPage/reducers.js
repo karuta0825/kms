@@ -8,6 +8,7 @@ import {
 import customerTab from './TabCustomer/reducers';
 import baseInfoTab from './TabSystem/reducers';
 import liceseTab from './TabLicense/reducers';
+import clientTab from './TabClient/reducers';
 
 const tabIndex = (state: number, action): number => {
   const { type, payload } = action;
@@ -59,4 +60,5 @@ export default (
   baseInfoTab: baseInfoTab(state.baseInfoTab, action, data),
   customerTab: customerTab(state.customerTab, action, data),
   licenseTab: liceseTab(state.licenseTab, action, data),
+  clientTab: clientTab(state.clientTab, action, data),
 });

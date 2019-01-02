@@ -5,6 +5,7 @@ declare type UserDetailPageType = {
   isFetching: boolean,
   baseInfoTab: UserDetailTabBaseInfoType,
   customerTab: UserDetailTabCustomerType,
+  clientTab: UserDetailTabClientType,
   licenseTab: {
     selected: Array<String>,
     canUpdate: boolean,

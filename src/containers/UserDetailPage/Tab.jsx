@@ -10,6 +10,7 @@ import TabSystem from './TabSystem';
 import TabCustomer from './TabCustomer';
 import { changeTabIndex } from './actions';
 import TabLicense from './TabLicense';
+import TabClient from './TabClient';
 
 function TabContainer(
   { children } = {
@@ -61,6 +62,7 @@ class TabManager extends React.Component<PropsType> {
           <Tab label="システム情報" />
           <Tab label="顧客情報" />
           <Tab label="ライセンス" />
+          <Tab label="クライアント(Citrix数)" />
           <Tab label="Fenics" />
           <Tab label="ビジV" />
           <Tab label="パートナ" />
@@ -70,11 +72,12 @@ class TabManager extends React.Component<PropsType> {
         {value === 0 && <TabSystem />}
         {value === 1 && <TabCustomer />}
         {value === 2 && <TabLicense />}
-        {value === 3 && <TabContainer>Item Four</TabContainer>}
+        {value === 3 && <TabClient />}
         {value === 4 && <TabContainer>Item Five</TabContainer>}
         {value === 5 && <TabContainer>Item Six</TabContainer>}
         {value === 6 && <TabContainer>Item Seven</TabContainer>}
         {value === 7 && <TabContainer>Item Eigth</TabContainer>}
+        {value === 8 && <TabContainer>Item Eigth</TabContainer>}
       </Paper>
     );
   }

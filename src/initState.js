@@ -104,6 +104,11 @@ const initState: StateType = {
       selectedTable: [],
       selection: [],
     },
+    clientTab: {
+      isEdit: false,
+      inputValues: [],
+      selection: [],
+    },
     fenicsTab: {},
     busivTab: {},
     partnerTab: {},
