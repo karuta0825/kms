@@ -53,6 +53,8 @@ const selection = (
     case SELECT_CLIENT: {
       return payload;
     }
+    case SUCCESSED_FETCH_USERINFO:
+      return [];
     default:
       return state;
   }
