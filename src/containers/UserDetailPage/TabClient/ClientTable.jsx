@@ -9,12 +9,12 @@ import {
   VirtualTable,
   TableHeaderRow,
   TableSelection,
-  TableEditColumn,
   TableEditRow,
 } from '@devexpress/dx-react-grid-material-ui';
 import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core';
 import { selectClient } from './actions';
+import TableCells from './TableCells';
 
 type PropsType = {
   isEdit: boolean,
@@ -62,11 +62,12 @@ function ClientTable(props: PropsType): React.Node {
           editingRowIds={rows.map((row, idx) => idx)}
           columnExtensions={[
             { columnName: 'client_id', editingEnabled: false },
+            { columnName: 'client_pass', editingEnabled: false },
           ]}
         />
         <VirtualTable />
         <TableHeaderRow />
-        <TableEditRow />
+        <TableEditRow cellComponent={TableCells} />
       </Grid>
     );
   }

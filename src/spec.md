@@ -13,7 +13,19 @@
 
 ### Today Task
 
-- [] ユーザー詳細画面移行時に、プログレスダイアログを表示する
+- [] ユーザーリスト
+
+  - [] ダウンロード
+  - [] 削除
+  - [] react-grid に変更
+    - [] KID クリックで詳細画面へ
+    - [] 列と行を固定させる
+    - [] セレクト状態をもち、並び替え、フィルタ後に対応
+    - [] 並び替え
+    - [] フィルター
+    - [] 列の表示・非表示選択
+
+- [x] ユーザー詳細画面移行時に、プログレスダイアログを表示する
 - [] 各種入力コンポーネント作成
   - [x] 入力チェックしてくれる
   - [x] 数値
@@ -26,6 +38,7 @@
   - [x] 日付
   - [x] 多選択
   - [x] 長さを指定できる
+- [] '次・前のユーザーボタン'を動作させる
 - [x] システムタブを作る
   - [x] reducer を下位階層に下ろす
   - [x] state 設計
@@ -39,7 +52,7 @@
   - [x] DB パスワード
   - [x] Fenics キー
   - [x] モバイル -> 修正必要かもね? helperText がほしい
-  - [] システム環境(オンプレ、クラウド)
+  - [x] システム環境(オンプレ、クラウド)
   - [x] バージョン(LM, ES)
     - [] 変更時にそれぞれの最新の KID を取得するようにする
   - [x] ネットワーク(Fenics, ビジネス VPN)
@@ -52,16 +65,37 @@
 - [x] Customer タブの入力コンポーネントに入力チェックを追加する
 - [x] 一覧にもどったときに参照モードに戻す
 - [] System タブを完成させる
-  - [] server 選択時に IP アドレスもつける(表示とデータをわけられるかどうか?)
+  - [] 入力チェック変更に対応させる
+  - [x] server 選択時に IP アドレスもつける(表示とデータをわけられるかどうか?)
   - [x] 受付日・終了日  のデータ反映させる
   - [x] モバイル入力がデータ反映できていない
-- [] ダウンロード機能の実験
 - [x] 不要な components を削除
 - [] ライセンスタブを完成させる
   - [x] react grid をつかってみる
   - [x] バージョンごとのテーブル表示
   - [x] 現在の使用サービスのみ表示
   - [] テキストからの編集ができるようにする
+- [] ユーザタブをつくる
+  - [x] react-grid をつかる
+  - [x] 編集不可能列
+  - [] inputValues に値反映
+  - [x] 一度のすべての行を編集状態にする
+  - [x] 日付入力できる
+  - [x] セレクト入力ができる
+  - [x] 数値入力ができる
+  - [] ダウンロード機能の実験
+  - [] パソコン名をこちらで変更できるようにする
+    - [] Database のデータの持ち方を変更する
+- [] Fenics タブをつくる
+  - [] react-grid で表示
+  - [] ダウンロード
+  - [] 一度に編集できる
+- [] モバイルタブ
+  - [] 拠点ごとに表示する
+  - [] 基本情報
+  - [] Fenics 情報
+  - [] タブで上記を切り替えられる
+  - [] ダウンロード機能(.sh ダウンロード実行できるようにする)
 
 ### 実装したい機能
 
@@ -78,81 +112,3 @@
 - [] push 通知(予定近づいたとき) Service Worker の実装
 - [] Electron 実装ではもっと別なことができるようになる
 - [] API 設計通りにつくる
-
-### ディレクトリ構成
-
-```cmd
-  .
-   |-- components
-   |-- containers
-   |   |-- TopPage
-   |   |    |-- css
-   |   |    |-- index.js
-   |   |    |-- reducer.js
-   |   |    |-- action.js
-   |   |    |-- ComponentA.jsx
-   |   |    `-- ComponentA'.jsx
-   |   |-- UserMakePage
-   |   |-- UserRegisterPage
-   |   |-- UserListPage
-   |   |-- UserDetailPage
-   |   |-- FenicsListPage
-   |   |-- ServerManagePage
-   |   |-- ServiceManagePage
-   |   |-- TemplateManagePage
-   |   `-- AccountManagePage
-   |-- constants
-   |   `-- ActionType.js
-   |-- ConfigureStore.js
-   |-- App.js
-   `-- index.html
-```
-
-### State 設計
-
-State 設計難しい
-気にせずつくればいいのかな?
-あとで分割すればいいのではないか?
-
-```json
-{
-  "session": {
-    "id": "string",
-    "name": "string",
-    "pass": "string"
-  },
-  "selectedMenu": {
-    "isTop": "boolean",
-    "isMakeUser": "boolean",
-    "isRegister": "boolean"
-  },
-  "top": {
-    "news": {},
-    "servers": {},
-    "graph": {}
-  },
-  "kidList": {},
-  "makeUserPage": {
-    "value": {},
-    "canMakeUser": "boolean"
-  },
-  "detail": {
-    "selectTab": "number"
-  },
-  // ひとつのreducerで管理必要になる
-  "data": {
-    "kids": [],
-    "customers": [],
-    "licennse": {},
-    "fenics": [],
-    "busivs": [],
-    "mobiles": [],
-    "historys": [],
-    "memos": [],
-    "templates": [],
-    "servers": [],
-    "services": [],
-    "loginUsers": []
-  }
-}
-```
