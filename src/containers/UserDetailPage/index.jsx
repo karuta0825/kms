@@ -18,6 +18,11 @@ class UserDetail extends React.Component<PropsType> {
     dispatch(getUserInfo(match.params.id));
   }
 
+  componentWillUpdate(nextProps) {
+    const { match, dispatch } = nextProps;
+    dispatch(getUserInfo(match.params.id));
+  }
+
   componentWillUnmount() {
     const { dispatch } = this.props;
     dispatch(toggleEditMode(false, 'BASEINFO'));
