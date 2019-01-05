@@ -6,6 +6,7 @@ import {
   FILTER_NETWORK,
   FILTER_MOBILE,
   FILTER_SYSTEM_TYPE,
+  SUCCESSED_FETCH_USERINFO,
 } from '../../constants/ActionTypes';
 import initState from '../../initState';
 
@@ -16,12 +17,17 @@ type Action = {
 
 const { userListPage } = initState;
 
-const isFilterOpen = (state: boolean, action: Action): boolean => {
+const isFilterOpen = (
+  state: boolean,
+  action: Action
+): boolean => {
   const { type } = action;
 
   switch (type) {
     case TOGGLE_FILTER_MENU:
       return !state;
+    case SUCCESSED_FETCH_USERINFO:
+      return false;
     default:
       return state;
   }
