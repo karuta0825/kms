@@ -3,7 +3,7 @@ import * as React from 'react';
 import TextField from '@material-ui/core/TextField';
 import styles from './css/NumberInputWithBtn.css';
 
-type PropsType = {
+export type PropsType = {
   isEdit: boolean,
   title: string,
   value: number | string,
@@ -11,9 +11,8 @@ type PropsType = {
   onChange: Event => void,
   onClickAdd: Event => void,
   onClickDel: Event => void,
-  inputCheck?: (
-    number | string
-  ) => { isError: boolean, msg: string },
+  isError: boolean,
+  errMsg: string,
 };
 
 const defaultEditProps = {
@@ -29,17 +28,13 @@ export default (props: PropsType): React.Node => {
     onChange,
     onClickAdd,
     onClickDel,
-    inputCheck,
+    isError,
+    errMsg,
   } = props;
 
   const htmlProps =
     (customProps && { ...defaultEditProps, ...customProps }) ||
     defaultEditProps;
-
-  const { isError, msg } = (inputCheck && inputCheck(value)) || {
-    isError: false,
-    msg: '',
-  };
 
   return (
     <div className={styles.wrapper}>
@@ -54,7 +49,7 @@ export default (props: PropsType): React.Node => {
           variant="outlined"
           value={value}
           onChange={onChange}
-          helperText={isError && msg}
+          helperText={isError && errMsg}
         />
       )}
       {!isEdit && (

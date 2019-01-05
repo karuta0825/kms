@@ -8,6 +8,7 @@ import {
 import checkers from '../../../utils/inputChecks';
 
 const inputCheck = {
+  number_pc: checkers.isPNum,
   userkey: checkers.upperAlpha,
   db_password: checkers.upperAlphaNum,
   fenics_key: checkers.lowerAlphaNum,
@@ -66,7 +67,11 @@ const inputValues = (
   }
 };
 
-const isInputError = (state, action: Action): Object => {
+const isInputError = (
+  state,
+  action: Action,
+  cache: KidType
+): Object => {
   const { type, payload } = action;
   switch (type) {
     case CHANGE_BASEINFO_VALUE: {
@@ -77,6 +82,20 @@ const isInputError = (state, action: Action): Object => {
       }
 
       obj[payload.key] = inputCheck[payload.key](payload.value);
+      return {
+        ...state,
+        ...obj,
+      };
+    }
+    case ADD_BASEINFO_VALUE: {
+      const obj = {};
+
+      if (!inputCheck[payload.key]) {
+        return state;
+      }
+      obj[payload.key] = inputCheck[payload.key](
+        Number(cache[payload.key]) + payload.num
+      );
       return {
         ...state,
         ...obj,
@@ -109,5 +128,9 @@ export default (
     action,
     data.baseInfo
   ),
-  isInputError: isInputError(state.isInputError, action),
+  isInputError: isInputError(
+    state.isInputError,
+    action,
+    state.inputValues
+  ),
 });
