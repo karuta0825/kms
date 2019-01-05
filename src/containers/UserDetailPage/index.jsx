@@ -4,7 +4,11 @@ import { connect } from 'react-redux';
 import styles from './css/index.css';
 import UserInfo from './UserInfo';
 import Memo from './Memo';
-import { getUserInfo, toggleEditMode } from './actions';
+import {
+  getUserInfo,
+  toggleEditMode,
+  togglePrevNexButton,
+} from './actions';
 import ReadyModal from './ReadyModal';
 
 type PropsType = {
@@ -25,6 +29,9 @@ class UserDetail extends React.Component<PropsType> {
 
   componentWillUnmount() {
     const { dispatch } = this.props;
+    dispatch(
+      togglePrevNexButton({ hasPrev: true, hasNext: true })
+    );
     dispatch(toggleEditMode(false, 'BASEINFO'));
     dispatch(toggleEditMode(false, 'CUSTOMER'));
   }

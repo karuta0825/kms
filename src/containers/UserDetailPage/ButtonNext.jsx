@@ -3,19 +3,31 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import Button from '@material-ui/core/Button';
 import ArrowRightIcon from '@material-ui/icons/ArrowRight';
+import { withRouter } from 'react-router';
 import styles from './css/userinfo.css';
+import { getNextKidsId, searchUser } from '../../utils/index';
+import { togglePrevNexButton } from './actions';
 
 type PropsType = {
-  onClick: Event => void,
   isActive: boolean,
+  history: Object,
+  match: Object,
+  data: Array<KidType>,
+  dispatch: Action => void,
 };
 
-function ButtonBack(props: PropsType): React.Node {
-  const { onClick, isActive } = props;
+function ButtonNext(props: PropsType): React.Node {
+  const { isActive, history, match, data, dispatch } = props;
   return (
     <Button
       className={styles.nextBtn}
-      onClick={onClick}
+      onClick={() => {
+        const next = getNextKidsId(data, match.params.id, 1);
+        if (next.kids_id !== null) {
+          history.push(`/kidList/detail/${next.kids_id}`);
+        }
+        dispatch(togglePrevNexButton(next));
+      }}
       disabled={!isActive}
     >
       次のユーザー
@@ -26,15 +38,7 @@ function ButtonBack(props: PropsType): React.Node {
 
 const mapStateToProps = state => ({
   isActive: state.userDetailPage.buttonNextIsActive,
+  data: searchUser(state.data.kids, state.userListPage.filter),
 });
 
-// 次のユーザをみつける関数を呼び出す必要がある。
-// ユーザーのindexとボタンが押せるかどうかの両方が必要だね
-const mapDispatchToProps = dispatch => ({
-  onClick: () => {},
-});
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ButtonBack);
+export default connect(mapStateToProps)(withRouter(ButtonNext));

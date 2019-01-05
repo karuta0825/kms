@@ -3,19 +3,31 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import Button from '@material-ui/core/Button';
 import ArrowLeftIcon from '@material-ui/icons/ArrowLeft';
-import styles from './css/userInfo.css';
+import { withRouter } from 'react-router';
+import styles from './css/userinfo.css';
+import { getNextKidsId, searchUser } from '../../utils/index';
+import { togglePrevNexButton } from './actions';
 
 type PropsType = {
-  onClick: Event => void,
   isActive: boolean,
+  history: Object,
+  match: Object,
+  data: Array<KidType>,
+  dispatch: Action => void,
 };
 
 function ButtonBack(props: PropsType): React.Node {
-  const { onClick, isActive } = props;
+  const { isActive, history, match, data, dispatch } = props;
   return (
     <Button
       className={styles.prevBtn}
-      onClick={onClick}
+      onClick={() => {
+        const next = getNextKidsId(data, match.params.id, -1);
+        if (next.kids_id !== null) {
+          history.push(`/kidList/detail/${next.kids_id}`);
+        }
+        dispatch(togglePrevNexButton(next));
+      }}
       disabled={!isActive}
     >
       <ArrowLeftIcon />
@@ -26,13 +38,7 @@ function ButtonBack(props: PropsType): React.Node {
 
 const mapStateToProps = state => ({
   isActive: state.userDetailPage.buttonPrevIsActive,
+  data: searchUser(state.data.kids, state.userListPage.filter),
 });
 
-const mapDispatchToProps = dispatch => ({
-  onClick: () => {},
-});
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ButtonBack);
+export default connect(mapStateToProps)(withRouter(ButtonBack));

@@ -4,6 +4,7 @@ import {
   FETCH_USERINFO,
   SUCCESSED_FETCH_USERINFO,
   FAILED_FETCH_USERINFO,
+  TOGGLE_PREV_NEXT_BUTTON,
 } from '../../constants/ActionTypes';
 import customerTab from './TabCustomer/reducers';
 import baseInfoTab from './TabSystem/reducers';
@@ -20,9 +21,21 @@ const tabIndex = (state: number, action): number => {
   }
 };
 
-const buttonIsActive = (state, action): boolean => {
-  const { type } = action;
+const buttonPrevIsActive = (state, action): boolean => {
+  const { type, payload } = action;
   switch (type) {
+    case TOGGLE_PREV_NEXT_BUTTON:
+      return payload.hasPrev;
+    default:
+      return state;
+  }
+};
+
+const buttonNextIsActive = (state, action): boolean => {
+  const { type, payload } = action;
+  switch (type) {
+    case TOGGLE_PREV_NEXT_BUTTON:
+      return payload.hasNext;
     default:
       return state;
   }
@@ -49,11 +62,11 @@ export default (
 ) => ({
   tabIndex: tabIndex(state.tabIndex, action),
   isFetching: isFetching(state.isFetching, action),
-  buttonPrevIsActive: buttonIsActive(
+  buttonPrevIsActive: buttonPrevIsActive(
     state.buttonPrevIsActive,
     action
   ),
-  buttonNextIsActive: buttonIsActive(
+  buttonNextIsActive: buttonNextIsActive(
     state.buttonNextIsActive,
     action
   ),

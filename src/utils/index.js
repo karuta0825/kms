@@ -179,3 +179,25 @@ export function filterService(
 ): Array<ServiceType> {
   return list.filter(item => item.version === version);
 }
+
+// kid_idを入れると, 次の番号と次があるかどうか?
+export const getNextKidsId = (
+  list: Array<KidType>,
+  kids_id: string,
+  leftOrRight: number
+): { kids_id: ?number, hasNext: boolean, hasPrev: boolean } => {
+  const maxIndex = list.length - 1;
+  const nowIndex =
+    list && list.findIndex(item => item.id === Number(kids_id));
+  const nextIndex = nowIndex + leftOrRight;
+  const hasNext =
+    leftOrRight < 0 ? true : nowIndex + 1 < maxIndex;
+  const hasPrev = leftOrRight > 0 ? true : nowIndex - 1 > 0;
+  const id = (list[nextIndex] && list[nextIndex].id) || null;
+
+  return {
+    kids_id: id,
+    hasNext,
+    hasPrev,
+  };
+};
