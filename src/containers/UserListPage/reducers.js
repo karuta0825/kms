@@ -8,14 +8,6 @@ import {
   FILTER_SYSTEM_TYPE,
   SUCCESSED_FETCH_USERINFO,
 } from '../../constants/ActionTypes';
-import initState from '../../initState';
-
-type Action = {
-  type: string,
-  payload: any,
-};
-
-const { userListPage } = initState;
 
 const isFilterOpen = (
   state: boolean,
@@ -99,7 +91,7 @@ const setFilter = (state: Object, action: Action): Object => {
   }
 };
 
-export default (state = userListPage, action: Action) => ({
+export default (state: UserListPageType, action: Action) => ({
   isFilterOpen: isFilterOpen(state.isFilterOpen, action),
   filter: setFilter(state.filter, action),
 });
