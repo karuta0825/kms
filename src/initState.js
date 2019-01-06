@@ -73,6 +73,7 @@ const initState: StateType = {
     customerTab: {
       isEdit: false,
       selectedIndex: 0,
+      isAddBaseMode: false,
       inputValues: {
         kids_id: -1,
         base_id: -1,

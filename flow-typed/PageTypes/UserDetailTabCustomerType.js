@@ -1,4 +1,6 @@
 declare type UserDetailTabCustomerType = {
+  isEdit: boolean,
+  isAddBaseMode: boolean,
   selectedIndex: number,
   inputValues: CustomerType,
   isInputError: {
