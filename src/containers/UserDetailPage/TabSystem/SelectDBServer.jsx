@@ -10,10 +10,10 @@ function SelectAPServer(props: PropsType): React.Node {
   return <SelectionInput {...props} />;
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state: StateType) => ({
   title: 'DBサーバ',
   isEdit: state.userDetailPage.baseInfoTab.isEdit,
-  value: state.userDetailPage.baseInfoTab.inputValues.server,
+  value: state.userDetailPage.baseInfoTab.inputValues.dbserver,
   items: filterServer(
     state.data.servers,
     state.data.baseInfo.version,
@@ -23,7 +23,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   onChange: e => {
-    dispatch(changeValue('server', e.target.value));
+    dispatch(changeValue('dbserver', e.target.value));
   },
 });
 

@@ -60,7 +60,7 @@ class TabManager extends React.Component<PropsType> {
           scrollButtons="auto"
         >
           <Tab label="システム情報" />
-          <Tab label="顧客情報" />
+          <Tab label="拠点情報" />
           <Tab label="ライセンス" />
           <Tab label="クライアント(Citrix数)" />
           <Tab label="Fenics" />

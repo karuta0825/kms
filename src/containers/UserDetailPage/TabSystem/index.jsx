@@ -19,13 +19,16 @@ import SelectNetwork from './SelectNetwork';
 import SelectVersion from './SelectVersion';
 import SelectSystemType from './SelectSystemType';
 import Buttons from './Buttons';
+import InputClientNum from './InputClientNum';
+import InputPCNum from './InputPCNum';
 
 type PropsType = {
   has_busiv: boolean,
+  has_fenics: boolean,
 };
 
 function TabSystem(props: PropsType): React.Node {
-  const { has_busiv } = props;
+  const { has_busiv, has_fenics } = props;
   return (
     <div className={styles.wrapper}>
       <div className={styles.action}>
@@ -45,8 +48,10 @@ function TabSystem(props: PropsType): React.Node {
         <InputUserkey />
         <InputDBPassword />
         <InputFenicskey />
+        <InputClientNum />
+        {has_fenics && has_busiv && <InputPCNum />}
         {has_busiv && <InputBusivNum />}
-        <InputFenicsNum />
+        {has_fenics && <InputFenicsNum />}
         <SwitchQA />
       </div>
     </div>
@@ -56,6 +61,9 @@ function TabSystem(props: PropsType): React.Node {
 const mapStateToProps = (state: StateType) => ({
   has_busiv:
     state.userDetailPage.baseInfoTab.inputValues.has_busiv === 1,
+  has_fenics:
+    state.userDetailPage.baseInfoTab.inputValues.has_fenics ===
+    1,
 });
 
 export default connect(mapStateToProps)(TabSystem);

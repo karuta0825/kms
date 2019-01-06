@@ -7,11 +7,18 @@ import {
 } from '../../../constants/ActionTypes';
 import checkers from '../../../utils/inputChecks';
 
+function isDecreae(value: string, cache: number): boolean {
+  const fmt = Number(value);
+  return fmt < cache;
+}
+
 const inputCheck = {
-  number_pc: checkers.isPNum,
+  busiv_number: checkers.isPNum,
   userkey: checkers.upperAlpha,
   db_password: checkers.upperAlphaNum,
   fenics_key: checkers.lowerAlphaNum,
+  client_number: isDecreae,
+  fenics_number: isDecreae,
 };
 
 const isEdit = (
@@ -81,7 +88,10 @@ const isInputError = (
         return state;
       }
 
-      obj[payload.key] = inputCheck[payload.key](payload.value);
+      obj[payload.key] = inputCheck[payload.key](
+        payload.value,
+        cache[payload.key]
+      );
       return {
         ...state,
         ...obj,
@@ -93,8 +103,10 @@ const isInputError = (
       if (!inputCheck[payload.key]) {
         return state;
       }
+      const v: number = cache[payload.key] + Number(payload.num);
       obj[payload.key] = inputCheck[payload.key](
-        Number(cache[payload.key]) + payload.num
+        v,
+        cache[payload.key]
       );
       return {
         ...state,

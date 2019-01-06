@@ -1,6 +1,6 @@
 declare type UserDetailTabBaseInfoType = {
   isEdit: boolean,
-  inputValues: Object,
+  inputValues: KidType,
   isInputError: {
     kid: boolean,
     user_name: boolean,
@@ -10,7 +10,8 @@ declare type UserDetailTabBaseInfoType = {
     db_password: boolean,
     fenics_key: boolean,
     client_number: boolean,
-    number_pc: boolean,
+    fenics_number: boolean,
+    busiv_number: boolean,
     license: boolean,
     number_id: boolean,
     range_id: boolean,
