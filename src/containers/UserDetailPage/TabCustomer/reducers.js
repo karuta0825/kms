@@ -139,6 +139,8 @@ const isAddBaseMode = (
   switch (type) {
     case CHANGE_NEWBASE_MODE:
       return payload;
+    case SELECT_BASE_INDEX:
+      return false;
     default:
       return state;
   }
