@@ -4,6 +4,8 @@ import {
   SUCCESSED_FETCH_USERINFO,
   FAILED_FETCH_USERINFO,
   SELECT_CLIENT,
+  CHANGE_CLIENT_INFO,
+  FETCH_USERINFO,
 } from '../../../constants/ActionTypes';
 
 const isEdit = (
@@ -60,6 +62,23 @@ const selection = (
   }
 };
 
+const rowChanges = (state, action: Action): Object => {
+  const { type, payload } = action;
+  switch (type) {
+    case FETCH_USERINFO:
+      return {};
+    case TOGGLE_EDIT_MODE:
+      if (payload.tabName === 'CLIENT') {
+        return {};
+      }
+      return state;
+    case CHANGE_CLIENT_INFO:
+      return payload;
+    default:
+      return state;
+  }
+};
+
 export default (
   state: UserDetailTabClientType,
   action: Action,
@@ -72,4 +91,5 @@ export default (
     data.clients
   ),
   selection: selection(state.selection, action),
+  rowChanges: rowChanges(state.rowChanges, action),
 });

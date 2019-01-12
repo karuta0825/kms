@@ -13,7 +13,7 @@ import {
 } from '@devexpress/dx-react-grid-material-ui';
 import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core';
-import { selectClient } from './actions';
+import { selectClient, updateRows } from './actions';
 import TableCells from './TableCells';
 
 type PropsType = {
@@ -21,7 +21,9 @@ type PropsType = {
   rows: Array<ClientTab>,
   columns: Array<{ name: string, title: string }>,
   selection: Array<number>,
+  rowChanges: Object,
   onSelectionChange: (Array<number>) => void,
+  onRowChangesChange: Object => void,
 };
 
 const styles = () => ({
@@ -45,7 +47,9 @@ function ClientTable(props: PropsType): React.Node {
     rows,
     columns,
     selection,
+    rowChanges,
     onSelectionChange,
+    onRowChangesChange,
   } = props;
 
   if (isEdit) {
@@ -56,9 +60,8 @@ function ClientTable(props: PropsType): React.Node {
         rootComponent={CustomGrid}
       >
         <EditingState
-          onCommitChanges={() => {
-            console.log('change');
-          }}
+          rowChanges={rowChanges}
+          onRowChangesChange={onRowChangesChange}
           editingRowIds={rows.map((row, idx) => idx)}
           columnExtensions={[
             { columnName: 'client_id', editingEnabled: false },
@@ -107,11 +110,15 @@ const mapStateToProps = state => ({
     { name: 'end_on', title: '終了日' },
   ],
   selection: state.userDetailPage.clientTab.selection,
+  rowChanges: state.userDetailPage.clientTab.rowChanges,
 });
 
 const mapDispatchToProps = dispatch => ({
   onSelectionChange: selections => {
     dispatch(selectClient(selections));
+  },
+  onRowChangesChange: changeRowsInfo => {
+    dispatch(updateRows(changeRowsInfo));
   },
 });
 

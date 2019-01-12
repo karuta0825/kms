@@ -110,6 +110,7 @@ const initState: StateType = {
       isEdit: false,
       inputValues: [],
       selection: [],
+      rowChanges: {},
     },
     fenicsTab: {},
     busivTab: {},
