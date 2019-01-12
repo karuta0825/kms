@@ -17,6 +17,11 @@ import SwitchMobile from './SwitchMobile';
 import InputBaseName from './InputBaseName';
 import ButtonsEdit from './ButtonsEdit';
 import ButtonsNew from './ButtonsNew';
+import SwitchNewContract from './SwitchNewContract';
+import SwitchReplaceFromCJ from './SwitchReplaceFromCJ';
+import SwitchReplaceFromWC from './SwitchReplaceFromWC';
+import SwitchReplaceFromAnother from './SwitchReplaceFromAnother';
+import SwitchQA from './SwitchQA';
 
 type PropsType = {
   isAddBaseMode: boolean,
@@ -44,6 +49,12 @@ function TabCustomer(props: PropsType): React.Node {
           <SwitchFenics />
           <SwitchBusiv />
           <SwitchMobile />
+          <SwitchQA />
+          <div>-----------</div>
+          <SwitchNewContract />
+          <SwitchReplaceFromCJ />
+          <SwitchReplaceFromWC />
+          <SwitchReplaceFromAnother />
         </div>
       </div>
     </div>

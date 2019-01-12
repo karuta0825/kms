@@ -12,7 +12,7 @@ export default function TabClient(): React.Node {
         <Buttons />
       </div>
       <div className={styles.body}>
-        <Download />
+        <ClientTable />
       </div>
     </div>
   );

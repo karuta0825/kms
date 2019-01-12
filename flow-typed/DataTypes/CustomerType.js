@@ -12,4 +12,8 @@ declare type CustomerType = {
   has_busiv: NumberBool,
   has_fenics: NumberBool,
   has_mobile: NumberBool,
+  is_new_contract: NumberBool,
+  is_replaced_from_cj: NumberBool,
+  is_replaced_from_wc: NumberBool,
+  is_replaced_from_another: NumberBool,
 };
