@@ -105,6 +105,7 @@ const mapStateToProps = state => ({
   columns: [
     { name: 'client_id', title: 'ユーザ名' },
     { name: 'client_pass', title: 'パスワード' },
+    { name: 'pc_name', title: 'パソコン名' },
     { name: 'fenics_id', title: '対応fenicsID' },
     { name: 'create_on', title: '作成日' },
     { name: 'end_on', title: '終了日' },
