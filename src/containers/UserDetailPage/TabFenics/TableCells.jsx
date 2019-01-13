@@ -3,7 +3,13 @@ import * as React from 'react';
 import { TableEditRow } from '@devexpress/dx-react-grid-material-ui';
 import TableCellDate from '../../../components/TableCellDate';
 
-export default function TableCells(props): React.Node {
+type PropsType = {
+  column: { name: string, title: string },
+};
+
+export default function TableCells(
+  props: PropsType
+): React.Node {
   const { column } = props;
   if (
     column.name === 'start_on' ||
