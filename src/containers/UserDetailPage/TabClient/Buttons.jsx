@@ -35,6 +35,28 @@ function Buttons(props: PropsType): React.Node {
           編集
         </Button>
       )}
+
+      {!isEdit && (
+        <Button
+          variant="contained"
+          onClick={() => {
+            console.log('clicked');
+          }}
+        >
+          削除
+        </Button>
+      )}
+
+      {!isEdit && (
+        <Button
+          variant="contained"
+          onClick={() => {
+            console.log('clicked');
+          }}
+        >
+          ダウンロード
+        </Button>
+      )}
     </React.Fragment>
   );
 }
