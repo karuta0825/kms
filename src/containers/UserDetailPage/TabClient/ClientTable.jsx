@@ -18,7 +18,7 @@ import TableCells from './TableCells';
 
 type PropsType = {
   isEdit: boolean,
-  rows: Array<ClientTab>,
+  rows: Array<ClientType>,
   columns: Array<{ name: string, title: string }>,
   selection: Array<number>,
   rowChanges: Object,
