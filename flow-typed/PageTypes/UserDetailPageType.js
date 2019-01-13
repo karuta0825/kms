@@ -6,6 +6,7 @@ declare type UserDetailPageType = {
   baseInfoTab: UserDetailTabBaseInfoType,
   customerTab: UserDetailTabCustomerType,
   clientTab: UserDetailTabClientType,
+  fenicsTab: UserDetailTabFenicsType,
   licenseTab: {
     selected: Array<String>,
     canUpdate: boolean,

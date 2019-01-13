@@ -10,6 +10,7 @@ import customerTab from './TabCustomer/reducers';
 import baseInfoTab from './TabSystem/reducers';
 import liceseTab from './TabLicense/reducers';
 import clientTab from './TabClient/reducers';
+import fenicsTab from './TabFenics/reducers';
 
 const tabIndex = (state: number, action): number => {
   const { type, payload } = action;
@@ -74,4 +75,5 @@ export default (
   customerTab: customerTab(state.customerTab, action, data),
   licenseTab: liceseTab(state.licenseTab, action, data),
   clientTab: clientTab(state.clientTab, action, data),
+  fenicsTab: fenicsTab(state.fenicsTab, action, data),
 });
