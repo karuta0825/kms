@@ -9,6 +9,12 @@ const optionGet = {
   credentials: 'include',
 };
 
+const optionGetText = {
+  method: 'GET',
+  headers: { 'content-type': 'text/plain' },
+  credentials: 'include',
+};
+
 Api.fetchKidsById = (id: number): Promise<Array<KidType>> => {
   const url = id
     ? `${host}/api/v1/kids/id/${id}`
@@ -130,6 +136,11 @@ Api.fetchAddInfo = (
 ): Promise<Array<Object>> => {
   const url = `${host}/api/v1/addInfo/${yearMonth}`;
   return fetch(url, optionGet).then(r => r.json());
+};
+
+Api.fetchTemplate = (name: string): Promise<string> => {
+  const url = `${host}/template/${name}`;
+  return fetch(url, optionGetText).then(r => r.text());
 };
 
 export default Api;
