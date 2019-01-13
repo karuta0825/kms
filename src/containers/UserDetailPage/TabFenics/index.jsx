@@ -3,6 +3,7 @@ import * as React from 'react';
 import styles from '../css/tab.css';
 import Buttons from './Buttons';
 import FenicsTable from './FenicsTable';
+import DownloadModal from './DownloadModal';
 
 export default function TabFenics(): React.Node {
   return (
@@ -13,6 +14,7 @@ export default function TabFenics(): React.Node {
       <div className={styles.body}>
         <FenicsTable />
       </div>
+      <DownloadModal />
     </div>
   );
 }

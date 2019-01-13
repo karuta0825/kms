@@ -117,6 +117,11 @@ const initState: StateType = {
       inputValues: [],
       selection: [],
       rowChanges: {},
+      isDonwloadOpen: false,
+      canDownload: false,
+      download: {
+        fenics: false,
+      },
     },
     busivTab: {},
     partnerTab: {},

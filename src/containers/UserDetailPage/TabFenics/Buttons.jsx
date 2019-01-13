@@ -3,12 +3,14 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import Button from '@material-ui/core/Button';
 import { toggleEditMode } from '../actions';
+import { toggleDownloadModal } from './actions';
 
 type PropsType = {
   isEdit: boolean,
   onClickSave: Event => void,
   onClickCancel: Event => void,
   onClickEdit: Event => void,
+  onClickDownload: Event => void,
 };
 
 function Buttons(props: PropsType): React.Node {
@@ -17,6 +19,7 @@ function Buttons(props: PropsType): React.Node {
     onClickEdit,
     onClickCancel,
     onClickSave,
+    onClickDownload,
   } = props;
   return (
     <React.Fragment>
@@ -48,12 +51,7 @@ function Buttons(props: PropsType): React.Node {
       )}
 
       {!isEdit && (
-        <Button
-          variant="contained"
-          onClick={() => {
-            console.log('clicked');
-          }}
-        >
+        <Button variant="contained" onClick={onClickDownload}>
           ダウンロード
         </Button>
       )}
@@ -71,6 +69,9 @@ const mapDispatchToProps = dispatch => ({
   },
   onClickEdit: () => {
     dispatch(toggleEditMode(true, 'FENICS'));
+  },
+  onClickDownload: () => {
+    dispatch(toggleDownloadModal(true));
   },
 });
 
