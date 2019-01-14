@@ -33,7 +33,7 @@ const inputValues = (
   state: Object,
   action: Action,
   index: number,
-  cache: CustomerType
+  cache: Array<CustomerType>
 ): Object => {
   const { type, payload } = action;
   switch (type) {
