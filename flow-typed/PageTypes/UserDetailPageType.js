@@ -7,12 +7,8 @@ declare type UserDetailPageType = {
   customerTab: UserDetailTabCustomerType,
   clientTab: UserDetailTabClientType,
   fenicsTab: UserDetailTabFenicsType,
-  licenseTab: {
-    selected: Array<String>,
-    canUpdate: boolean,
-    isEditing: boolean,
-    canCancel: boolean,
-  },
+  busivTab: UserDetailTabBusivType,
+  licenseTab: UserDetailTabLicenseType,
   partnerTab: {
     inputValues: {},
     canUpdate: boolean,
