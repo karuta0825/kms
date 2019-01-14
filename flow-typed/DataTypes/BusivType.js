@@ -1,3 +1,1 @@
-export type BusivType = {
-  information: Object,
-};
+export type BusivType = BusivESType | BusivLMType | null;

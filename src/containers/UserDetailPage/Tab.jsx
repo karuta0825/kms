@@ -12,6 +12,7 @@ import { changeTabIndex } from './actions';
 import TabLicense from './TabLicense';
 import TabClient from './TabClient';
 import TabFenics from './TabFenics';
+import TabBuisv from './TabBuisv';
 
 function TabContainer(
   { children } = {
@@ -75,7 +76,7 @@ class TabManager extends React.Component<PropsType> {
         {value === 2 && <TabLicense />}
         {value === 3 && <TabClient />}
         {value === 4 && <TabFenics />}
-        {value === 5 && <TabContainer>Item Six</TabContainer>}
+        {value === 5 && <TabBuisv />}
         {value === 6 && <TabContainer>Item Seven</TabContainer>}
         {value === 7 && <TabContainer>Item Eigth</TabContainer>}
         {value === 8 && <TabContainer>Item Eigth</TabContainer>}

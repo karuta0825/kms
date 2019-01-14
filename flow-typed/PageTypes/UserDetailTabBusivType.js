@@ -1,5 +1,6 @@
 declare type UserDetailTabBusivType = {
   isEdit: boolean,
+  selectedIndex: number,
   inputValues: { [string]: any },
-  isInputErrors: { [string]: boolean },
+  isInputError: { [string]: boolean },
 };

@@ -26,7 +26,7 @@ export default (state = data, action) => ({
   customers: customers(state.customers, action),
   clients: clients(state.clients, action),
   license: license(state.license, action),
-  busivs: busivs(state.buisvs, action),
+  busivs: busivs(state.busivs, action),
   fenics: fenics(state.fenics, action),
   mobiles: mobiles(state.mobiles, action),
   partners: partners(state.partners, action),

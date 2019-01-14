@@ -3,7 +3,10 @@ import {
   FAILED_FETCH_USERINFO,
 } from '../constants/ActionTypes';
 
-export default (state, action) => {
+export default (
+  state: Array<BusivType>,
+  action: Action
+): Array<BusivType> => {
   const { type, payload } = action;
   switch (type) {
     case SUCCESSED_FETCH_USERINFO:
@@ -13,4 +16,4 @@ export default (state, action) => {
     default:
       return state;
   }
-}
+};

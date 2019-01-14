@@ -1,0 +1,18 @@
+declare type BusivESType = {
+  base_id: number,
+  base_name: string,
+  circuit_name: string,
+  circuit_service: string,
+  open_date: string,
+  w_network: string,
+  w_subnet: string,
+  w_router: string,
+  virtual_dl_ip: string,
+  has_sxr_j: NumberBool,
+  sx_ip: string,
+  has_rx: NumberBool,
+  rx_ip: string,
+  has_sd: NumberBool,
+  auth_server_ip: string,
+  clients_ip: string,
+};
