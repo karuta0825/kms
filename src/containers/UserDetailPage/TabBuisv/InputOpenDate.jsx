@@ -16,7 +16,9 @@ function InputOpenDate(props: PropsType): React.Node {
   return <InputDate {...props} />;
 }
 
-const mapStateToProps = (state: StateType): PropsType => {
+const mapStateToProps = (
+  state: StateType
+): { title: string, isEdit: boolean, value: string } => {
   const date =
     state.userDetailPage.busivTab.inputValues.open_date;
   const fmtDate =
