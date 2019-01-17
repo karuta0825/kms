@@ -23,7 +23,7 @@ function ButtonBack(props: PropsType): React.Node {
       className={styles.prevBtn}
       onClick={() => {
         const next = getNextKidsId(data, match.params.id, -1);
-        if (next.kids_id !== null) {
+        if (next.kids_id) {
           history.push(`/kidList/detail/${next.kids_id}`);
         }
         dispatch(togglePrevNexButton(next));

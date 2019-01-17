@@ -123,7 +123,12 @@ const initState: StateType = {
         fenics: false,
       },
     },
-    busivTab: {},
+    busivTab: {
+      isEdit: false,
+      selectedIndex: 0,
+      inputValues: {},
+      isInputError: {},
+    },
     partnerTab: {},
     historyTab: {},
     memo: {},
