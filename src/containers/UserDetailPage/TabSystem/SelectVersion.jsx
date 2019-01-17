@@ -27,8 +27,8 @@ function SelectVersion(props: PropsType): React.Node {
   return (
     <div className={styles.wrapper}>
       <span className={styles.title}>{title}</span>
-      <Switch name="ES" isEdit={false} isSelected={isLM} />
-      <Switch name="LM" isEdit={false} isSelected={!isLM} />
+      <Switch name="ES" isEdit={false} isSelected={!isLM} />
+      <Switch name="LM" isEdit={false} isSelected={isLM} />
       {helperText(isEdit)}
     </div>
   );
