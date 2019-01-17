@@ -6,6 +6,7 @@ import BaseList from './BaseList';
 import styles from './css/index.css';
 import frameStyles from '../css/tab.css';
 import LMInfo from './LMInfo';
+import ESInfo from './ESInfo';
 
 type PropsType = {
   version: string,
@@ -22,7 +23,7 @@ function TabBusiv(props: PropsType): React.Node {
         </div>
         <div className={frameStyles.body}>
           {version === 'LM' && <LMInfo />}
-          {version === 'ES' && <span>ES</span>}
+          {version === 'ES' && <ESInfo />}
         </div>
       </div>
     </div>
