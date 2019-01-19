@@ -7,14 +7,9 @@ import EventNoteIcon from '@material-ui/icons/EventNote';
 import FormControl from '@material-ui/core/FormControl';
 import NativeSelect from '@material-ui/core/NativeSelect';
 import styles from '../css/memo.css';
+import MemoList from './MemoList';
 
-type PropsType = {
-  match: Object,
-  location: Object,
-  history: Object,
-};
-
-export default function Memo(props: PropsType) {
+export default function Memo(props): React.Node {
   return (
     <div className={props.className}>
       <div className={styles.title}>
@@ -23,7 +18,6 @@ export default function Memo(props: PropsType) {
       </div>
       <Paper className={styles.paper}>
         <div className={styles.header}>
-
           <FormControl className={styles.memoSelecter}>
             <NativeSelect
               value={10}
@@ -42,13 +36,13 @@ export default function Memo(props: PropsType) {
             mini
             color="secondary"
             aria-label="Add"
-            className={styles.addBtn}>
+            className={styles.addBtn}
+          >
             <AddIcon />
           </Button>
-
         </div>
         <div className={styles.content}>
-
+          <MemoList />
         </div>
       </Paper>
     </div>

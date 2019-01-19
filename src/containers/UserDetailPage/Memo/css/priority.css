@@ -1,0 +1,14 @@
+.emergency {
+  background: #ff5b94;
+}
+
+.important {
+  background: #ffb600;
+}
+
+.reminder {
+}
+
+.special {
+  background: #673ab7;
+}

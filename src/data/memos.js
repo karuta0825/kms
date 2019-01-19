@@ -3,7 +3,10 @@ import {
   FAILED_FETCH_USERINFO,
 } from '../constants/ActionTypes';
 
-export default (state, action) => {
+export default (
+  state: Array<MemoType>,
+  action: Action
+): Array<MemoType> => {
   const { type, payload } = action;
   switch (type) {
     case SUCCESSED_FETCH_USERINFO:

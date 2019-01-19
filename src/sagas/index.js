@@ -126,6 +126,7 @@ function* fetchUserInfoById(
       partner,
       mobile,
       history,
+      memo,
     ] = yield all([
       call(Api.fetchKidsById, payload),
       call(Api.fetchCustomerById, payload),
@@ -136,6 +137,7 @@ function* fetchUserInfoById(
       call(Api.fetchPartnerById, payload),
       call(Api.fetchMobileById, payload),
       call(Api.fetchHistoryById, payload),
+      call(Api.fetchMemoById, payload),
     ]);
     yield put({
       type: SUCCESSED_FETCH_USERINFO,
@@ -149,6 +151,7 @@ function* fetchUserInfoById(
         partner,
         mobile,
         history,
+        memo,
       },
     });
   } catch (e) {

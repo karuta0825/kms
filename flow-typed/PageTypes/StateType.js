@@ -26,5 +26,6 @@ declare type StateType = {
     historys: Array<HistoryType>,
     servers: Array<ServerType>,
     services: Array<ServiceType>,
+    memos: Array<MemoType>,
   },
 };
