@@ -11,4 +11,5 @@ declare type CombineDataType = {
   servers: Array<ServerType>,
   services: Array<ServiceType>,
   memos: Array<MemoType>,
+  memoTemplates: Array<MemoTemplateType>,
 };

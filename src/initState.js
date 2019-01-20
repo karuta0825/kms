@@ -135,6 +135,7 @@ const initState: StateType = {
       isModalOpen: false,
       isNew: false,
       inputValues: {},
+      selectedTemplate: '',
     },
   },
   serverManagePage: {},

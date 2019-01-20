@@ -29,6 +29,9 @@ import {
   FAILED_FETCH_SERVICES,
   SUCCESSED_FETCH_SERVICES,
   FETCH_SERVICES,
+  SUCCESSED_FETCH_MEMOTEMPLATES,
+  FAILED_FETCH_MEMOTEMPLATES,
+  FETCH_MEMOTEMPLATES,
 } from '../constants/ActionTypes';
 import Api from './Api';
 
@@ -111,6 +114,22 @@ function* fetchEnvironment(): Generator<
   }
 }
 
+function* fetchMemoTemplate(): Generator<
+  Object,
+  void,
+  { done: boolean, value: any }
+> {
+  try {
+    const data = yield call(Api.fetchMemoTemplate);
+    yield put({
+      type: SUCCESSED_FETCH_MEMOTEMPLATES,
+      payload: data,
+    });
+  } catch (e) {
+    yield put({ type: FAILED_FETCH_MEMOTEMPLATES, payload: e });
+  }
+}
+
 function* fetchUserInfoById(
   action: Action
 ): Generator<Object, void, { done: boolean, value: any }> {
@@ -171,4 +190,5 @@ export default function* rootSage(): Generator<
   yield takeEvery(FETCH_SERVICES, fetchService);
   yield takeEvery(FETCH_ENVIRONMENTS, fetchEnvironment);
   yield takeEvery(FETCH_USERINFO, fetchUserInfoById);
+  yield takeEvery(FETCH_MEMOTEMPLATES, fetchMemoTemplate);
 }

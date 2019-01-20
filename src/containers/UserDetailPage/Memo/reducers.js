@@ -1,5 +1,9 @@
 // @flow
-import { TOGGLE_MEMO_MODAL } from '../../../constants/ActionTypes';
+import {
+  TOGGLE_MEMO_MODAL,
+  SELECT_MEMO_TEMPLATE,
+  CHANGE_MEMO_VALUE,
+} from '../../../constants/ActionTypes';
 
 const isModalOpen = (
   state: boolean,
@@ -24,10 +28,39 @@ const isNew = (state: boolean, action: Action): boolean => {
 
 const inputValues = (
   state: MemoType,
-  action: Action
+  action: Action,
+  data: CombineDataType
 ): MemoType => {
   const { type, payload } = action;
   switch (type) {
+    case CHANGE_MEMO_VALUE: {
+      const obj = {};
+      obj[payload.key] = payload.value;
+      return { ...state, ...obj };
+    }
+    case SELECT_MEMO_TEMPLATE: {
+      const [target] = data.memoTemplates.filter(
+        template => template.title === payload
+      );
+      return {
+        ...state,
+        message: target.msg,
+      };
+    }
+    default:
+      return state;
+  }
+};
+
+const selectedTemplate = (
+  state: string,
+  action: Action
+): string => {
+  const { type, payload } = action;
+  switch (type) {
+    case SELECT_MEMO_TEMPLATE: {
+      return payload;
+    }
     default:
       return state;
   }
@@ -41,4 +74,8 @@ export default (
   isModalOpen: isModalOpen(state.isModalOpen, action),
   isNew: isNew(state.isNew, action),
   inputValues: inputValues(state.inputValues, action, data),
+  selectedTemplate: selectedTemplate(
+    state.selectedTemplate,
+    action
+  ),
 });

@@ -9,6 +9,7 @@ import {
   FETCH_SERVERS,
   FETCH_ENVIRONMENTS,
   FETCH_SERVICES,
+  FETCH_MEMOTEMPLATES,
 } from './constants/ActionTypes';
 
 const sagaMiddleware = createSagaMiddleware();
@@ -27,5 +28,6 @@ store.dispatch({ type: FETCH_KIDS });
 store.dispatch({ type: FETCH_SERVERS });
 store.dispatch({ type: FETCH_ENVIRONMENTS });
 store.dispatch({ type: FETCH_SERVICES });
+store.dispatch({ type: FETCH_MEMOTEMPLATES });
 
 export default store;

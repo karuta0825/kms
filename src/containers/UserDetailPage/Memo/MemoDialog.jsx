@@ -6,6 +6,10 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { toggleModal } from './actions';
+import InputTitle from './InputTitle';
+import SelectTemplate from './SelectTemplate';
+import InputMessage from './InputMessage';
+import RemainingChar from './RemainingChar';
 
 type PropsType = {
   title: string,
@@ -31,14 +35,17 @@ function MemoDialog(props: PropsType): React.Node {
   } = props;
   return (
     <Dialog
-      fullWidth
       open={isOpen}
-      aria-labelledby="alert-dialog-title"
-      aria-describedby="alert-dialog-description"
+      aria-labelledby="form-dialog-title"
+      fullWidth
+      maxWidth="md"
     >
       <DialogTitle id="alert-dialog-title">{title}</DialogTitle>
       <DialogContent>
-        <div>{values.id}</div>
+        <InputTitle />
+        <SelectTemplate />
+        <InputMessage />
+        <RemainingChar />
       </DialogContent>
       <DialogActions>
         <Button onClick={onClickCancel} color="primary">

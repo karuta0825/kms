@@ -1,0 +1,19 @@
+.title {
+  width: 100%;
+}
+
+.template {
+  margin-top: 20px !important;
+  width: 100%;
+}
+
+.message {
+  margin-top: 40px !important;
+  width: 100%;
+  height: 300px;
+}
+
+.remaingChar {
+  margin-top: 10px;
+  text-align: right;
+}
