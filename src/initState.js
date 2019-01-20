@@ -131,7 +131,11 @@ const initState: StateType = {
     },
     partnerTab: {},
     historyTab: {},
-    memo: {},
+    memo: {
+      isModalOpen: false,
+      isNew: false,
+      inputValues: {},
+    },
   },
   serverManagePage: {},
   serviceManagePage: {},

@@ -3,8 +3,9 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
-import styles from './css/memo.css';
+import styles from './css/item.css';
 import priorityStyles from './css/priority.css';
+import { toggleModal } from './actions';
 
 type PropsType = {
   memos: Array<MemoType>,
@@ -47,7 +48,7 @@ const mapStateToProps = (state: StateType) => ({
 
 const mapDispatchProps = dispatch => ({
   onClickMemo: idx => {
-    console.log(idx);
+    dispatch(toggleModal(true));
   },
 });
 

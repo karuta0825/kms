@@ -15,4 +15,5 @@ declare type UserDetailPageType = {
     isEditing: boolean,
     canCancel: boolean,
   },
+  memo: UserDetailMemoType,
 };
