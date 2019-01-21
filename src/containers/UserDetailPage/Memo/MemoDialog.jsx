@@ -10,6 +10,7 @@ import InputTitle from './InputTitle';
 import SelectTemplate from './SelectTemplate';
 import InputMessage from './InputMessage';
 import RemainingChar from './RemainingChar';
+import SelectPriority from './SelectPriority';
 
 type PropsType = {
   title: string,
@@ -41,6 +42,7 @@ function MemoDialog(props: PropsType): React.Node {
       <DialogTitle id="alert-dialog-title">{title}</DialogTitle>
       <DialogContent>
         <InputTitle />
+        <SelectPriority />
         <SelectTemplate />
         <InputMessage />
         <RemainingChar />

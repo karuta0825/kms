@@ -13,6 +13,12 @@
   height: 300px;
 }
 
+.priorityTitle {
+  margin-top: 20px;
+  display: block;
+  transform: translate(0, 1.5px) scale(0.75);
+}
+
 .remaingChar {
   margin-top: 10px;
   text-align: right;
