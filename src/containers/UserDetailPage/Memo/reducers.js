@@ -95,6 +95,8 @@ const selectedTemplate = (
     case SELECT_MEMO_TEMPLATE: {
       return payload;
     }
+    case TOGGLE_MEMO_MODAL:
+      return !payload ? '' : state;
     default:
       return state;
   }
