@@ -3,6 +3,8 @@ import {
   TOGGLE_MEMO_MODAL,
   SELECT_MEMO_TEMPLATE,
   CHANGE_MEMO_VALUE,
+  SELECT_MEMO,
+  CREATE_MEMO,
 } from '../../../constants/ActionTypes';
 
 const isModalOpen = (
@@ -13,6 +15,8 @@ const isModalOpen = (
   switch (type) {
     case TOGGLE_MEMO_MODAL:
       return payload;
+    case CREATE_MEMO:
+      return true;
     default:
       return state;
   }
@@ -21,6 +25,10 @@ const isModalOpen = (
 const isNew = (state: boolean, action: Action): boolean => {
   const { type, payload } = action;
   switch (type) {
+    case CREATE_MEMO:
+      return true;
+    case TOGGLE_MEMO_MODAL:
+      return !payload ? false : state;
     default:
       return state;
   }
@@ -30,7 +38,7 @@ const inputValues = (
   state: MemoType,
   action: Action,
   data: CombineDataType
-): MemoType => {
+): Object | MemoType => {
   const { type, payload } = action;
   switch (type) {
     case CHANGE_MEMO_VALUE: {
@@ -38,6 +46,14 @@ const inputValues = (
       obj[payload.key] = payload.value;
       return { ...state, ...obj };
     }
+    case TOGGLE_MEMO_MODAL: {
+      const obj = {};
+      return !payload ? obj : state;
+    }
+    case CREATE_MEMO:
+      return {};
+    case SELECT_MEMO:
+      return { ...state, ...data.memos[payload] };
     case SELECT_MEMO_TEMPLATE: {
       const [target] = data.memoTemplates.filter(
         template => template.title === payload

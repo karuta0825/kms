@@ -5,7 +5,7 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import styles from './css/item.css';
 import priorityStyles from './css/priority.css';
-import { toggleModal } from './actions';
+import { toggleModal, selectMemo } from './actions';
 
 type PropsType = {
   memos: Array<MemoType>,
@@ -49,6 +49,7 @@ const mapStateToProps = (state: StateType) => ({
 const mapDispatchProps = dispatch => ({
   onClickMemo: idx => {
     dispatch(toggleModal(true));
+    dispatch(selectMemo(idx));
   },
 });
 

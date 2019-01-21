@@ -3,6 +3,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { TextField } from '@material-ui/core';
 import styles from './css/modal.css';
+import { changeValue } from './actions';
 
 type PropsType = {
   value: ?string,
@@ -26,11 +27,13 @@ function InputTitle(props: PropsType): React.Node {
   );
 }
 
-const mapStateToProps = (state: StateType) => ({});
+const mapStateToProps = (state: StateType) => ({
+  value: state.userDetailPage.memo.inputValues.title,
+});
 
 const mapDispatchToProps = dispatch => ({
   onChange: e => {
-    console.log(e.target.value);
+    dispatch(changeValue('title', e.target.value));
   },
 });
 
