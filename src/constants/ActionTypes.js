@@ -56,6 +56,7 @@ export const SELECT_MEMO_TEMPLATE = 'SELECT_MEMO_TEMPLATE';
 export const CHANGE_MEMO_VALUE = 'CHANGE_MEMO_VALUE';
 export const SELECT_MEMO = 'SELECT_MEMO';
 export const CREATE_MEMO = 'CREATE_MEMO';
+export const FILTER_MEMO = 'FILTER_MEMO';
 
 // FETCH
 export const FETCH_KIDS = 'FETCH_KIDS';

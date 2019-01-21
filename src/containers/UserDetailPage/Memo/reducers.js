@@ -5,7 +5,21 @@ import {
   CHANGE_MEMO_VALUE,
   SELECT_MEMO,
   CREATE_MEMO,
+  FILTER_MEMO,
 } from '../../../constants/ActionTypes';
+
+const memoFilter = (
+  state: MemoPriorityType,
+  action: Action
+): MemoPriorityType => {
+  const { type, payload } = action;
+  switch (type) {
+    case FILTER_MEMO:
+      return payload;
+    default:
+      return state;
+  }
+};
 
 const isModalOpen = (
   state: boolean,
@@ -52,8 +66,12 @@ const inputValues = (
     }
     case CREATE_MEMO:
       return {};
-    case SELECT_MEMO:
-      return { ...state, ...data.memos[payload] };
+    case SELECT_MEMO: {
+      const [target] = data.memos.filter(
+        memo => memo.id === payload
+      );
+      return target;
+    }
     case SELECT_MEMO_TEMPLATE: {
       const [target] = data.memoTemplates.filter(
         template => template.title === payload
@@ -87,6 +105,7 @@ export default (
   action: Action,
   data: CombineDataType
 ) => ({
+  filter: memoFilter(state.filter, action),
   isModalOpen: isModalOpen(state.isModalOpen, action),
   isNew: isNew(state.isNew, action),
   inputValues: inputValues(state.inputValues, action, data),

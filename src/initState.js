@@ -132,6 +132,7 @@ const initState: StateType = {
     partnerTab: {},
     historyTab: {},
     memo: {
+      filter: '',
       isModalOpen: false,
       isNew: false,
       inputValues: {},

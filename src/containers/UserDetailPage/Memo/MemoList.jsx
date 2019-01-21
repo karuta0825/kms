@@ -16,6 +16,14 @@ function setPriorityStyle(priority: MemoPriorityType): string {
   return `${styles.colorBar} ${priorityStyles[priority]}`;
 }
 
+function filterMemo(
+  memos: Array<MemoType>,
+  priority: MemoPriorityType
+): Array<MemoType> {
+  if (priority === '') return memos;
+  return memos.filter(memo => memo.priority === priority);
+}
+
 function MemoList(props: PropsType): React.Node {
   const { memos, onClickMemo } = props;
   return (
@@ -26,7 +34,7 @@ function MemoList(props: PropsType): React.Node {
             className={styles.wrapper}
             key={memo.id}
             button
-            onClick={() => onClickMemo(idx)}
+            onClick={() => onClickMemo(memo.id)}
           >
             <div className={setPriorityStyle(memo.priority)} />
             <div className={styles.content}>
@@ -43,13 +51,16 @@ function MemoList(props: PropsType): React.Node {
 }
 
 const mapStateToProps = (state: StateType) => ({
-  memos: state.data.memos,
+  memos: filterMemo(
+    state.data.memos,
+    state.userDetailPage.memo.filter
+  ),
 });
 
 const mapDispatchProps = dispatch => ({
-  onClickMemo: idx => {
+  onClickMemo: id => {
     dispatch(toggleModal(true));
-    dispatch(selectMemo(idx));
+    dispatch(selectMemo(id));
   },
 });
 

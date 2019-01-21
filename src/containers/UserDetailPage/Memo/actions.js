@@ -4,6 +4,7 @@ import {
   CHANGE_MEMO_VALUE,
   SELECT_MEMO,
   CREATE_MEMO,
+  FILTER_MEMO,
 } from '../../../constants/ActionTypes';
 
 export const toggleModal = (isOpen: boolean) => ({
@@ -29,4 +30,9 @@ export const selectMemo = (id: number) => ({
 export const createMemo = () => ({
   type: CREATE_MEMO,
   payload: {},
+});
+
+export const filterMemo = (name: MemoPriorityType) => ({
+  type: FILTER_MEMO,
+  payload: name,
 });
