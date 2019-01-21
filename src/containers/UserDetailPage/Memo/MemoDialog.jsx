@@ -15,7 +15,6 @@ type PropsType = {
   title: string,
   isOpen: boolean,
   isNewMemo: boolean,
-  values: MemoType,
   onClickSave: Event => void,
   onClickCancel: Event => void,
   onClickUpdate: Event => void,
@@ -27,7 +26,6 @@ function MemoDialog(props: PropsType): React.Node {
     title,
     isOpen,
     isNewMemo,
-    values,
     onClickCancel,
     onClickSave,
     onClickUpdate,
@@ -75,7 +73,6 @@ const mapStateToProps = (state: StateType) => ({
   title: 'メモ',
   isNewMemo: state.userDetailPage.memo.isNew,
   isOpen: state.userDetailPage.memo.isModalOpen,
-  values: { id: 2 },
 });
 
 const mapDispatchToProps = dispatch => ({
