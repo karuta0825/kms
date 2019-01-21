@@ -8,9 +8,9 @@ import MemoDialog from './MemoDialog';
 import ButtonAdd from './ButtonAdd';
 import FilterMemo from './FilterMemo';
 
-export default function Memo(props): React.Node {
+export default function Memo(): React.Node {
   return (
-    <div className={props.className}>
+    <div>
       <div className={styles.title}>
         <EventNoteIcon />
         <span className={styles.titleText}>メモ</span>

@@ -29,7 +29,7 @@ function MemoList(props: PropsType): React.Node {
   return (
     <List style={{ padding: 0 }}>
       {memos &&
-        memos.map((memo, idx) => (
+        memos.map(memo => (
           <ListItem
             className={styles.wrapper}
             key={memo.id}
