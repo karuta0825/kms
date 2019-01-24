@@ -22,7 +22,7 @@ const mapStateToProps = (
   const msg = state.userDetailPage.memo.inputValues.message;
   const length = (msg && msg.length) || 0;
   return {
-    length: 200 - length,
+    length: 500 - length,
   };
 };
 

@@ -23,7 +23,7 @@ function InputMessage(props: PropsType): React.Node {
       onChange={onChange}
       rows="15"
       inputProps={{
-        maxLength: 200,
+        maxLength: 500,
       }}
     />
   );
