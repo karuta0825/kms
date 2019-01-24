@@ -4,7 +4,13 @@ import {
   SELECT_BUSIV_BASE_INDEX,
   SUCCESSED_FETCH_USERINFO,
   CHANGE_BUSIV_VALUE,
+  CHANGE_BASEINFO_VALUE,
 } from '../../../constants/ActionTypes';
+import checkers from '../../../utils/inputChecks';
+
+const inputCheck = {
+  cc_ip: checkers.isIP,
+};
 
 const choiceBaseIdx = (
   state: number,
@@ -66,6 +72,15 @@ const inputValues = (
 const isInputError = (state, action: Action): Object => {
   const { type, payload } = action;
   switch (type) {
+    case CHANGE_BUSIV_VALUE: {
+      const obj = {};
+      if (!inputCheck[payload.key]) return state;
+      obj[payload.key] = inputCheck[payload.key](payload.value);
+      return {
+        ...state,
+        ...obj,
+      };
+    }
     default:
       return state;
   }

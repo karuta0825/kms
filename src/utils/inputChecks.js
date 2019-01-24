@@ -59,4 +59,10 @@ inputChecks.isPNum = (value: string): boolean => {
   return num < 0;
 };
 
+inputChecks.isIP = (value: string): boolean => {
+  const reg = new RegExp(/^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$/);
+  if (value === '') return false;
+  return !reg.test(value);
+};
+
 export default inputChecks;
