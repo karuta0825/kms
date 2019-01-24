@@ -4,6 +4,7 @@ import {
   CHANGE_CUSTOMER_VALUE,
   SELECT_BASE_INDEX,
   CHANGE_NEWBASE_MODE,
+  FETCH_USERINFO,
 } from '../../../constants/ActionTypes';
 import inputChecks from '../../../utils/inputChecks';
 
@@ -24,6 +25,8 @@ const choiceBaseIdx = (
       return payload;
     case CHANGE_NEWBASE_MODE:
       return payload ? -1 : 0;
+    case FETCH_USERINFO:
+      return 0;
     default:
       return state;
   }
