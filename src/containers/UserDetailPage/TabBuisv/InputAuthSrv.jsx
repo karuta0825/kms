@@ -9,13 +9,14 @@ function InputAuthSrv(props: TextInputPropsType): React.Node {
   return <TextInput {...props} />;
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state: StateType) => ({
   title: '認証サーバIP',
   isEdit: state.userDetailPage.busivTab.isEdit,
   value:
     state.userDetailPage.busivTab.inputValues.auth_server_ip,
-  isError: false,
-  errMsg: '',
+  isError:
+    state.userDetailPage.busivTab.isInputError.auth_server_ip,
+  errMsg: 'IPアドレスを入力してください',
 });
 
 const mapDispatchToProps = dispatch => ({

@@ -11,13 +11,15 @@ function InputCarteHtmlIP(
   return <TextInput {...props} />;
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state: StateType) => ({
   title: 'カルテHTML保存IP',
   isEdit: state.userDetailPage.busivTab.isEdit,
   value:
     state.userDetailPage.busivTab.inputValues.carte_html_save_ip,
-  isError: false,
-  errMsg: '',
+  isError:
+    state.userDetailPage.busivTab.isInputError
+      .carte_html_save_ip,
+  errMsg: 'IPアドレスを入力してください',
 });
 
 const mapDispatchToProps = dispatch => ({

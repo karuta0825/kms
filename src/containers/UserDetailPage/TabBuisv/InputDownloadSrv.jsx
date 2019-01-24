@@ -11,13 +11,15 @@ function InputDownloadSrv(
   return <TextInput {...props} />;
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state: StateType) => ({
   title: 'ダウンロードサーバIP',
   isEdit: state.userDetailPage.busivTab.isEdit,
   value:
     state.userDetailPage.busivTab.inputValues.download_server_ip,
-  isError: false,
-  errMsg: '',
+  isError:
+    state.userDetailPage.busivTab.isInputError
+      .download_server_ip,
+  errMsg: 'IPアドレスを入力してください',
 });
 
 const mapDispatchToProps = dispatch => ({

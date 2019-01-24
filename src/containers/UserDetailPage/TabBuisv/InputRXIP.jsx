@@ -9,12 +9,12 @@ function InputRXIP(props: TextInputPropsType): React.Node {
   return <TextInput {...props} />;
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state: StateType) => ({
   title: 'RX IPアドレス',
   isEdit: state.userDetailPage.busivTab.isEdit,
   value: state.userDetailPage.busivTab.inputValues.rx_ip,
-  isError: false,
-  errMsg: '',
+  isError: state.userDetailPage.busivTab.isInputError.rx_ip,
+  errMsg: 'IPアドレスを入力してください',
 });
 
 const mapDispatchToProps = dispatch => ({

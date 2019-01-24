@@ -9,12 +9,12 @@ function InputRouter(props: TextInputPropsType): React.Node {
   return <TextInput {...props} />;
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state: StateType) => ({
   title: 'ルータアドレス',
   isEdit: state.userDetailPage.busivTab.isEdit,
   value: state.userDetailPage.busivTab.inputValues.w_router,
-  isError: false,
-  errMsg: '',
+  isError: state.userDetailPage.busivTab.isInputError.w_router,
+  errMsg: 'IPアドレスを入力してください',
 });
 
 const mapDispatchToProps = dispatch => ({

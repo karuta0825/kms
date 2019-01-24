@@ -11,12 +11,12 @@ function InputNetworkAddress(
   return <TextInput {...props} />;
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state: StateType) => ({
   title: 'ネットワークアドレス',
   isEdit: state.userDetailPage.busivTab.isEdit,
   value: state.userDetailPage.busivTab.inputValues.w_network,
-  isError: false,
-  errMsg: '',
+  isError: state.userDetailPage.busivTab.isInputError.w_network,
+  errMsg: 'IPアドレスを入力してください',
 });
 
 const mapDispatchToProps = dispatch => ({

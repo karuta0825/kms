@@ -9,12 +9,12 @@ function InputSubnet(props: TextInputPropsType): React.Node {
   return <TextInput {...props} />;
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state: StateType) => ({
   title: 'サブネットマスク',
   isEdit: state.userDetailPage.busivTab.isEdit,
   value: state.userDetailPage.busivTab.inputValues.w_subnet,
-  isError: false,
-  errMsg: '',
+  isError: state.userDetailPage.busivTab.isInputError.w_subnet,
+  errMsg: 'IPアドレスを入力してください',
 });
 
 const mapDispatchToProps = dispatch => ({

@@ -4,12 +4,20 @@ import {
   SELECT_BUSIV_BASE_INDEX,
   SUCCESSED_FETCH_USERINFO,
   CHANGE_BUSIV_VALUE,
-  CHANGE_BASEINFO_VALUE,
 } from '../../../constants/ActionTypes';
 import checkers from '../../../utils/inputChecks';
 
 const inputCheck = {
   cc_ip: checkers.isIP,
+  sx_ip: checkers.isIP,
+  rx_ip: checkers.isIP,
+  carte_html_save_ip: checkers.isIP,
+  auth_server_ip: checkers.isIP,
+  download_server_ip: checkers.isIP,
+  w_network: checkers.isIP,
+  w_router: checkers.isIP,
+  w_subnet: checkers.isIP,
+  virtual_dl_ip: checkers.isIP,
 };
 
 const choiceBaseIdx = (
