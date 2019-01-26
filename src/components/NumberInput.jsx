@@ -13,7 +13,11 @@ type PropsType = {
 };
 
 const defaultEditProps = {
-  style: { padding: '9px', background: '#fbfbfb' },
+  style: {
+    padding: '9px',
+    background: '#fbfbfb',
+    fontSize: '0.87rem',
+  },
 };
 
 export default (props: PropsType): React.Node => {
@@ -41,6 +45,9 @@ export default (props: PropsType): React.Node => {
           margin="normal"
           type="number"
           InputProps={{ readOnly: true }}
+          inputProps={{
+            style: { fontSize: '0.87rem' },
+          }}
           value={(value && convertStN(value)) || ''}
         />
       )}

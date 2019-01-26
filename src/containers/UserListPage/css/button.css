@@ -14,10 +14,10 @@
 .filterText {
   position: absolute;
   left: 5px;
-  top: -22px;
+  top: -27px;
   margin: 0;
 }
 
 .filterInput__textInput {
-  width: 250px;
+  width: 200px;
 }

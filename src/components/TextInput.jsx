@@ -14,7 +14,11 @@ export type TextInputPropsType = {
 };
 
 const defaultEditProps = {
-  style: { padding: '9px', background: '#fbfbfb' },
+  style: {
+    padding: '9px',
+    background: '#fbfbfb',
+    fontSize: '0.87rem',
+  },
 };
 
 export default (props: TextInputPropsType): React.Node => {
@@ -50,7 +54,12 @@ export default (props: TextInputPropsType): React.Node => {
         <TextField
           className={styles.text}
           margin="normal"
-          InputProps={{ readOnly: true }}
+          inputProps={{
+            style: { fontSize: '0.87rem' },
+          }}
+          InputProps={{
+            readOnly: true,
+          }}
           value={(value && value) || ''}
         />
       )}

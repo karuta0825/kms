@@ -6,8 +6,10 @@ import styles from './css/userinfo.css';
 
 export default function ButtonBack(): React.Node {
   return (
-    <Button className={styles.backBtn}>
-      <Link to="/kidList" className={styles.backBtnLink}>一覧に戻る</Link>
+    <Button size="small" className={styles.backBtn}>
+      <Link to="/kidList" className={styles.backBtnLink}>
+        一覧に戻る
+      </Link>
     </Button>
   );
 }

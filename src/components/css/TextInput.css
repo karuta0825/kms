@@ -7,9 +7,10 @@
 .title {
   display: inline-block;
   width: 20%;
-  margin: 10px -10px 0 60px;
+  margin: 10px -10px 0 20px;
 }
 
 .text {
-  width: 68%;
+  width: 80%;
+  margin-left: 10px !important;
 }

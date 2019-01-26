@@ -20,6 +20,7 @@ function ButtonBack(props: PropsType): React.Node {
   const { isActive, history, match, data, dispatch } = props;
   return (
     <Button
+      size="small"
       className={styles.prevBtn}
       onClick={() => {
         const next = getNextKidsId(data, match.params.id, -1);

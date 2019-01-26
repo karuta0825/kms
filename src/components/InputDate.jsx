@@ -20,7 +20,11 @@ export default (props: PropsType): React.Node => {
           className={styles.text}
           type="date"
           inputProps={{
-            style: { padding: '9px', background: '#fbfbfb' },
+            style: {
+              padding: '9px',
+              background: '#fbfbfb',
+              fontSize: '0.87rem',
+            },
           }}
           margin="normal"
           variant="outlined"
@@ -34,6 +38,9 @@ export default (props: PropsType): React.Node => {
           type="date"
           margin="normal"
           InputProps={{ readOnly: true }}
+          inputProps={{
+            style: { fontSize: '0.87rem' },
+          }}
           value={(value && value) || ''}
         />
       )}

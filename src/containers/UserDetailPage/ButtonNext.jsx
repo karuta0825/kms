@@ -20,6 +20,7 @@ function ButtonNext(props: PropsType): React.Node {
   const { isActive, history, match, data, dispatch } = props;
   return (
     <Button
+      size="small"
       className={styles.nextBtn}
       onClick={() => {
         const next = getNextKidsId(data, match.params.id, 1);
