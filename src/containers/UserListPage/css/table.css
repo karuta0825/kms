@@ -6,7 +6,6 @@
 
 .action {
   position: relative;
-  height: 40px;
   width: 90vw;
   margin: 15px auto 0 auto;
   display: flex;
@@ -18,4 +17,3 @@
   width: 90vw;
   margin: 20px auto 0 auto;
 }
-

@@ -5,7 +5,7 @@ import CloudDownloadIcon from '@material-ui/icons/CloudDownload';
 import styles from './css/button.css';
 
 type PropsType = {
-  onClick: (Event) => void
+  onClick: Event => void,
 };
 
 function DownloadButton(props: PropsType): React.Node {
@@ -14,7 +14,7 @@ function DownloadButton(props: PropsType): React.Node {
     <Button
       variant="contained"
       color="primary"
-      size="medium"
+      size="small"
       className={styles.download}
       onClick={onClick}
     >
@@ -32,5 +32,5 @@ const mapDispatchToProp = dispatch => ({
 
 export default connect(
   null,
-  mapDispatchToProp,
+  mapDispatchToProp
 )(DownloadButton);

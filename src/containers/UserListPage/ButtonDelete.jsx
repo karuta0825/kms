@@ -5,7 +5,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import styles from './css/button.css';
 
 type PropsType = {
-  onClick: (Event) => void
+  onClick: Event => void,
 };
 
 function DeleteButton(props: PropsType): React.Node {
@@ -14,7 +14,7 @@ function DeleteButton(props: PropsType): React.Node {
     <Button
       variant="contained"
       color="secondary"
-      size="medium"
+      size="small"
       className={styles.delete}
       onClick={onClick}
     >
@@ -32,5 +32,5 @@ const mapDispatchToProp = dispatch => ({
 
 export default connect(
   null,
-  mapDispatchToProp,
+  mapDispatchToProp
 )(DeleteButton);

@@ -6,7 +6,7 @@ import styles from './css/button.css';
 import { toggleFilter } from './actions';
 
 type PropsType = {
-  onClick: (Event) => void
+  onClick: Event => void,
 };
 
 function FilterButton(props: PropsType): React.Node {
@@ -16,7 +16,7 @@ function FilterButton(props: PropsType): React.Node {
       variant="contained"
       className={styles.filter}
       onClick={onClick}
-      size="medium"
+      size="small"
     >
       <FilterListIcon className={styles.buttonIcon} />
       フィルター詳細
@@ -32,5 +32,5 @@ const mapDispatchToProp = dispatch => ({
 
 export default connect(
   null,
-  mapDispatchToProp,
+  mapDispatchToProp
 )(FilterButton);
