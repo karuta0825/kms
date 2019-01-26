@@ -1,4 +1,3 @@
-
 .wrapper {
   display: flex;
   width: 100%;
@@ -9,7 +8,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-width: 70px;
+  min-width: 60px;
   height: 100%;
   background: #2b343c;
   padding-top: 5px;

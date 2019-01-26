@@ -1,15 +1,14 @@
-
 .wrapper {
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
 .title {
   position: absolute;
-  bottom: -9px;
+  bottom: -2px;
   font-size: 5px;
   width: 80px;
   -webkit-transform: scale(0.75);
-  -webkit-transform-origin:1 0;
+  -webkit-transform-origin: 1 0;
 }
 
 .isActive {
