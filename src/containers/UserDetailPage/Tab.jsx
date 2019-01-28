@@ -50,39 +50,37 @@ type PropsType = {
   handleChange: (any, number) => void,
 };
 
-class TabManager extends React.Component<PropsType> {
-  render(): React.Node {
-    const { classes, value, handleChange } = this.props;
-    return (
-      <Paper className={classes.root}>
-        <Tabs
-          value={value}
-          onChange={handleChange}
-          scrollable
-          scrollButtons="auto"
-        >
-          <Tab label="システム情報" />
-          <Tab label="拠点情報" />
-          <Tab label="ライセンス" />
-          <Tab label="クライアント(Citrix数)" />
-          <Tab label="Fenics" />
-          <Tab label="ビジV" />
-          <Tab label="パートナ" />
-          <Tab label="モバイル" />
-          <Tab label="履歴" />
-        </Tabs>
-        {value === 0 && <TabSystem />}
-        {value === 1 && <TabCustomer />}
-        {value === 2 && <TabLicense />}
-        {value === 3 && <TabClient />}
-        {value === 4 && <TabFenics />}
-        {value === 5 && <TabBuisv />}
-        {value === 6 && <TabContainer>Item Seven</TabContainer>}
-        {value === 7 && <TabContainer>Item Eigth</TabContainer>}
-        {value === 8 && <TabContainer>Item Eigth</TabContainer>}
-      </Paper>
-    );
-  }
+function TabManager(props: PropsType): React.Node {
+  const { classes, value, handleChange } = props;
+  return (
+    <Paper className={classes.root}>
+      <Tabs
+        value={value}
+        onChange={handleChange}
+        scrollable
+        scrollButtons="auto"
+      >
+        <Tab label="システム情報" className="tets" />
+        <Tab label="拠点情報" />
+        <Tab label="ライセンス" />
+        <Tab label="クライアント(Citrix数)" />
+        <Tab label="Fenics" />
+        <Tab label="ビジV" />
+        <Tab label="パートナ" />
+        <Tab label="モバイル" />
+        <Tab label="履歴" />
+      </Tabs>
+      {value === 0 && <TabSystem />}
+      {value === 1 && <TabCustomer />}
+      {value === 2 && <TabLicense />}
+      {value === 3 && <TabClient />}
+      {value === 4 && <TabFenics />}
+      {value === 5 && <TabBuisv />}
+      {value === 6 && <TabContainer>Item Seven</TabContainer>}
+      {value === 7 && <TabContainer>Item Eigth</TabContainer>}
+      {value === 8 && <TabContainer>Item Eigth</TabContainer>}
+    </Paper>
+  );
 }
 
 const mapStateToProps = state => ({
