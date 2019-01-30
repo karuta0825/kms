@@ -42,6 +42,9 @@ const styles = theme => ({
     backgroundColor: theme.palette.background.paper,
     marginTop: '3px',
   },
+  tabTitle: {
+    minWidth: '110px',
+  },
 });
 
 type PropsType = {
@@ -60,15 +63,18 @@ function TabManager(props: PropsType): React.Node {
         scrollable
         scrollButtons="auto"
       >
-        <Tab label="システム情報" className="tets" />
-        <Tab label="拠点情報" />
-        <Tab label="ライセンス" />
-        <Tab label="クライアント(Citrix数)" />
-        <Tab label="Fenics" />
-        <Tab label="ビジV" />
-        <Tab label="パートナ" />
-        <Tab label="モバイル" />
-        <Tab label="履歴" />
+        <Tab label="システム情報" className={classes.tabTitle} />
+        <Tab label="拠点情報" className={classes.tabTitle} />
+        <Tab label="ライセンス" className={classes.tabTitle} />
+        <Tab
+          label="クライアント(Citrix数)"
+          className={classes.tabTitle}
+        />
+        <Tab label="Fenics" className={classes.tabTitle} />
+        <Tab label="ビジV" className={classes.tabTitle} />
+        <Tab label="パートナ" className={classes.tabTitle} />
+        <Tab label="モバイル" className={classes.tabTitle} />
+        <Tab label="履歴" className={classes.tabTitle} />
       </Tabs>
       {value === 0 && <TabSystem />}
       {value === 1 && <TabCustomer />}
