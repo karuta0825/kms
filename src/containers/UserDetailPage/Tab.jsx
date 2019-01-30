@@ -38,7 +38,7 @@ const styles = theme => ({
   root: {
     flexGrow: 1,
     // width: '100%',
-    height: 'calc(100% - 55px)',
+    height: 'calc(100% - 38px)',
     backgroundColor: theme.palette.background.paper,
     marginTop: '3px',
   },

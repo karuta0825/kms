@@ -16,8 +16,12 @@ function Header(props: PropsType): React.Node {
   return (
     <div className={styles.wrapper}>
       <AppBar position="static">
-        <Toolbar>
-          <Typography variant="h6" color="inherit" className={styles.title}>
+        <Toolbar variant="dense">
+          <Typography
+            variant="h6"
+            color="inherit"
+            className={styles.title}
+          >
             {title}
           </Typography>
           <Button color="inherit">Login</Button>
@@ -31,6 +35,4 @@ const mapStateToProps = state => ({
   title: state.header.title,
 });
 
-export default connect(
-  mapStateToProps,
-)(Header);
+export default connect(mapStateToProps)(Header);
