@@ -13,10 +13,18 @@ function ButtonsNew(props: PropsType): React.Node {
   const { onClickCancel, onClickSave } = props;
   return (
     <React.Fragment>
-      <Button variant="contained" onClick={onClickSave}>
+      <Button
+        size="small"
+        variant="contained"
+        onClick={onClickSave}
+      >
         作成
       </Button>
-      <Button variant="contained" onClick={onClickCancel}>
+      <Button
+        size="small"
+        variant="contained"
+        onClick={onClickCancel}
+      >
         キャンセル
       </Button>
     </React.Fragment>

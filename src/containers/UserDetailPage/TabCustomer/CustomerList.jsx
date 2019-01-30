@@ -31,7 +31,11 @@ function CustomerList(props: PropsType): React.Node {
   return (
     <div className={styles.customerList}>
       <div className={listStyles.action}>
-        <Button variant="outlined" onClick={onClickAddBase}>
+        <Button
+          size="small"
+          variant="outlined"
+          onClick={onClickAddBase}
+        >
           新規追加
         </Button>
       </div>
