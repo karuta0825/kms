@@ -19,7 +19,7 @@ const defaultEditProps = {
   style: {
     padding: '9px',
     background: '#fbfbfb',
-    fontSize: '0.87rem',
+    fontSize: '12.5px',
   },
 };
 
@@ -63,7 +63,7 @@ export default (props: PropsType): React.Node => {
           type="number"
           InputProps={{ readOnly: true }}
           inputProps={{
-            style: { fontSize: '0.87rem' },
+            style: { fontSize: '12.5px' },
           }}
           value={value}
         />

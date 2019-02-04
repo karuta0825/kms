@@ -23,7 +23,7 @@ export default (props: PropsType): React.Node => {
             style: {
               padding: '9px',
               background: '#fbfbfb',
-              fontSize: '0.87rem',
+              fontSize: '12.5px',
             },
           }}
           margin="normal"
@@ -39,7 +39,7 @@ export default (props: PropsType): React.Node => {
           margin="normal"
           InputProps={{ readOnly: true }}
           inputProps={{
-            style: { fontSize: '0.87rem' },
+            style: { fontSize: '12.5px' },
           }}
           value={(value && value) || ''}
         />

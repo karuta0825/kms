@@ -17,7 +17,7 @@ const defaultEditProps = {
   style: {
     padding: '9px',
     background: '#fbfbfb',
-    fontSize: '0.87rem',
+    fontSize: '12.5px',
   },
 };
 
@@ -55,7 +55,7 @@ export default (props: TextInputPropsType): React.Node => {
           className={styles.text}
           margin="normal"
           inputProps={{
-            style: { fontSize: '0.87rem' },
+            style: { fontSize: '12.5px' },
           }}
           InputProps={{
             readOnly: true,
