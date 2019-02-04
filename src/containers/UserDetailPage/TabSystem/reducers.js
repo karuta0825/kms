@@ -77,7 +77,8 @@ const inputValues = (
 const isInputError = (
   state,
   action: Action,
-  cache: KidType
+  cache: KidType,
+  data: KidType
 ): Object => {
   const { type, payload } = action;
   switch (type) {
@@ -90,7 +91,7 @@ const isInputError = (
 
       obj[payload.key] = inputCheck[payload.key](
         payload.value,
-        cache[payload.key]
+        data[payload.key]
       );
       return {
         ...state,
@@ -106,7 +107,7 @@ const isInputError = (
       const v: number = cache[payload.key] + Number(payload.num);
       obj[payload.key] = inputCheck[payload.key](
         v,
-        cache[payload.key]
+        data[payload.key]
       );
       return {
         ...state,
@@ -143,6 +144,7 @@ export default (
   isInputError: isInputError(
     state.isInputError,
     action,
-    state.inputValues
+    state.inputValues,
+    data.baseInfo
   ),
 });
