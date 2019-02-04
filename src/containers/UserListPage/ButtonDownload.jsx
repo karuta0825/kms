@@ -14,7 +14,6 @@ function DownloadButton(props: PropsType): React.Node {
     <Button
       variant="contained"
       color="primary"
-      size="small"
       className={styles.download}
       onClick={onClick}
     >

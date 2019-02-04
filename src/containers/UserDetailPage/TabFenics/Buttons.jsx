@@ -24,13 +24,12 @@ function Buttons(props: PropsType): React.Node {
   return (
     <React.Fragment>
       {isEdit && (
-        <Button size="small" variant="contained">
+        <Button variant="contained">
           保存
         </Button>
       )}
       {isEdit && (
         <Button
-          size="small"
           variant="contained"
           onClick={onClickCancel}
         >
@@ -39,7 +38,6 @@ function Buttons(props: PropsType): React.Node {
       )}
       {!isEdit && (
         <Button
-          size="small"
           variant="contained"
           color="secondary"
           onClick={onClickEdit}
@@ -50,7 +48,6 @@ function Buttons(props: PropsType): React.Node {
 
       {!isEdit && (
         <Button
-          size="small"
           variant="contained"
           onClick={() => {
             console.log('clicked');
@@ -62,7 +59,6 @@ function Buttons(props: PropsType): React.Node {
 
       {!isEdit && (
         <Button
-          size="small"
           variant="contained"
           onClick={onClickDownload}
         >

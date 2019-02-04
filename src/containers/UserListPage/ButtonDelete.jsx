@@ -14,7 +14,6 @@ function DeleteButton(props: PropsType): React.Node {
     <Button
       variant="contained"
       color="secondary"
-      size="small"
       className={styles.delete}
       onClick={onClick}
     >

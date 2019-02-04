@@ -16,7 +16,6 @@ function FilterButton(props: PropsType): React.Node {
       variant="contained"
       className={styles.filter}
       onClick={onClick}
-      size="small"
     >
       <FilterListIcon className={styles.buttonIcon} />
       フィルター詳細

@@ -16,7 +16,7 @@ function Header(props: PropsType): React.Node {
   return (
     <div className={styles.wrapper}>
       <AppBar position="static">
-        <Toolbar variant="dense">
+        <Toolbar>
           <Typography
             variant="h6"
             color="inherit"
