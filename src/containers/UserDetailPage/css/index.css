@@ -1,5 +1,5 @@
 .wrapper {
-  width: 94.5vw;
+  width: 100%;
   height: calc(99% - 64px);
   display: flex;
 }
@@ -11,6 +11,6 @@
 }
 
 .memo {
-  width: 250px;
+  width: 240px;
   height: 100%;
 }
