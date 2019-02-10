@@ -130,7 +130,11 @@ const initState: StateType = {
       isInputError: {},
     },
     partnerTab: {},
-    historyTab: {},
+    historyTab: {
+      selection: [],
+      isOpenDeleteModal: false,
+      filter: '',
+    },
     memo: {
       filter: '',
       isModalOpen: false,

@@ -5,7 +5,7 @@ declare type HistoryType = {
   item_name: string,
   before: string,
   after: string,
-  create_on: Date,
+  create_on: string,
   creater: string,
   msg: string,
 };

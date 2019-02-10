@@ -16,4 +16,5 @@ declare type UserDetailPageType = {
     canCancel: boolean,
   },
   memo: UserDetailMemoType,
+  historyTab: UserDetailTabHistoryType,
 };
