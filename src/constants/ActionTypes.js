@@ -57,6 +57,9 @@ export const CHANGE_MEMO_VALUE = 'CHANGE_MEMO_VALUE';
 export const SELECT_MEMO = 'SELECT_MEMO';
 export const CREATE_MEMO = 'CREATE_MEMO';
 export const FILTER_MEMO = 'FILTER_MEMO';
+export const SELECT_HISTORY = 'SELECT_HISTORY';
+export const TOGGLE_DELETE_MODAL = 'TOGGLE_DELETE_MODAL';
+export const FILTER_HISTORY = 'FILTER_HISTORY';
 
 // FETCH
 export const FETCH_KIDS = 'FETCH_KIDS';

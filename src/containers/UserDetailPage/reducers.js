@@ -12,6 +12,7 @@ import liceseTab from './TabLicense/reducers';
 import clientTab from './TabClient/reducers';
 import fenicsTab from './TabFenics/reducers';
 import busivTab from './TabBuisv/reducers';
+import historyTab from './TabHistory/reducers';
 import memo from './Memo/reducers';
 
 const tabIndex = (state: number, action): number => {
@@ -79,5 +80,6 @@ export default (
   clientTab: clientTab(state.clientTab, action, data),
   fenicsTab: fenicsTab(state.fenicsTab, action, data),
   busivTab: busivTab(state.busivTab, action, data),
+  historyTab: historyTab(state.historyTab, action),
   memo: memo(state.memo, action, data),
 });
