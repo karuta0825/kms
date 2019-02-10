@@ -22,6 +22,7 @@ import SwitchReplaceFromCJ from './SwitchReplaceFromCJ';
 import SwitchReplaceFromWC from './SwitchReplaceFromWC';
 import SwitchReplaceFromAnother from './SwitchReplaceFromAnother';
 import SwitchQA from './SwitchQA';
+import CategoryName from '../../../components/CategoryName';
 
 type PropsType = {
   isAddBaseMode: boolean,
@@ -38,6 +39,7 @@ function TabCustomer(props: PropsType): React.Node {
           {isAddBaseMode && <ButtonsNew />}
         </div>
         <div className={frameStyles.body}>
+          <CategoryName name="基本情報" />
           <InputBaseName />
           <InputPostal />
           <InputAddress />
@@ -50,7 +52,7 @@ function TabCustomer(props: PropsType): React.Node {
           <SwitchBusiv />
           <SwitchMobile />
           <SwitchQA />
-          <div>-----------</div>
+          <CategoryName name="契約情報" />
           <SwitchNewContract />
           <SwitchReplaceFromCJ />
           <SwitchReplaceFromWC />
