@@ -12,9 +12,9 @@ import {
   TableEditRow,
 } from '@devexpress/dx-react-grid-material-ui';
 import { connect } from 'react-redux';
-import { withStyles } from '@material-ui/core';
 import { selectClient, updateRows } from './actions';
 import TableCells from './TableCells';
+import BorderGrid from '../../../components/BorderGrid';
 
 type PropsType = {
   isEdit: boolean,
@@ -25,21 +25,6 @@ type PropsType = {
   onSelectionChange: (Array<number>) => void,
   onRowChangesChange: Object => void,
 };
-
-const styles = () => ({
-  rootContainer: {
-    marginTop: '25px',
-    border: '1px solid rgba(224, 224, 224, 1)',
-  },
-});
-
-const CustomGridComponent = ({ classes, ...restProps }) => (
-  <Grid.Root {...restProps} className={classes.rootContainer} />
-);
-
-export const CustomGrid = withStyles(styles, {
-  name: 'CustomGrid',
-})(CustomGridComponent);
 
 function ClientTable(props: PropsType): React.Node {
   const {
@@ -57,7 +42,7 @@ function ClientTable(props: PropsType): React.Node {
       <Grid
         rows={rows}
         columns={columns}
-        rootComponent={CustomGrid}
+        rootComponent={BorderGrid}
       >
         <EditingState
           rowChanges={rowChanges}
@@ -80,7 +65,7 @@ function ClientTable(props: PropsType): React.Node {
       <Grid
         rows={rows}
         columns={columns}
-        rootComponent={CustomGrid}
+        rootComponent={BorderGrid}
       >
         <SelectionState
           selection={selection}
