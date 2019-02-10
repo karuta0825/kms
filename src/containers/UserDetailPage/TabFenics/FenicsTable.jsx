@@ -62,7 +62,7 @@ function FenicsTable(props: PropsType): React.Node {
   }
 
   return (
-    <div>
+    <div style={{ height: 'calc( 100% - 30px)' }}>
       <Grid
         rows={rows}
         columns={columns}

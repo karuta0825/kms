@@ -35,7 +35,7 @@ function filterItems(
 function HistoryTable(props: PropsType): React.Node {
   const { rows, columns, selection, onSelectionChange } = props;
   return (
-    <div>
+    <div style={{ height: 'calc( 100% - 30px)' }}>
       <Grid
         rows={rows}
         columns={columns}
@@ -46,7 +46,7 @@ function HistoryTable(props: PropsType): React.Node {
           onSelectionChange={onSelectionChange}
         />
         <IntegratedSelection />
-        <VirtualTable />
+        <VirtualTable height="auto" />
         <TableHeaderRow />
         <TableSelection
           showSelectAll

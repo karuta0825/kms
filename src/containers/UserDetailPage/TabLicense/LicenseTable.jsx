@@ -10,8 +10,8 @@ import {
   TableSelection,
 } from '@devexpress/dx-react-grid-material-ui';
 import { connect } from 'react-redux';
-import { withStyles } from '@material-ui/core';
 import { selectLicense } from './actions';
+import BorderGrid from '../../../components/BorderGrid';
 
 type PropsType = {
   isEdit: boolean,
@@ -21,21 +21,6 @@ type PropsType = {
   onSelectionChange: Object => void,
   inputValues: Object,
 };
-
-const styles = () => ({
-  rootContainer: {
-    marginTop: '25px',
-    border: '1px solid rgba(224, 224, 224, 1)',
-  },
-});
-
-const CustomGridComponent = ({ classes, ...restProps }) => (
-  <Grid.Root {...restProps} className={classes.rootContainer} />
-);
-
-export const CustomGrid = withStyles(styles, {
-  name: 'CustomGrid',
-})(CustomGridComponent);
 
 function getUsedLicense(
   allLicense: Array<ServiceType>,
@@ -65,26 +50,26 @@ function TabLicense(props: PropsType): React.Node {
       <Grid
         rows={getUsedLicense(rows, inputValues)}
         columns={columns}
-        rootComponent={CustomGrid}
+        rootComponent={BorderGrid}
       >
-        <VirtualTable />
+        <VirtualTable height="auto" />
         <TableHeaderRow />
       </Grid>
     );
   }
   return (
-    <div>
+    <div style={{ height: 'calc( 100% - 30px)' }}>
       <Grid
         rows={rows}
         columns={columns}
-        rootComponent={CustomGrid}
+        rootComponent={BorderGrid}
       >
         <SelectionState
           selection={selection}
           onSelectionChange={onSelectionChange}
         />
         <IntegratedSelection />
-        <VirtualTable />
+        <VirtualTable height="auto" />
         <TableHeaderRow />
         <TableSelection
           showSelectAll
