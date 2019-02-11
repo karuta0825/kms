@@ -143,4 +143,27 @@ Api.fetchTemplate = (name: string): Promise<string> => {
   return fetch(url, optionGetText).then(r => r.text());
 };
 
+Api.makeMemoTemplate = (
+  data: Object
+): Promise<{ affectedRows: number }> => {
+  const url = `${host}/api/v1/memoTemplates`;
+  return fetch(url, {
+    method: 'POST',
+    headers: { 'content-type': 'application/json' },
+    credentials: 'include',
+    body: JSON.stringify(data),
+  }).then(r => r.json());
+};
+
+Api.deleteMemoTemplate = (
+  id: number
+): Promise<{ affectedRows: number }> => {
+  const url = `${host}/api/v1/memoTemplates/${id}`;
+  return fetch(url, {
+    method: 'DELETE',
+    headers: { 'content-type': 'application/json' },
+    credentials: 'include',
+  }).then(r => r.json());
+};
+
 export default Api;

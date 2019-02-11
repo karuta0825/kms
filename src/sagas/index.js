@@ -32,6 +32,10 @@ import {
   SUCCESSED_FETCH_MEMOTEMPLATES,
   FAILED_FETCH_MEMOTEMPLATES,
   FETCH_MEMOTEMPLATES,
+  FAILED_POST_MEMO_TEMPLATE,
+  SUCCESSED_POST_MEMO_TEMPLATE,
+  POST_MEMO_TEMPLATE,
+  DELETE_MEMO_TEMPLATE,
 } from '../constants/ActionTypes';
 import Api from './Api';
 
@@ -130,6 +134,54 @@ function* fetchMemoTemplate(): Generator<
   }
 }
 
+function* makeMemoTemplate(): Generator<
+  Object,
+  void,
+  { done: boolean, value: any }
+> {
+  try {
+    const store = yield select();
+    yield call(
+      Api.makeMemoTemplate,
+      store.templateManagePage.inputValues
+    );
+    const result = yield call(Api.fetchMemoTemplate);
+    yield put({
+      type: SUCCESSED_POST_MEMO_TEMPLATE,
+      payload: result,
+    });
+  } catch (e) {
+    yield put({
+      type: FAILED_POST_MEMO_TEMPLATE,
+      payload: e,
+    });
+  }
+}
+
+function* deleteMemoTemplate(): Generator<
+  Object,
+  void,
+  { done: boolean, value: any }
+> {
+  try {
+    const store = yield select();
+    yield call(
+      Api.deleteMemoTemplate,
+      store.templateManagePage.inputValues.id
+    );
+    const result = yield call(Api.fetchMemoTemplate);
+    yield put({
+      type: SUCCESSED_POST_MEMO_TEMPLATE,
+      payload: result,
+    });
+  } catch (e) {
+    yield put({
+      type: FAILED_POST_MEMO_TEMPLATE,
+      payload: e,
+    });
+  }
+}
+
 function* fetchUserInfoById(
   action: Action
 ): Generator<Object, void, { done: boolean, value: any }> {
@@ -191,4 +243,6 @@ export default function* rootSage(): Generator<
   yield takeEvery(FETCH_ENVIRONMENTS, fetchEnvironment);
   yield takeEvery(FETCH_USERINFO, fetchUserInfoById);
   yield takeEvery(FETCH_MEMOTEMPLATES, fetchMemoTemplate);
+  yield takeEvery(POST_MEMO_TEMPLATE, makeMemoTemplate);
+  yield takeEvery(DELETE_MEMO_TEMPLATE, deleteMemoTemplate);
 }

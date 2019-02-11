@@ -1,6 +1,7 @@
 import {
   SUCCESSED_FETCH_MEMOTEMPLATES,
   FAILED_FETCH_MEMOTEMPLATES,
+  SUCCESSED_POST_MEMO_TEMPLATE,
 } from '../constants/ActionTypes';
 
 export default (
@@ -10,6 +11,8 @@ export default (
   const { type, payload } = action;
   switch (type) {
     case SUCCESSED_FETCH_MEMOTEMPLATES:
+      return payload;
+    case SUCCESSED_POST_MEMO_TEMPLATE:
       return payload;
     case FAILED_FETCH_MEMOTEMPLATES:
       return state;
