@@ -1,0 +1,16 @@
+.wrapper {
+  display: flex;
+  width: 100%;
+  height: calc(100% - 64px);
+}
+
+.list {
+  width: 250px;
+  height: 100%;
+  border-right: 1px solid #0000001f;
+}
+
+.content {
+  flex: 1;
+  height: 100%;
+}

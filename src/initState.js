@@ -145,7 +145,13 @@ const initState: StateType = {
   },
   serverManagePage: {},
   serviceManagePage: {},
-  templateManagePage: {},
+  templateManagePage: {
+    isNewMode: true,
+    selectedIndex: -1,
+    isOpenDeleteModal: false,
+    isOpenUpdateModal: false,
+    inputValues: { title: '', msg: '' },
+  },
   accountManagePage: {},
   data: {
     kids: [],

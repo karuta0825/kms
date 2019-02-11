@@ -1,0 +1,18 @@
+.header {
+  display: flex;
+  position: relative;
+  height: 50px;
+  align-items: center;
+  flex-direction: row-reverse;
+  padding-right: 10px;
+  border-bottom: 1px solid #0000001f !important;
+}
+
+.selectedItem {
+  color: white;
+  background: #0000001f !important;
+}
+
+.item {
+  border-bottom: 1px solid #0000001f !important;
+}
