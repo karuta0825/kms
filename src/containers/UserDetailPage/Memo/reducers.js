@@ -1,7 +1,7 @@
 // @flow
 import {
   TOGGLE_MEMO_MODAL,
-  SELECT_MEMO_TEMPLATE,
+  SET_MEMO_TEMPLATE,
   CHANGE_MEMO_VALUE,
   SELECT_MEMO,
   CREATE_MEMO,
@@ -65,14 +65,14 @@ const inputValues = (
       return !payload ? obj : state;
     }
     case CREATE_MEMO:
-      return {};
+      return { priority: 'emergency' };
     case SELECT_MEMO: {
       const [target] = data.memos.filter(
         memo => memo.id === payload
       );
       return target;
     }
-    case SELECT_MEMO_TEMPLATE: {
+    case SET_MEMO_TEMPLATE: {
       const [target] = data.memoTemplates.filter(
         template => template.title === payload
       );
@@ -92,7 +92,7 @@ const selectedTemplate = (
 ): string => {
   const { type, payload } = action;
   switch (type) {
-    case SELECT_MEMO_TEMPLATE: {
+    case SET_MEMO_TEMPLATE: {
       return payload;
     }
     case TOGGLE_MEMO_MODAL:
