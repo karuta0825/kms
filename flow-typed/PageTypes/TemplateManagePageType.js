@@ -3,8 +3,5 @@ declare type TemplateManagePageType = {
   isNewMode: boolean,
   isOpenDeleteModal: boolean,
   isOpenUpdateModal: boolean,
-  inputValues: {
-    title: string,
-    msg: string,
-  },
+  inputValues: MemoTemplateType,
 };

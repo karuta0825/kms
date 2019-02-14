@@ -166,4 +166,17 @@ Api.deleteMemoTemplate = (
   }).then(r => r.json());
 };
 
+Api.updateMemoTemplate = (
+  id: number,
+  obj: { title: string, msg: string }
+): Promise<null> => {
+  const url = `${host}/api/v1/memoTemplates/${id}`;
+  return fetch(url, {
+    method: 'PUT',
+    headers: { 'content-type': 'application/json' },
+    credentials: 'include',
+    body: JSON.stringify(obj),
+  }).then(r => r.json());
+};
+
 export default Api;

@@ -36,6 +36,7 @@ import {
   SUCCESSED_POST_MEMO_TEMPLATE,
   POST_MEMO_TEMPLATE,
   DELETE_MEMO_TEMPLATE,
+  PUT_MEMO_TEMPLATE,
 } from '../constants/ActionTypes';
 import Api from './Api';
 
@@ -164,11 +165,37 @@ function* deleteMemoTemplate(): Generator<
   { done: boolean, value: any }
 > {
   try {
-    const store = yield select();
-    yield call(
-      Api.deleteMemoTemplate,
-      store.templateManagePage.inputValues.id
+    const id = yield select(
+      (state: StateType) =>
+        state.templateManagePage.inputValues.id
     );
+    yield call(Api.deleteMemoTemplate, id);
+    const result = yield call(Api.fetchMemoTemplate);
+    yield put({
+      type: SUCCESSED_POST_MEMO_TEMPLATE,
+      payload: result,
+    });
+  } catch (e) {
+    yield put({
+      type: FAILED_POST_MEMO_TEMPLATE,
+      payload: e,
+    });
+  }
+}
+
+function* updateMemoTemplate(): Generator<
+  Object,
+  void,
+  { done: boolean, [key: string]: any }
+> {
+  try {
+    const { id, title, msg } = yield select(
+      (state: StateType) => state.templateManagePage.inputValues
+    );
+    yield call(Api.updateMemoTemplate, id, {
+      title,
+      msg,
+    });
     const result = yield call(Api.fetchMemoTemplate);
     yield put({
       type: SUCCESSED_POST_MEMO_TEMPLATE,
@@ -245,4 +272,5 @@ export default function* rootSage(): Generator<
   yield takeEvery(FETCH_MEMOTEMPLATES, fetchMemoTemplate);
   yield takeEvery(POST_MEMO_TEMPLATE, makeMemoTemplate);
   yield takeEvery(DELETE_MEMO_TEMPLATE, deleteMemoTemplate);
+  yield takeEvery(PUT_MEMO_TEMPLATE, updateMemoTemplate);
 }

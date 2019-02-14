@@ -4,7 +4,10 @@ import { connect } from 'react-redux';
 import { Button } from '@material-ui/core';
 import styles from './css/editorHeader.css';
 import { toggleDeleteModal } from './actions';
-import { POST_MEMO_TEMPLATE } from '../../constants/ActionTypes';
+import {
+  POST_MEMO_TEMPLATE,
+  PUT_MEMO_TEMPLATE,
+} from '../../constants/ActionTypes';
 
 type PropsType = {
   isNewMode: boolean,
@@ -52,7 +55,9 @@ const mapDispatchToProps = dispatch => ({
   onClickDelete: () => {
     dispatch(toggleDeleteModal(true));
   },
-  onClickUpdate: () => {},
+  onClickUpdate: () => {
+    dispatch({ type: PUT_MEMO_TEMPLATE });
+  },
 });
 
 export default connect(
