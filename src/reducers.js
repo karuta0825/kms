@@ -5,6 +5,7 @@ import userMakePage from './containers/UserMakePage/reducers';
 import userListPage from './containers/UserListPage/reducers';
 import userDetailPage from './containers/UserDetailPage/reducers';
 import templateManage from './containers/TemplateManagePage/reducers';
+import serviceManage from './containers/ServiceManagePage/reducers';
 import data from './data';
 import initState from './initState';
 
@@ -29,6 +30,10 @@ const reducers = (
     state.templateManagePage,
     action,
     state.data
+  ),
+  serviceManagePage: serviceManage(
+    state.serviceManagePage,
+    action
   ),
   data: data(state.data, action),
 });

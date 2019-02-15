@@ -16,6 +16,7 @@ import Setting from '../SettingPage';
 import Home from '../TopPage';
 import Server from '../ServerManagePage';
 import Template from '../TemplateManagePage';
+import Service from '../ServiceManagePage';
 
 export default function Frame(props): React.Node {
   return (
@@ -43,6 +44,7 @@ export default function Frame(props): React.Node {
               path="/setting/memoTemplate"
               component={Template}
             />
+            <Route path="/setting/service" component={Service} />
           </Switch>
         </main>
       </div>

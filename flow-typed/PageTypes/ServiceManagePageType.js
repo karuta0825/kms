@@ -1,1 +1,3 @@
-declare type ServiceManagePageType = {};
+declare type ServiceManagePageType = {
+  selectedIndex: number,
+};

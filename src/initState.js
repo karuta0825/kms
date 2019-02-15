@@ -144,7 +144,9 @@ const initState: StateType = {
     },
   },
   serverManagePage: {},
-  serviceManagePage: {},
+  serviceManagePage: {
+    selectedIndex: 0,
+  },
   templateManagePage: {
     isNewMode: true,
     selectedIndex: -1,
