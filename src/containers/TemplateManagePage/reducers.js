@@ -48,7 +48,7 @@ const isOpenDeleteModal = (
   switch (type) {
     case TOGGLE_TEMPLATE_DELETE_MODAL:
       return payload;
-    case SUCCESSED_POST_MEMO_TEMPLATE:
+    case DELETE_MEMO_TEMPLATE:
       return false;
     default:
       return state;
