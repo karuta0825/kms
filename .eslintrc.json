@@ -12,6 +12,7 @@
   },
   "rules": {
     "class-methods-use-this": "off",
+    "react/require-default-props": "off",
     "flowtype/use-flow-type": 1,
     "camelcase": 0,
     // "flowtype/boolean-style": [
