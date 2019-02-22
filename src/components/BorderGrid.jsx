@@ -5,7 +5,7 @@ import { withStyles } from '@material-ui/core';
 
 const styles = () => ({
   rootContainer: {
-    marginTop: '25px',
+    marginTop: '15px',
     border: '1px solid rgba(224, 224, 224, 1)',
     height: '100%',
   },
