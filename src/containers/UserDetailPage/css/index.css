@@ -5,12 +5,12 @@
 }
 
 .userinfo {
-  width: calc(100% - 300px);
+  width: calc(100% - 360px);
   height: 100%;
   margin: 0 20px 0 20px;
 }
 
 .memo {
-  width: 240px;
+  width: 300px;
   height: 100%;
 }
