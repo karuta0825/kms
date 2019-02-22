@@ -24,6 +24,7 @@ const initState: StateType = {
     isUploading: false,
   },
   userListPage: {
+    selections: [],
     isFilterOpen: false,
     filter: {
       keyword: '',
@@ -145,7 +146,7 @@ const initState: StateType = {
   },
   serverManagePage: {},
   serviceManagePage: {
-    selectedIndex: 0,
+    selectedVersion: 'LM',
   },
   templateManagePage: {
     isNewMode: true,

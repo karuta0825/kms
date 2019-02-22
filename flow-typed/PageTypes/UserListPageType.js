@@ -1,4 +1,5 @@
 declare type UserListPageType = {
+  selections: Array<number>,
   isFilterOpen: boolean,
   filter: {
     keyword: ?string,

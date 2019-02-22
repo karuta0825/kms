@@ -7,7 +7,21 @@ import {
   FILTER_MOBILE,
   FILTER_SYSTEM_TYPE,
   SUCCESSED_FETCH_USERINFO,
+  SELECT_USER,
 } from '../../constants/ActionTypes';
+
+const selections = (
+  state: Array<number>,
+  action: Action
+): Array<number> => {
+  const { type, payload } = action;
+  switch (type) {
+    case SELECT_USER:
+      return payload;
+    default:
+      return state;
+  }
+};
 
 const isFilterOpen = (
   state: boolean,
@@ -92,6 +106,7 @@ const setFilter = (state: Object, action: Action): Object => {
 };
 
 export default (state: UserListPageType, action: Action) => ({
+  selections: selections(state.selections, action),
   isFilterOpen: isFilterOpen(state.isFilterOpen, action),
   filter: setFilter(state.filter, action),
 });

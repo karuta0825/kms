@@ -5,7 +5,13 @@ import {
   FILTER_NETWORK,
   FILTER_MOBILE,
   FILTER_SYSTEM_TYPE,
+  SELECT_USER,
 } from '../../constants/ActionTypes';
+
+export const selectUser = (idx: number) => ({
+  type: SELECT_USER,
+  payload: idx,
+});
 
 export const toggleFilter = () => ({
   type: TOGGLE_FILTER_MENU,

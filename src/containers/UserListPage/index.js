@@ -7,10 +7,9 @@ import ButtonDownload from './ButtonDownload';
 import FilterInputText from './FilterInputText';
 import Filter from './Filter';
 import styles from './css/table.css';
+import KidTableNew from './KidTableNew';
 
-type PropsType = {
-
-};
+type PropsType = {};
 
 class UserListPage extends React.Component<PropsType> {
   componentWillMount() {
@@ -27,13 +26,12 @@ class UserListPage extends React.Component<PropsType> {
           <ButtonFilter />
         </div>
         <Paper className={styles.table}>
-          <KidTable history={this.props.p} />
+          <KidTableNew />
         </Paper>
         <Filter />
       </div>
     );
   }
 }
-
 
 export default UserListPage;

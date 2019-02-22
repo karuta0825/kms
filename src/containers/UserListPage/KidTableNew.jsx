@@ -8,6 +8,8 @@ import {
   IntegratedSorting,
   FilteringState,
   IntegratedFiltering,
+  PagingState,
+  IntegratedPaging,
 } from '@devexpress/dx-react-grid';
 import {
   Grid,
@@ -17,15 +19,18 @@ import {
   TableFixedColumns,
   TableSelection,
   TableFilterRow,
+  PagingPanel,
 } from '@devexpress/dx-react-grid-material-ui';
 import BorderGrid from '../../components/BorderGrid';
+import KidTableCell from './KidTableCell';
+import KidTableRow from './KidTableRow';
 import { searchUser } from '../../utils';
 import { selectUser } from './actions';
 
 type PropsType = {
   rows: Array<KidType>,
   columns: Array<{ name: string, title: string }>,
-  selection: Array<number>,
+  selections: Array<number>,
   onSelectionChange: (Array<number>) => void,
   defaultColumnWidths: Array<{
     columnName: string,
@@ -37,7 +42,7 @@ function KidTable(props: PropsType): React.Node {
   const {
     rows,
     columns,
-    selection,
+    selections,
     onSelectionChange,
     defaultColumnWidths,
   } = props;
@@ -48,26 +53,29 @@ function KidTable(props: PropsType): React.Node {
       rootComponent={BorderGrid}
     >
       <FilteringState defaultFilters={[]} />
-      <IntegratedFiltering />
       <SelectionState
-        selection={selection}
+        selection={selections}
         onSelectionChange={onSelectionChange}
       />
-      <IntegratedSelection />
-
       <SortingState />
+      <PagingState defaultCurrentPage={0} pageSize={25} />
+
+      <IntegratedFiltering />
+      <IntegratedSelection />
       <IntegratedSorting />
-      <VirtualTable />
+      <IntegratedPaging />
+
+      <VirtualTable
+        cellComponent={KidTableCell}
+        rowComponent={KidTableRow}
+      />
       <TableColumnResizing
         defaultColumnWidths={defaultColumnWidths}
       />
       <TableHeaderRow showSortingControls />
+      <PagingPanel />
       <TableFilterRow />
-      <TableSelection
-        showSelectAll
-        highlightRow
-        selectByRowClick
-      />
+      <TableSelection showSelectAll />
       <TableFixedColumns
         leftColumns={[
           TableSelection.COLUMN_TYPE,
@@ -80,7 +88,7 @@ function KidTable(props: PropsType): React.Node {
 }
 
 const mapStateToProps = (state: StateType) => ({
-  selection: state.userListPage.selection,
+  selections: state.userListPage.selections,
   rows: searchUser(state.data.kids, state.userListPage.filter),
   columns: [
     { title: 'KID', name: 'kid' },
