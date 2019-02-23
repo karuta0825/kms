@@ -1,4 +1,6 @@
 declare type UserListPageType = {
+  currentPage: number,
+  columnFilters: Array<[{ columnName: string, value: string }]>,
   selections: Array<number>,
   isFilterOpen: boolean,
   filter: {

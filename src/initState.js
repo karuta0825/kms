@@ -24,7 +24,9 @@ const initState: StateType = {
     isUploading: false,
   },
   userListPage: {
+    currentPage: 0,
     selections: [],
+    columnFilters: [],
     isFilterOpen: false,
     filter: {
       keyword: '',

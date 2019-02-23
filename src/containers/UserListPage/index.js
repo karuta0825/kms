@@ -1,13 +1,12 @@
 import * as React from 'react';
 import Paper from '@material-ui/core/Paper';
-import KidTable from './KidTable';
 import ButtonDelete from './ButtonDelete';
 import ButtonFilter from './ButtonFilter';
 import ButtonDownload from './ButtonDownload';
 import FilterInputText from './FilterInputText';
 import Filter from './Filter';
 import styles from './css/table.css';
-import KidTableNew from './KidTableNew';
+import KidTable from './KidTable';
 
 type PropsType = {};
 
@@ -26,7 +25,7 @@ class UserListPage extends React.Component<PropsType> {
           <ButtonFilter />
         </div>
         <Paper className={styles.table}>
-          <KidTableNew />
+          <KidTable />
         </Paper>
         <Filter />
       </div>

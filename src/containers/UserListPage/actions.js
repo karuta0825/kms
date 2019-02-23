@@ -6,7 +6,14 @@ import {
   FILTER_MOBILE,
   FILTER_SYSTEM_TYPE,
   SELECT_USER,
+  CHANGE_USER_LIST_PAGE,
+  FILTER_USER_LIST_BY_COLUMN,
 } from '../../constants/ActionTypes';
+
+export const changePage = (idx: number) => ({
+  type: CHANGE_USER_LIST_PAGE,
+  payload: idx,
+});
 
 export const selectUser = (idx: number) => ({
   type: SELECT_USER,
@@ -40,4 +47,11 @@ export const filterMobile = () => ({
 export const filterSystemType = (type: string) => ({
   type: FILTER_SYSTEM_TYPE,
   payload: type,
+});
+
+export const changeColumnFilters = (
+  filters: Array<{ [key: string]: string }>
+) => ({
+  type: FILTER_USER_LIST_BY_COLUMN,
+  payload: filters,
 });

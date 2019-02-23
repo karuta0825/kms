@@ -1,120 +1,171 @@
+// @flow
 import * as React from 'react';
 import { connect } from 'react-redux';
-import ReactTable from 'react-table';
-import checkboxHOC from 'react-table/lib/hoc/selectTable';
-import withFixedColumns from 'react-table-hoc-fixed-columns';
-import { Link } from 'react-router-dom';
-import type { KidType } from '../../types';
-import 'react-table/react-table.css';
+import {
+  SelectionState,
+  IntegratedSelection,
+  SortingState,
+  IntegratedSorting,
+  FilteringState,
+  IntegratedFiltering,
+  PagingState,
+  IntegratedPaging,
+} from '@devexpress/dx-react-grid';
+import {
+  Grid,
+  VirtualTable,
+  TableHeaderRow,
+  TableColumnResizing,
+  TableFixedColumns,
+  TableSelection,
+  TableFilterRow,
+  PagingPanel,
+} from '@devexpress/dx-react-grid-material-ui';
+import BorderGrid from '../../components/BorderGrid';
+import KidTableCell from './KidTableCell';
+import KidTableRow from './KidTableRow';
 import { searchUser } from '../../utils';
-
-// const CheckAbleTable = checkboxHOC(ReactTable);
-const ReactTableFixedColumns = withFixedColumns(ReactTable);
+import {
+  selectUser,
+  changePage,
+  changeColumnFilters,
+} from './actions';
 
 type PropsType = {
-  data: Array<KidType>
+  currentPage: number,
+  rows: Array<KidType>,
+  columns: Array<{ name: string, title: string }>,
+  selections: Array<number>,
+  columnFilters: Array<{ [key: string]: string }>,
+  onSelectionChange: (Array<number>) => void,
+  onCurrentPageChange: number => void,
+  onFiltersChange: (Array<{ [key: string]: string }>) => void,
+  defaultColumnWidths: Array<{
+    columnName: string,
+    width: number,
+  }>,
 };
-const columns = [
-  {
-    Header: 'KID',
-    accessor: 'kid',
-    fixed: true,
-    Cell: (row): React.Node => {
-      const url = `/kidList/detail/${row.original.id}`;
-      return <Link to={url}>{row.value}</Link>;
-    },
-  },
-  {
-    Header: '顧客名',
-    accessor: 'user_name',
-    fixed: true,
-    width: 300,
-  },
-  {
-    Header: 'サーバ',
-    accessor: 'server',
-  },
-  {
-    Header: 'ユーザーキー',
-    accessor: 'userkey',
-    width: 145,
-  },
-  {
-    Header: 'DBパスワード',
-    accessor: 'db_password',
-    width: 145,
-  },
-  {
-    Header: 'Fenicsキー',
-    accessor: 'fenics_key',
-  },
-  {
-    Header: 'ユーザ数(CitrixID数)',
-    accessor: 'client_number',
-    width: 175,
-  },
-  {
-    Header: 'クライアント数(FENICSID数)',
-    accessor: 'number_pc',
-    width: 235,
-  },
-  {
-    Header: 'ライセンス',
-    accessor: 'license',
-    width: 300,
-  },
-  {
-    Header: '端末id範囲',
-    accessor: 'range_id',
-  },
-  {
-    Header: '更新日',
-    accessor: 'update_on',
-    width: 120,
-  },
-  {
-    Header: 'SA販社名',
-    accessor: 'sa_company',
-  },
-  {
-    Header: 'SA担当者',
-    accessor: 'sa_name',
-  },
-  {
-    Header: 'SE販社名',
-    accessor: 'se_company',
-  },
-];
 
 function KidTable(props: PropsType): React.Node {
-  const { data } = props;
-  if (data.length === 0) { return null; }
+  const {
+    currentPage,
+    rows,
+    columns,
+    selections,
+    columnFilters,
+    onSelectionChange,
+    onCurrentPageChange,
+    onFiltersChange,
+    defaultColumnWidths,
+  } = props;
   return (
-    <ReactTableFixedColumns
-      data={data}
+    <Grid
+      rows={rows}
       columns={columns}
-      filterable
-      defaultFilterMethod={(filter, row) => (
-        row[filter.id] && String(row[filter.id]).indexOf(filter.value) !== -1
-      )}
-      defaultPageSize={30}
-      style={{
-        height: '100%',
-      }}
-      className="-striped -highlight"
-      previousText="前へ"
-      nextText="次へ"
-      pageText="ページ"
-      ofText="/"
-      showPageSizeOptions={false}
-    />
+      rootComponent={BorderGrid}
+    >
+      <FilteringState
+        filters={columnFilters}
+        onFiltersChange={onFiltersChange}
+      />
+      <SelectionState
+        selection={selections}
+        onSelectionChange={onSelectionChange}
+      />
+      <SortingState />
+      <PagingState
+        currentPage={currentPage}
+        pageSize={20}
+        onCurrentPageChange={onCurrentPageChange}
+      />
+
+      <IntegratedFiltering />
+      <IntegratedSelection />
+      <IntegratedSorting />
+      <IntegratedPaging />
+
+      <VirtualTable
+        cellComponent={KidTableCell}
+        rowComponent={KidTableRow}
+      />
+      <TableColumnResizing
+        defaultColumnWidths={defaultColumnWidths}
+      />
+      <TableHeaderRow showSortingControls />
+      <PagingPanel />
+      <TableFilterRow
+        rowHeight={40}
+        messages={{ filterPlaceholder: '...' }}
+      />
+      <TableSelection showSelectAll />
+      <TableFixedColumns
+        leftColumns={[
+          TableSelection.COLUMN_TYPE,
+          'is_marked',
+          'kid',
+          'user_name',
+        ]}
+      />
+    </Grid>
   );
 }
 
-const mapStateToProps = state => ({
-  data: searchUser(state.data.kids, state.userListPage.filter),
+const mapStateToProps = (state: StateType) => ({
+  currentPage: state.userListPage.currentPage,
+  selections: state.userListPage.selections,
+  columnFilters: state.userListPage.columnFilters,
+  rows: searchUser(state.data.kids, state.userListPage.filter),
+  columns: [
+    { title: '個別', name: 'is_marked' },
+    { title: 'KID', name: 'kid' },
+    { title: '顧客名', name: 'user_name' },
+    { title: 'サーバ', name: 'server' },
+    { title: 'ユーザーキー', name: 'userkey' },
+    { title: 'DBパスワード', name: 'db_password' },
+    { title: 'Fenicsキー', name: 'fenics_key' },
+    { title: 'ユーザ数(CitrixID数)', name: 'client_number' },
+    { title: 'クライアント数(FENICSID数)', name: 'number_pc' },
+    { title: 'ライセンス', name: 'license' },
+    { title: '端末id範囲', name: 'range_id' },
+    { title: '更新日', name: 'update_on' },
+    { title: 'SA販社名', name: 'sa_company' },
+    { title: 'SA担当者', name: 'sa_name' },
+    { title: 'SE販社名', name: 'se_company' },
+  ],
+  defaultColumnWidths: [
+    { width: 60, columnName: 'is_marked' },
+    { width: 85, columnName: 'kid' },
+    { width: 300, columnName: 'user_name' },
+    { width: 150, columnName: 'server' },
+    { width: 150, columnName: 'userkey' },
+    { width: 150, columnName: 'db_password' },
+    { width: 150, columnName: 'fenics_key' },
+    { width: 150, columnName: 'client_number' },
+    { width: 150, columnName: 'number_pc' },
+    { width: 150, columnName: 'license' },
+    { width: 150, columnName: 'range_id' },
+    { width: 150, columnName: 'update_on' },
+    { width: 150, columnName: 'sa_company' },
+    { width: 150, columnName: 'sa_name' },
+    { width: 150, columnName: 'se_company' },
+  ],
+});
+
+const mapDispatchToProps = dispatch => ({
+  onSelectionChange: selections => {
+    dispatch(selectUser(selections));
+  },
+  onCurrentPageChange: (page: number) => {
+    dispatch(changePage(page));
+  },
+  onFiltersChange: (
+    filters: Array<[{ columnName: string, value: string }]>
+  ) => {
+    dispatch(changeColumnFilters(filters));
+  },
 });
 
 export default connect(
   mapStateToProps,
+  mapDispatchToProps
 )(KidTable);
