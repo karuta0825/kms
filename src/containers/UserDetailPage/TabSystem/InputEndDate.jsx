@@ -1,6 +1,7 @@
 // @flow
 import * as React from 'react';
 import { connect } from 'react-redux';
+import moment from 'moment';
 import { changeValue } from './actions';
 import InputDate from '../../../components/InputDate';
 
@@ -11,14 +12,19 @@ type PropsType = {
   onChange: Event => void,
 };
 
+const fmtDate = (date: string | null): string =>
+  (date && moment(date).format('YYYY-MM-DD')) || '';
+
 function InputStartDate(props: PropsType): React.Node {
   return <InputDate {...props} />;
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state: StateType) => ({
   title: '解約日',
   isEdit: state.userDetailPage.baseInfoTab.isEdit,
-  value: state.userDetailPage.baseInfoTab.inputValues.end_on,
+  value: fmtDate(
+    state.userDetailPage.baseInfoTab.inputValues.end_on
+  ),
 });
 
 const mapDispatchToProps = dispatch => ({

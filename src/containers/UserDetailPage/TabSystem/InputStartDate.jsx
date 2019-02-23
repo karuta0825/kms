@@ -12,21 +12,20 @@ type PropsType = {
   onChange: Event => void,
 };
 
+const fmtDate = (date: string | null): string =>
+  (date && moment(date).format('YYYY-MM-DD')) || '';
+
 function InputStartDate(props: PropsType): React.Node {
   return <InputDate {...props} />;
 }
 
-const mapStateToProps = state => {
-  const date =
-    state.userDetailPage.baseInfoTab.inputValues.register_on;
-  const fmtDate =
-    (date && moment(date).format('YYYY-MM-DD')) || '';
-  return {
-    title: '受付日',
-    isEdit: state.userDetailPage.baseInfoTab.isEdit,
-    value: fmtDate,
-  };
-};
+const mapStateToProps = (state: StateType) => ({
+  title: '受付日',
+  isEdit: state.userDetailPage.baseInfoTab.isEdit,
+  value: fmtDate(
+    state.userDetailPage.baseInfoTab.inputValues.register_on
+  ),
+});
 
 const mapDispatchToProps = dispatch => ({
   onChange: e => {
