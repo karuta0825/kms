@@ -148,6 +148,8 @@ const initState: StateType = {
   },
   serverManagePage: {},
   serviceManagePage: {
+    editingRowIds: [],
+    deletingRowIds: [],
     selectedVersion: 'LM',
   },
   templateManagePage: {

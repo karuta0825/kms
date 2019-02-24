@@ -1,3 +1,5 @@
 declare type ServiceManagePageType = {
-  selectedIndex: number,
+  editingRowIds: Array<number>,
+  deletingRowIds: Array<number>,
+  selectedVersion: Version,
 };

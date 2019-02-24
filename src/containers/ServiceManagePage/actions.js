@@ -1,6 +1,20 @@
-import { SELECT_SERVICE_VERSION } from '../../constants/ActionTypes';
+import {
+  SELECT_SERVICE_VERSION,
+  EDIT_SERVICE,
+  DELETING_SERVICE,
+} from '../../constants/ActionTypes';
 
-export const selectVersion = (idx: number) => ({
+export const selectVersion = (version: string) => ({
   type: SELECT_SERVICE_VERSION,
-  payload: idx,
+  payload: version,
+});
+
+export const changeEditingRowIds = (ids: Array<number>) => ({
+  type: EDIT_SERVICE,
+  payload: ids,
+});
+
+export const changeDeletingRowIds = (ids: Array<number>) => ({
+  type: DELETING_SERVICE,
+  payload: ids,
 });

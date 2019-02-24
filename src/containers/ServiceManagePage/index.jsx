@@ -2,6 +2,8 @@
 import * as React from 'react';
 import styles from '../TemplateManagePage/css/index.css';
 import VersionList from './VersionList';
+import Editor from './Editor';
+import ModalDelete from './ModalDelete';
 
 export default function ServiceManagePage(): React.Node {
   return (
@@ -10,8 +12,9 @@ export default function ServiceManagePage(): React.Node {
         <VersionList />
       </div>
       <div className={styles.content}>
-        <span>右</span>
+        <Editor />
       </div>
+      <ModalDelete />
     </div>
   );
 }

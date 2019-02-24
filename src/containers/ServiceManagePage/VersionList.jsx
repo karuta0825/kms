@@ -8,8 +8,8 @@ import { selectVersion } from './actions';
 
 type PropsType = {
   versions: Array<string>,
-  selectedIndex: number,
-  onClick: number => void,
+  selectedVersion: string,
+  onClick: string => void,
 };
 
 function getVersions(
@@ -22,17 +22,17 @@ function getVersions(
 }
 
 function setClassName(
-  selectedIndex: number,
-  idx: number
+  selectedVersion: string,
+  version: string
 ): string {
-  if (selectedIndex === idx) {
+  if (selectedVersion === version) {
     return listStyles.selectedItem;
   }
   return listStyles.item;
 }
 
 function VersionList(props: PropsType): React.Node {
-  const { versions, selectedIndex, onClick } = props;
+  const { versions, selectedVersion, onClick } = props;
   return (
     <React.Fragment>
       <div className={listStyles.header}>
@@ -47,13 +47,16 @@ function VersionList(props: PropsType): React.Node {
       >
         <List style={{ padding: 0 }}>
           {versions.length > 0 &&
-            versions.map((version, idx) => (
+            versions.map(version => (
               <ListItem
-                className={setClassName(selectedIndex, idx)}
+                className={setClassName(
+                  selectedVersion,
+                  version
+                )}
                 button
                 key={version}
                 onClick={() => {
-                  onClick(idx);
+                  onClick(version);
                 }}
               >
                 {version}
@@ -67,7 +70,7 @@ function VersionList(props: PropsType): React.Node {
 
 const mapStateToProps = (state: StateType) => ({
   versions: getVersions(state.data.services),
-  selectedIndex: state.serviceManagePage.selectedIndex,
+  selectedVersion: state.serviceManagePage.selectedVersion,
 });
 
 const mapDispatchToProps = dispatch => ({
