@@ -63,6 +63,7 @@ function KidTable(props: PropsType): React.Node {
       rows={rows}
       columns={columns}
       rootComponent={BorderGrid}
+      getRowId={row => row.id}
     >
       <FilteringState
         filters={columnFilters}
@@ -73,16 +74,10 @@ function KidTable(props: PropsType): React.Node {
         onSelectionChange={onSelectionChange}
       />
       <SortingState />
-      <PagingState
-        currentPage={currentPage}
-        pageSize={20}
-        onCurrentPageChange={onCurrentPageChange}
-      />
 
       <IntegratedFiltering />
       <IntegratedSelection />
       <IntegratedSorting />
-      <IntegratedPaging />
 
       <VirtualTable
         cellComponent={KidTableCell}
@@ -92,7 +87,6 @@ function KidTable(props: PropsType): React.Node {
         defaultColumnWidths={defaultColumnWidths}
       />
       <TableHeaderRow showSortingControls />
-      <PagingPanel />
       <TableFilterRow
         rowHeight={40}
         messages={{ filterPlaceholder: '...' }}
