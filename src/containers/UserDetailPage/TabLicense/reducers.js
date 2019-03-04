@@ -4,19 +4,6 @@ import {
   SELECT_LICENSE,
 } from '../../../constants/ActionTypes';
 
-function getUsedNumber(
-  allLicense: Array<ServiceType>,
-  usedInfo: Object
-): Array<number> {
-  const usedServiceNames = Object.keys(usedInfo).filter(
-    key => usedInfo[key] === 1
-  );
-
-  return usedServiceNames.map(name =>
-    allLicense.findIndex(service => service.service_id === name)
-  );
-}
-
 const inputValues = (
   state: Object,
   action: Action,
@@ -52,7 +39,6 @@ const isEdit = (
 const selection = (
   state,
   action: Action,
-  data: LicenseType,
   inputData: Object
 ): Array<number> => {
   const { type, payload } = action;
@@ -62,7 +48,9 @@ const selection = (
     }
     case TOGGLE_EDIT_MODE: {
       if (payload) {
-        return getUsedNumber(data, inputData);
+        return Object.keys(inputData).filter(
+          key => inputData[key] === 1
+        );
       }
       return state;
     }
@@ -85,7 +73,6 @@ export default (
   selection: selection(
     state.selection,
     action,
-    data.services,
     state.inputValues
   ),
 });

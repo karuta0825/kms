@@ -43,11 +43,12 @@ function FenicsTable(props: PropsType): React.Node {
         rows={rows}
         columns={columns}
         rootComponent={BorderGrid}
+        getRowId={row => row.fenics_id}
       >
         <EditingState
           rowChanges={rowChanges}
           onRowChangesChange={onRowChangesChange}
-          editingRowIds={rows.map((row, idx) => idx)}
+          editingRowIds={rows.map(row => row.fenics_id)}
           columnExtensions={[
             { columnName: 'fenics_id', editingEnabled: false },
             { columnName: 'password', editingEnabled: false },
@@ -67,6 +68,7 @@ function FenicsTable(props: PropsType): React.Node {
         rows={rows}
         columns={columns}
         rootComponent={BorderGrid}
+        getRowId={row => row.fenics_id}
       >
         <SelectionState
           selection={selection}
@@ -105,7 +107,9 @@ const mapDispatchToProps = dispatch => ({
   onSelectionChange: selections => {
     dispatch(selectFenics(selections));
   },
-  onRowChangesChange: changeRowsInfo => {
+  onRowChangesChange: (changeRowsInfo: {
+    [id: number]: { [key: string]: any },
+  }) => {
     dispatch(updateRows(changeRowsInfo));
   },
 });

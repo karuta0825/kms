@@ -63,6 +63,7 @@ function TabLicense(props: PropsType): React.Node {
         rows={rows}
         columns={columns}
         rootComponent={BorderGrid}
+        getRowId={row => row.service_id}
       >
         <SelectionState
           selection={selection}

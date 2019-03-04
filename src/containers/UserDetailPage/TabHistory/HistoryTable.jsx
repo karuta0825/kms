@@ -40,6 +40,7 @@ function HistoryTable(props: PropsType): React.Node {
         rows={rows}
         columns={columns}
         rootComponent={BorderGrid}
+        getRowId={row => row.id}
       >
         <SelectionState
           selection={selection}

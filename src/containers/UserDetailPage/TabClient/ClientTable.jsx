@@ -43,11 +43,12 @@ function ClientTable(props: PropsType): React.Node {
         rows={rows}
         columns={columns}
         rootComponent={BorderGrid}
+        getRowId={row => row.client_id}
       >
         <EditingState
           rowChanges={rowChanges}
           onRowChangesChange={onRowChangesChange}
-          editingRowIds={rows.map((row, idx) => idx)}
+          editingRowIds={rows.map(row => row.client_id)}
           columnExtensions={[
             { columnName: 'client_id', editingEnabled: false },
             { columnName: 'client_pass', editingEnabled: false },
@@ -66,6 +67,7 @@ function ClientTable(props: PropsType): React.Node {
         rows={rows}
         columns={columns}
         rootComponent={BorderGrid}
+        getRowId={row => row.client_id}
       >
         <SelectionState
           selection={selection}

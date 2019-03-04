@@ -54,8 +54,9 @@ function ServiceTable(props: PropsType): React.Node {
       getRowId={row => row.id}
     >
       <EditingState
-        editingRowIds={editingRowIds}
-        onEditingRowIdsChange={onEditingRowIdsChange}
+        // editingRowIds={editingRowIds}
+        editingRowIds={[]}
+        // onEditingRowIdsChange={onEditingRowIdsChange}
         onCommitChanges={onCommitChanges}
       />
       <VirtualTable />
