@@ -6,6 +6,7 @@ import {
   SELECT_MEMO,
   CREATE_MEMO,
   FILTER_MEMO,
+  TOGGLE_MODAL,
 } from '../../../constants/ActionTypes';
 
 const memoFilter = (
@@ -27,8 +28,11 @@ const isModalOpen = (
 ): boolean => {
   const { type, payload } = action;
   switch (type) {
-    case TOGGLE_MEMO_MODAL:
-      return payload;
+    case TOGGLE_MODAL:
+      if (payload.name === 'memo') {
+        return payload.isOpen;
+      }
+      return state;
     case CREATE_MEMO:
       return true;
     default:

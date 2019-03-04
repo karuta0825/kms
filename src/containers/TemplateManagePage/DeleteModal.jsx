@@ -1,7 +1,7 @@
 // @flow
 import { connect } from 'react-redux';
 import DeleteModal from '../../components/DeleteModal';
-import { toggleDeleteModal } from './actions';
+import { toggleModal } from '../Common/actions';
 import { DELETE_MEMO_TEMPLATE } from '../../constants/ActionTypes';
 
 const mapStateToProps = (state: StateType) => ({
@@ -11,7 +11,7 @@ const mapStateToProps = (state: StateType) => ({
 
 const mapDispatchToProps = dispatch => ({
   onClickCancel: () => {
-    dispatch(toggleDeleteModal(false));
+    dispatch(toggleModal(false, 'memoTemplate'));
   },
   onClickDelete: () => {
     dispatch({ type: DELETE_MEMO_TEMPLATE });

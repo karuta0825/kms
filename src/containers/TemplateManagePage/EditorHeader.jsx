@@ -7,7 +7,7 @@ import SaveIcon from '@material-ui/icons/Save';
 import UpdateIcon from '@material-ui/icons/Loop';
 
 import styles from './css/editorHeader.css';
-import { toggleDeleteModal } from './actions';
+import { toggleModal } from '../Common/actions';
 import {
   POST_MEMO_TEMPLATE,
   PUT_MEMO_TEMPLATE,
@@ -80,7 +80,7 @@ const mapDispatchToProps = dispatch => ({
     dispatch({ type: POST_MEMO_TEMPLATE });
   },
   onClickDelete: () => {
-    dispatch(toggleDeleteModal(true));
+    dispatch(toggleModal(true, 'memoTemplate'));
   },
   onClickUpdate: () => {
     dispatch({ type: PUT_MEMO_TEMPLATE });

@@ -5,12 +5,12 @@ import { Button, DialogActions } from '@material-ui/core';
 import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import { toggleModal } from './actions';
 import InputTitle from './InputTitle';
 import SelectTemplate from './SelectTemplate';
 import InputMessage from './InputMessage';
 import RemainingChar from './RemainingChar';
 import SelectPriority from './SelectPriority';
+import { toggleModal } from '../../Common/actions';
 
 type PropsType = {
   title: string,
@@ -80,7 +80,7 @@ const mapStateToProps = (state: StateType) => ({
 const mapDispatchToProps = dispatch => ({
   onClickSave: () => {},
   onClickCancel: () => {
-    dispatch(toggleModal(false));
+    dispatch(toggleModal(false, 'memo'));
   },
   onClickUpdate: () => {},
   onClickDelete: () => {},

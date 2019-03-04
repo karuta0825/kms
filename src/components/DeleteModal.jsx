@@ -8,6 +8,7 @@ import { Button, DialogActions } from '@material-ui/core';
 type PropsType = {
   title: string,
   isOpen: boolean,
+  body: React.Node,
   onClickCancel: Event => void,
   onClickDelete: Event => void,
 };
@@ -15,12 +16,19 @@ type PropsType = {
 export default function DeleteModal(
   props: PropsType
 ): React.Node {
-  const { title, isOpen, onClickCancel, onClickDelete } = props;
+  const {
+    title,
+    isOpen,
+    body,
+    onClickCancel,
+    onClickDelete,
+  } = props;
   return (
     <Dialog open={isOpen} maxWidth="xs">
       <DialogTitle id="alert-dialog-title">{title}</DialogTitle>
       <DialogContent>
-        <span>削除してもよろしいですか?</span>
+        {body}
+        {!body && <span>削除してもよろしいですか?</span>}
       </DialogContent>
       <DialogActions>
         <Button onClick={onClickCancel} color="primary">

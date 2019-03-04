@@ -1,16 +1,10 @@
 import {
-  TOGGLE_MEMO_MODAL,
   CHANGE_MEMO_VALUE,
   SELECT_MEMO,
   CREATE_MEMO,
   FILTER_MEMO,
   SET_MEMO_TEMPLATE,
 } from '../../../constants/ActionTypes';
-
-export const toggleModal = (isOpen: boolean) => ({
-  type: TOGGLE_MEMO_MODAL,
-  payload: isOpen,
-});
 
 export const selectTemplate = (name: string) => ({
   type: SET_MEMO_TEMPLATE,

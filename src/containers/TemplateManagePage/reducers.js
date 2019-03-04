@@ -1,13 +1,4 @@
-import {
-  TOGGLE_NEW_MEMOTEMPLATE_MODE,
-  SELECT_MEMO_TEMPLATE,
-  CHANGE_MEMO_TEMPLATE_VALUE,
-  TOGGLE_TEMPLATE_DELETE_MODAL,
-  POST_MEMO_TEMPLATE,
-  SUCCESSED_POST_MEMO_TEMPLATE,
-  DELETE_MEMO_TEMPLATE,
-  PUT_MEMO_TEMPLATE,
-} from '../../constants/ActionTypes';
+import * as Types from '../../constants/ActionTypes';
 
 const selectedIndex = (
   state: number,
@@ -15,11 +6,11 @@ const selectedIndex = (
 ): number => {
   const { type, payload } = action;
   switch (type) {
-    case SELECT_MEMO_TEMPLATE:
+    case Types.SELECT_MEMO_TEMPLATE:
       return payload;
-    case TOGGLE_NEW_MEMOTEMPLATE_MODE:
+    case Types.TOGGLE_NEW_MEMOTEMPLATE_MODE:
       return payload ? -1 : 0;
-    case SUCCESSED_POST_MEMO_TEMPLATE:
+    case Types.SUCCESSED_POST_MEMO_TEMPLATE:
       return -1;
     default:
       return state;
@@ -29,11 +20,11 @@ const selectedIndex = (
 const isNewMode = (state: boolean, action: Action): boolean => {
   const { type, payload } = action;
   switch (type) {
-    case TOGGLE_NEW_MEMOTEMPLATE_MODE:
+    case Types.TOGGLE_NEW_MEMOTEMPLATE_MODE:
       return payload;
-    case SELECT_MEMO_TEMPLATE:
+    case Types.SELECT_MEMO_TEMPLATE:
       return false;
-    case SUCCESSED_POST_MEMO_TEMPLATE:
+    case Types.SUCCESSED_POST_MEMO_TEMPLATE:
       return true;
     default:
       return state;
@@ -46,9 +37,12 @@ const isOpenDeleteModal = (
 ): boolean => {
   const { type, payload } = action;
   switch (type) {
-    case TOGGLE_TEMPLATE_DELETE_MODAL:
-      return payload;
-    case DELETE_MEMO_TEMPLATE:
+    case Types.TOGGLE_MODAL:
+      if (payload.name === 'memoTemplate') {
+        return payload.isOpen;
+      }
+      return state;
+    case Types.DELETE_MEMO_TEMPLATE:
       return false;
     default:
       return state;
@@ -61,13 +55,13 @@ const isOpenUpdateModal = (
 ): boolean => {
   const { type, payload } = action;
   switch (type) {
-    case POST_MEMO_TEMPLATE:
+    case Types.POST_MEMO_TEMPLATE:
       return true;
-    case DELETE_MEMO_TEMPLATE:
+    case Types.DELETE_MEMO_TEMPLATE:
       return true;
-    case PUT_MEMO_TEMPLATE:
+    case Types.PUT_MEMO_TEMPLATE:
       return true;
-    case SUCCESSED_POST_MEMO_TEMPLATE:
+    case Types.SUCCESSED_POST_MEMO_TEMPLATE:
       return false;
     default:
       return state;
@@ -81,12 +75,12 @@ const inputValues = (
 ): Object => {
   const { type, payload } = action;
   switch (type) {
-    case SELECT_MEMO_TEMPLATE: {
+    case Types.SELECT_MEMO_TEMPLATE: {
       return cache.length > 1
         ? cache[payload]
         : { title: '', msg: '' };
     }
-    case CHANGE_MEMO_TEMPLATE_VALUE: {
+    case Types.CHANGE_MEMO_TEMPLATE_VALUE: {
       const obj = {};
       obj[payload.key] = payload.value;
       return {
@@ -94,9 +88,9 @@ const inputValues = (
         ...obj,
       };
     }
-    case TOGGLE_NEW_MEMOTEMPLATE_MODE:
+    case Types.TOGGLE_NEW_MEMOTEMPLATE_MODE:
       return payload ? { title: '', msg: '' } : state;
-    case SUCCESSED_POST_MEMO_TEMPLATE:
+    case Types.SUCCESSED_POST_MEMO_TEMPLATE:
       return { title: '', msg: '' };
     default:
       return state;
