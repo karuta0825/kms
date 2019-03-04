@@ -1,79 +1,87 @@
-// @flow
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { EditingState } from '@devexpress/dx-react-grid';
+import {
+  SelectionState,
+  IntegratedSelection,
+  EditingState,
+} from '@devexpress/dx-react-grid';
 import {
   Grid,
   VirtualTable,
   TableHeaderRow,
+  TableSelection,
   TableEditRow,
-  TableEditColumn,
 } from '@devexpress/dx-react-grid-material-ui';
 import BorderGrid from '../../components/BorderGrid';
-import EditCommand from './EditCommand';
-import {
-  changeEditingRowIds,
-  changeDeletingRowIds,
-} from './actions';
+import styles from './css/editor.css';
+import { selectService, updateRows } from './actions';
 
 type PropsType = {
+  isEdit: boolean,
   rows: Array<ServiceType>,
   columns: Array<{ name: string, title: string }>,
-  editingRowIds: Array<number>,
-  onEditingRowIdsChange: (Array<number>) => void,
-  onCommitChanges: ({
-    added?: Array<{
-      service_id: string,
-      service_name: string,
-      sales_id: string,
-    }>,
-    changed?: {
-      [key: number]: {
-        service_id?: string,
-        service_name?: string,
-        sales_id?: string,
-      },
-    },
-    deleted?: Array<number>,
-  }) => void,
+  rowChanges: ServiceType,
+  selection: Array<number>,
+  onSelectionChange: (Array<number>) => void,
+  onRowChangesChange: Object => void,
 };
 
-function ServiceTable(props: PropsType): React.Node {
+function ServiceTableNew(props: PropsType): React.Node {
   const {
+    isEdit,
     rows,
     columns,
-    editingRowIds,
-    onEditingRowIdsChange,
-    onCommitChanges,
+    selection,
+    rowChanges,
+    onSelectionChange,
+    onRowChangesChange,
   } = props;
+  if (isEdit) {
+    return (
+      <Grid
+        rows={rows}
+        columns={columns}
+        rootComponent={BorderGrid}
+        getRowId={row => row.id}
+      >
+        <EditingState
+          rowChanges={rowChanges}
+          editingRowIds={rows.map(row => row.id)}
+          onRowChangesChange={onRowChangesChange}
+        />
+        <VirtualTable />
+        <TableHeaderRow />
+        <TableEditRow />
+      </Grid>
+    );
+  }
   return (
-    <Grid
-      rows={rows}
-      columns={columns}
-      rootComponent={BorderGrid}
-      getRowId={row => row.id}
-    >
-      <EditingState
-        // editingRowIds={editingRowIds}
-        editingRowIds={[]}
-        // onEditingRowIdsChange={onEditingRowIdsChange}
-        onCommitChanges={onCommitChanges}
-      />
-      <VirtualTable />
-      <TableHeaderRow />
-      <TableEditRow />
-      <TableEditColumn
-        width={80}
-        showAddCommand
-        showEditCommand
-        showDeleteCommand
-        commandComponent={EditCommand}
-      />
-    </Grid>
+    <div className={styles.content}>
+      <Grid
+        rows={rows}
+        columns={columns}
+        rootComponent={BorderGrid}
+        getRowId={row => row.id}
+      >
+        <SelectionState
+          selection={selection}
+          onSelectionChange={onSelectionChange}
+        />
+        <IntegratedSelection />
+        <VirtualTable />
+        <TableHeaderRow />
+        <TableSelection
+          showSelectAll
+          highlightRow
+          selectByRowClick
+        />
+      </Grid>
+    </div>
   );
 }
 
 const mapStateToProps = (state: StateType) => ({
+  isEdit: state.serviceManagePage.isEdit,
   rows: state.data.services.filter(
     service =>
       service.version ===
@@ -85,28 +93,22 @@ const mapStateToProps = (state: StateType) => ({
     { name: 'service_name', title: 'サービス名' },
     { name: 'sales_id', title: '型名' },
   ],
-  editingRowIds: state.serviceManagePage.editingRowIds,
+  selection: state.serviceManagePage.selection,
+  rowChanges: state.serviceManagePage.rowChanges,
 });
 
 const mapDispatchToProps = dispatch => ({
-  onEditingRowIdsChange: rowIds => {
-    dispatch(changeEditingRowIds(rowIds));
+  onRowChangesChange: (changeRowsInfo: {
+    [id: number]: { [key: string]: any },
+  }) => {
+    dispatch(updateRows(changeRowsInfo));
   },
-  onCommitChanges: changes => {
-    const { added, changed, deleted } = changes;
-    if (added) {
-      console.log(added);
-    }
-    if (changed) {
-      console.log(changed);
-    }
-    if (deleted) {
-      dispatch(changeDeletingRowIds(deleted));
-    }
+  onSelectionChange: selection => {
+    dispatch(selectService(selection));
   },
 });
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(ServiceTable);
+)(ServiceTableNew);

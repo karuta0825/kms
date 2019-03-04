@@ -1,20 +1,26 @@
-import {
-  SELECT_SERVICE_VERSION,
-  EDIT_SERVICE,
-  DELETING_SERVICE,
-} from '../../constants/ActionTypes';
+import * as Types from '../../constants/ActionTypes';
 
 export const selectVersion = (version: string) => ({
-  type: SELECT_SERVICE_VERSION,
+  type: Types.SELECT_SERVICE_VERSION,
   payload: version,
 });
 
-export const changeEditingRowIds = (ids: Array<number>) => ({
-  type: EDIT_SERVICE,
-  payload: ids,
+export const toggleEditMode = (isEdit: boolean) => ({
+  type: Types.TOGGLE_SERVICE_EDIT_MODE,
+  payload: isEdit,
 });
 
-export const changeDeletingRowIds = (ids: Array<number>) => ({
-  type: DELETING_SERVICE,
-  payload: ids,
+export const selectService = (selection: Array<number>) => ({
+  type: Types.SELECT_SERVICE,
+  payload: selection,
+});
+
+export const updateRows = changeRowsInfo => ({
+  type: Types.CHANGE_SERVICE_VALUE,
+  payload: changeRowsInfo,
+});
+
+export const changeValues = (obj: { [key: string]: any }) => ({
+  type: Types.INPUT_SERVICE,
+  payload: obj,
 });

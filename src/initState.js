@@ -148,9 +148,17 @@ const initState: StateType = {
   },
   serverManagePage: {},
   serviceManagePage: {
-    editingRowIds: [],
-    deletingRowIds: [],
+    isEdit: false,
+    selection: [],
+    rowChanges: {},
     selectedVersion: 'LM',
+    isOpenDeleteModal: false,
+    isOpenNewModal: false,
+    inputValues: {
+      service_id: '',
+      service_name: '',
+      sales_id: '',
+    },
   },
   templateManagePage: {
     isNewMode: true,
