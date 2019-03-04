@@ -2,6 +2,10 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { Button } from '@material-ui/core';
+import DeleteIcon from '@material-ui/icons/Delete';
+import SaveIcon from '@material-ui/icons/Save';
+import UpdateIcon from '@material-ui/icons/Loop';
+
 import styles from './css/editorHeader.css';
 import { toggleDeleteModal } from './actions';
 import {
@@ -16,6 +20,12 @@ type PropsType = {
   onClickUpdate: Event => void,
 };
 
+const IconStyle = (isWhite: boolean) => ({
+  fontSize: '20px',
+  marginRight: '5px',
+  color: isWhite ? 'white' : 'rgba(0, 0, 0, 0.54)',
+});
+
 function EditorHeader(props: PropsType): React.Node {
   const {
     isNewMode,
@@ -26,17 +36,34 @@ function EditorHeader(props: PropsType): React.Node {
   return (
     <React.Fragment>
       {isNewMode && (
-        <Button className={styles.btn} onClick={onClickSave}>
+        <Button
+          variant="contained"
+          className={styles.btn}
+          onClick={onClickSave}
+        >
+          <SaveIcon style={IconStyle(false)} />
           保存
         </Button>
       )}
       {!isNewMode && (
-        <Button className={styles.btn} onClick={onClickUpdate}>
+        <Button
+          variant="contained"
+          className={styles.btn}
+          onClick={onClickUpdate}
+          color="primary"
+        >
+          <UpdateIcon style={IconStyle(true)} />
           更新
         </Button>
       )}
       {!isNewMode && (
-        <Button className={styles.btn} onClick={onClickDelete}>
+        <Button
+          variant="contained"
+          className={styles.btn}
+          onClick={onClickDelete}
+          color="secondary"
+        >
+          <DeleteIcon style={IconStyle(true)} />
           削除
         </Button>
       )}
