@@ -1,15 +1,18 @@
 // @flow
-import {
-  SUCCESSED_FETCH_KIDS,
-  FAILED_FETCH_KIDS,
-} from '../constants/ActionTypes';
+import * as Types from '../constants/ActionTypes';
 
-export default (state: Array<KidType>, action: Action): Array<KidType> => {
+export default (
+  state: Array<KidType>,
+  action: Action
+): Array<KidType> => {
   const { type, payload } = action;
   switch (type) {
-    case SUCCESSED_FETCH_KIDS:
-      return payload;
-    case FAILED_FETCH_KIDS:
+    case Types.SUCCESSED_HTTP_GET:
+      if (payload.key === 'kids') {
+        return payload.value;
+      }
+      return state;
+    case Types.FAILED_HTTP_GET:
       return state;
     default:
       return state;

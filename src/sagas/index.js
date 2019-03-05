@@ -1,44 +1,10 @@
 // @flow
 import { delay } from 'redux-saga';
-import {
-  takeEvery,
-  call,
-  put,
-  all,
-  select,
-} from 'redux-saga/effects';
-import {
-  POST_MAKE_USER,
-  POST_REGISTER_USER,
-  SUCCESSED_MAKE_USER,
-  SUCCESSED_REGISTER_USER,
-  SUCCESSED_FETCH_KIDS,
-  SUCCESSED_FETCH_ENVIRONMENTS,
-  SUCCESSED_FETCH_SERVERS,
-  SUCCESSED_FETCH_USERINFO,
-  FAILED_MAKE_USER,
-  FAILED_REGISTER_USER,
-  FAILED_FETCH_KIDS,
-  FAILED_FETCH_ENVIRONMENTS,
-  FAILED_FETCH_SERVERS,
-  FAILED_FETCH_USERINFO,
-  FETCH_KIDS,
-  FETCH_ENVIRONMENTS,
-  FETCH_SERVERS,
-  FETCH_USERINFO,
-  FAILED_FETCH_SERVICES,
-  SUCCESSED_FETCH_SERVICES,
-  FETCH_SERVICES,
-  SUCCESSED_FETCH_MEMOTEMPLATES,
-  FAILED_FETCH_MEMOTEMPLATES,
-  FETCH_MEMOTEMPLATES,
-  FAILED_POST_MEMO_TEMPLATE,
-  SUCCESSED_POST_MEMO_TEMPLATE,
-  POST_MEMO_TEMPLATE,
-  DELETE_MEMO_TEMPLATE,
-  PUT_MEMO_TEMPLATE,
-} from '../constants/ActionTypes';
-import Api from './Api';
+import { takeEvery, call, put, all } from 'redux-saga/effects';
+import * as Types from '../constants/ActionTypes';
+import * as Api from './Api';
+import http from './Api';
+import * as EndPoints from '../constants/EndPoints';
 
 function* makeUser(
   action: Action
@@ -46,11 +12,11 @@ function* makeUser(
   try {
     yield call(delay, 3000);
     yield put({
-      type: SUCCESSED_MAKE_USER,
+      type: Types.SUCCESSED_MAKE_USER,
       payload: 'KID88888',
     });
   } catch (e) {
-    yield put({ type: FAILED_MAKE_USER, e });
+    yield put({ type: Types.FAILED_MAKE_USER, e });
   }
 }
 
@@ -59,151 +25,95 @@ function* registerUser(
 ): Generator<Object, void, { done: boolean, value: any }> {
   try {
     yield call(delay, 3000);
-    yield put({ type: SUCCESSED_REGISTER_USER });
+    yield put({ type: Types.SUCCESSED_REGISTER_USER });
   } catch (e) {
-    yield put({ type: FAILED_REGISTER_USER });
+    yield put({ type: Types.FAILED_REGISTER_USER });
   }
 }
 
-function* fetchKids(
+function* httpGet(
   action: Action
 ): Generator<Object, void, { done: boolean, value: any }> {
-  const { payload } = action;
+  const { key, options } = action.payload;
   try {
-    const data = yield call(Api.fetchKidsById, payload);
-    yield put({ type: SUCCESSED_FETCH_KIDS, payload: data });
-  } catch (e) {
-    yield put({ type: FAILED_FETCH_KIDS, payload: e });
-  }
-}
-
-function* fetchServer(): Generator<
-  Object,
-  void,
-  { done: boolean, value: any }
-> {
-  try {
-    const data = yield call(Api.fetchServer);
-    yield put({ type: SUCCESSED_FETCH_SERVERS, payload: data });
-  } catch (e) {
-    yield put({ type: FAILED_FETCH_SERVERS, payload: e });
-  }
-}
-
-function* fetchService(): Generator<
-  Object,
-  void,
-  { done: boolean, value: any }
-> {
-  try {
-    const data = yield call(Api.fetchService);
-    yield put({ type: SUCCESSED_FETCH_SERVICES, payload: data });
-  } catch (e) {
-    yield put({ type: FAILED_FETCH_SERVICES, payload: e });
-  }
-}
-
-function* fetchEnvironment(): Generator<
-  Object,
-  void,
-  { done: boolean, value: any }
-> {
-  try {
-    const data = yield call(Api.fetchEnvironment);
+    const data = yield call(http, { method: 'GET', ...options });
     yield put({
-      type: SUCCESSED_FETCH_ENVIRONMENTS,
-      payload: data,
-    });
-  } catch (e) {
-    yield put({ type: FAILED_FETCH_ENVIRONMENTS, payload: e });
-  }
-}
-
-function* fetchMemoTemplate(): Generator<
-  Object,
-  void,
-  { done: boolean, value: any }
-> {
-  try {
-    const data = yield call(Api.fetchMemoTemplate);
-    yield put({
-      type: SUCCESSED_FETCH_MEMOTEMPLATES,
-      payload: data,
-    });
-  } catch (e) {
-    yield put({ type: FAILED_FETCH_MEMOTEMPLATES, payload: e });
-  }
-}
-
-function* makeMemoTemplate(): Generator<
-  Object,
-  void,
-  { done: boolean, value: any }
-> {
-  try {
-    const store = yield select();
-    yield call(
-      Api.makeMemoTemplate,
-      store.templateManagePage.inputValues
-    );
-    const result = yield call(Api.fetchMemoTemplate);
-    yield put({
-      type: SUCCESSED_POST_MEMO_TEMPLATE,
-      payload: result,
+      type: Types.SUCCESSED_HTTP_GET,
+      payload: { key, value: data },
     });
   } catch (e) {
     yield put({
-      type: FAILED_POST_MEMO_TEMPLATE,
+      type: Types.FAILED_HTTP_GET,
       payload: e,
     });
   }
 }
 
-function* deleteMemoTemplate(): Generator<
-  Object,
-  void,
-  { done: boolean, value: any }
-> {
+function* httpPost(
+  action: Action
+): Generator<Object, void, { done: boolean, value: any }> {
   try {
-    const id = yield select(
-      (state: StateType) =>
-        state.templateManagePage.inputValues.id
-    );
-    yield call(Api.deleteMemoTemplate, id);
-    const result = yield call(Api.fetchMemoTemplate);
+    const { key, options } = action.payload;
+    yield call(http, { method: 'POST', ...options });
+    const result = yield call(http, {
+      method: 'GET',
+      endpoint: EndPoints[key].GET(),
+    });
     yield put({
-      type: SUCCESSED_POST_MEMO_TEMPLATE,
-      payload: result,
+      type: Types.SUCCESSED_HTTP_POST,
+      payload: { key, value: result },
     });
   } catch (e) {
     yield put({
-      type: FAILED_POST_MEMO_TEMPLATE,
+      type: Types.FAILED_HTTP_POST,
       payload: e,
     });
   }
 }
 
-function* updateMemoTemplate(): Generator<
+function* httpDelete(
+  action: Action
+): Generator<Object, void, { done: boolean, value: any }> {
+  try {
+    const { key, options } = action.payload;
+    yield call(http, { method: 'DELETE', ...options });
+    const result = yield call(http, {
+      method: 'GET',
+      endpoint: EndPoints[key].GET(),
+    });
+    yield put({
+      type: Types.SUCCESSED_HTTP_DELETE,
+      payload: { key, value: result },
+    });
+  } catch (e) {
+    yield put({
+      type: Types.FAILED_HTTP_DELETE,
+      payload: e,
+    });
+  }
+}
+
+function* httpPut(
+  action: Action
+): Generator<
   Object,
   void,
   { done: boolean, [key: string]: any }
 > {
   try {
-    const { id, title, msg } = yield select(
-      (state: StateType) => state.templateManagePage.inputValues
-    );
-    yield call(Api.updateMemoTemplate, id, {
-      title,
-      msg,
+    const { key, options } = action.payload;
+    yield call(http, { method: 'PUT', ...options });
+    const result = yield call(http, {
+      method: 'GET',
+      endpoint: EndPoints[key].GET(),
     });
-    const result = yield call(Api.fetchMemoTemplate);
     yield put({
-      type: SUCCESSED_POST_MEMO_TEMPLATE,
-      payload: result,
+      type: Types.SUCCESSED_HTTP_PUT,
+      payload: { key, value: result },
     });
   } catch (e) {
     yield put({
-      type: FAILED_POST_MEMO_TEMPLATE,
+      type: Types.FAILED_HTTP_PUT,
       payload: e,
     });
   }
@@ -238,7 +148,7 @@ function* fetchUserInfoById(
       call(Api.fetchMemoById, payload),
     ]);
     yield put({
-      type: SUCCESSED_FETCH_USERINFO,
+      type: Types.SUCCESSED_FETCH_USERINFO,
       payload: {
         baseInfo,
         customer,
@@ -253,7 +163,7 @@ function* fetchUserInfoById(
       },
     });
   } catch (e) {
-    yield put({ type: FAILED_FETCH_USERINFO, payload: e });
+    yield put({ type: Types.FAILED_FETCH_USERINFO, payload: e });
   }
 }
 
@@ -262,15 +172,11 @@ export default function* rootSage(): Generator<
   void,
   { done: boolean, value: any }
 > {
-  yield takeEvery(POST_MAKE_USER, makeUser);
-  yield takeEvery(POST_REGISTER_USER, registerUser);
-  yield takeEvery(FETCH_KIDS, fetchKids);
-  yield takeEvery(FETCH_SERVERS, fetchServer);
-  yield takeEvery(FETCH_SERVICES, fetchService);
-  yield takeEvery(FETCH_ENVIRONMENTS, fetchEnvironment);
-  yield takeEvery(FETCH_USERINFO, fetchUserInfoById);
-  yield takeEvery(FETCH_MEMOTEMPLATES, fetchMemoTemplate);
-  yield takeEvery(POST_MEMO_TEMPLATE, makeMemoTemplate);
-  yield takeEvery(DELETE_MEMO_TEMPLATE, deleteMemoTemplate);
-  yield takeEvery(PUT_MEMO_TEMPLATE, updateMemoTemplate);
+  yield takeEvery(Types.POST_MAKE_USER, makeUser);
+  yield takeEvery(Types.POST_REGISTER_USER, registerUser);
+  yield takeEvery(Types.FETCH_USERINFO, fetchUserInfoById);
+  yield takeEvery(Types.HTTP_GET, httpGet);
+  yield takeEvery(Types.HTTP_POST, httpPost);
+  yield takeEvery(Types.HTTP_DELETE, httpDelete);
+  yield takeEvery(Types.HTTP_PUT, httpPut);
 }

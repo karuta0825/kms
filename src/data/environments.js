@@ -1,18 +1,20 @@
 // @flow
-import type { EnvironemntType } from '../types';
-import {
-  SUCCESSED_FETCH_ENVIRONMENTS,
-  FAILED_FETCH_ENVIRONMENTS,
-} from '../constants/ActionTypes';
+import * as Types from '../constants/ActionTypes';
 
-export default (state: Array<EnvironemntType>, action) => {
+export default (
+  state: Array<EnvironmentType>,
+  action: Action
+): Array<EnvironmentType> => {
   const { type, payload } = action;
   switch (type) {
-    case SUCCESSED_FETCH_ENVIRONMENTS:
-      return payload;
-    case FAILED_FETCH_ENVIRONMENTS:
+    case Types.SUCCESSED_HTTP_GET:
+      if (payload.key === 'environments') {
+        return payload.value;
+      }
+      return state;
+    case Types.FAILED_HTTP_GET:
       return state;
     default:
       return state;
   }
-}
+};

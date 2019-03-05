@@ -5,6 +5,11 @@ const isEdit = (state: boolean, action: Action): boolean => {
   switch (type) {
     case Types.TOGGLE_SERVICE_EDIT_MODE:
       return payload;
+    case Types.SUCCESSED_HTTP_PUT:
+      if (payload.key === 'services') {
+        return false;
+      }
+      return state;
     default:
       return state;
   }
@@ -59,6 +64,11 @@ const isOpenDeleteModal = (
     case Types.TOGGLE_MODAL:
       if (payload.name === 'service') {
         return payload.isOpen;
+      }
+      return state;
+    case Types.SUCCESSED_HTTP_DELETE:
+      if (payload.key === 'services') {
+        return false;
       }
       return state;
     default:

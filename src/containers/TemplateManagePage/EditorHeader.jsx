@@ -8,10 +8,7 @@ import UpdateIcon from '@material-ui/icons/Loop';
 
 import styles from './css/editorHeader.css';
 import { toggleModal } from '../Common/actions';
-import {
-  POST_MEMO_TEMPLATE,
-  PUT_MEMO_TEMPLATE,
-} from '../../constants/ActionTypes';
+import * as Types from '../../constants/ActionTypes';
 
 type PropsType = {
   isNewMode: boolean,
@@ -71,23 +68,48 @@ function EditorHeader(props: PropsType): React.Node {
   );
 }
 
-const mapStateToProps = (state: StateType) => ({
-  isNewMode: state.templateManagePage.isNewMode,
-});
+const mapStateToProps = (state: StateType) => state;
+const mapDispatchToProps = dispatch => ({ dispatch });
 
-const mapDispatchToProps = dispatch => ({
+const mergeProps = (state, { dispatch }) => ({
+  isNewMode: state.templateManagePage.isNewMode,
   onClickSave: () => {
-    dispatch({ type: POST_MEMO_TEMPLATE });
+    const { inputValues } = state.templateManagePage;
+    dispatch({
+      type: Types.HTTP_POST,
+      payload: {
+        key: 'memoTemplates',
+        options: {
+          endpoint: `/api/v1/memoTemplates`,
+          body: inputValues,
+        },
+      },
+    });
   },
   onClickDelete: () => {
     dispatch(toggleModal(true, 'memoTemplate'));
   },
   onClickUpdate: () => {
-    dispatch({ type: PUT_MEMO_TEMPLATE });
+    const {
+      id,
+      title,
+      msg,
+    } = state.templateManagePage.inputValues;
+    dispatch({
+      type: Types.HTTP_PUT,
+      payload: {
+        key: 'memoTemplates',
+        options: {
+          endpoint: `/api/v1/memoTemplates/${id}`,
+          body: { title, msg },
+        },
+      },
+    });
   },
 });
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
+  mergeProps
 )(EditorHeader);

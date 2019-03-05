@@ -4,13 +4,7 @@ import createSagaMiddleware from 'redux-saga';
 import reducers from './reducers';
 import initState from './initState';
 import rootSaga from './sagas';
-import {
-  FETCH_KIDS,
-  FETCH_SERVERS,
-  FETCH_ENVIRONMENTS,
-  FETCH_SERVICES,
-  FETCH_MEMOTEMPLATES,
-} from './constants/ActionTypes';
+import * as Types from './constants/ActionTypes';
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -24,10 +18,50 @@ store.subscribe(() => console.log(store.getState()));
 
 sagaMiddleware.run(rootSaga);
 
-store.dispatch({ type: FETCH_KIDS });
-store.dispatch({ type: FETCH_SERVERS });
-store.dispatch({ type: FETCH_ENVIRONMENTS });
-store.dispatch({ type: FETCH_SERVICES });
-store.dispatch({ type: FETCH_MEMOTEMPLATES });
+store.dispatch({
+  type: Types.HTTP_GET,
+  payload: {
+    key: 'kids',
+    options: {
+      endpoint: `/api/v1/kids/id`,
+    },
+  },
+});
+store.dispatch({
+  type: Types.HTTP_GET,
+  payload: {
+    key: 'servers',
+    options: {
+      endpoint: `/api/v1/servers`,
+    },
+  },
+});
+store.dispatch({
+  type: Types.HTTP_GET,
+  payload: {
+    key: 'environments',
+    options: {
+      endpoint: `/api/v1/environments`,
+    },
+  },
+});
+store.dispatch({
+  type: Types.HTTP_GET,
+  payload: {
+    key: 'services',
+    options: {
+      endpoint: `/api/v1/services`,
+    },
+  },
+});
+store.dispatch({
+  type: Types.HTTP_GET,
+  payload: {
+    key: 'memoTemplates',
+    options: {
+      endpoint: `/api/v1/memoTemplates`,
+    },
+  },
+});
 
 export default store;

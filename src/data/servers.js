@@ -1,18 +1,23 @@
 // @flow
-import {
-  SUCCESSED_FETCH_SERVERS,
-  FAILED_FETCH_SERVERS,
-} from '../constants/ActionTypes';
+import * as Types from '../constants/ActionTypes';
 
 export default (
   state: Array<ServerType>,
-  action
+  action: Action
 ): Array<ServerType> => {
   const { type, payload } = action;
   switch (type) {
-    case SUCCESSED_FETCH_SERVERS:
-      return payload;
-    case FAILED_FETCH_SERVERS:
+    case Types.SUCCESSED_HTTP_GET:
+      if (payload.key === 'servers') {
+        return payload.value;
+      }
+      return state;
+    case Types.SUCCESSED_HTTP_PUT:
+      if (payload.key === 'servers') {
+        return payload.value;
+      }
+      return state;
+    case Types.FAILED_HTTP_GET:
       return state;
     default:
       return state;

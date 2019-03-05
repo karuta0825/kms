@@ -2,23 +2,34 @@
 import { connect } from 'react-redux';
 import DeleteModal from '../../components/DeleteModal';
 import { toggleModal } from '../Common/actions';
-import { DELETE_MEMO_TEMPLATE } from '../../constants/ActionTypes';
+import * as Types from '../../constants/ActionTypes';
 
-const mapStateToProps = (state: StateType) => ({
+const mapStateToProps = (state: StateType) => state;
+
+const mapDispatchToProps = dispatch => ({ dispatch });
+
+const mergeProps = (state: StateType, { dispatch }) => ({
   title: 'メモテンプレートの削除',
   isOpen: state.templateManagePage.isOpenDeleteModal,
-});
-
-const mapDispatchToProps = dispatch => ({
   onClickCancel: () => {
     dispatch(toggleModal(false, 'memoTemplate'));
   },
   onClickDelete: () => {
-    dispatch({ type: DELETE_MEMO_TEMPLATE });
+    const { id } = state.templateManagePage.inputValues;
+    dispatch({
+      type: Types.HTTP_DELETE,
+      payload: {
+        key: 'memoTemplates',
+        options: {
+          endpoint: `/api/v1/memoTemplates/${id}`,
+        },
+      },
+    });
   },
 });
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
+  mergeProps
 )(DeleteModal);

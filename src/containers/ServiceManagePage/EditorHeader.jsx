@@ -5,6 +5,7 @@ import { Button } from '@material-ui/core';
 import { toggleEditMode } from './actions';
 import { toggleModal } from '../Common/actions';
 import styles from './css/editor.css';
+import * as Types from '../../constants/ActionTypes';
 
 type PropsType = {
   isEdit: boolean,
@@ -83,16 +84,28 @@ function EditorHeader(props: PropsType): React.Node {
   );
 }
 
-const mapStateToProps = (state: StateType) => ({
+const mapStateToProps = (state: StateType) => state;
+
+const mapDispatchToProps = dispatch => ({ dispatch });
+
+const mergeProps = (state, { dispatch }) => ({
   isEdit: state.serviceManagePage.isEdit,
   selection: state.serviceManagePage.selection,
-});
-
-const mapDispatchToProps = dispatch => ({
   onClickAdd: () => {
     dispatch(toggleModal(true, 'create-service'));
   },
-  onClickSave: () => {},
+  onClickSave: () => {
+    dispatch({
+      type: Types.HTTP_PUT,
+      payload: {
+        key: 'services',
+        options: {
+          endpoint: '/api/v1/services',
+          body: state.serviceManagePage.rowChanges,
+        },
+      },
+    });
+  },
   onClickDelete: () => {
     dispatch(toggleModal(true, 'service'));
   },
@@ -106,5 +119,6 @@ const mapDispatchToProps = dispatch => ({
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
+  mergeProps
 )(EditorHeader);

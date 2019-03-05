@@ -10,8 +10,11 @@ const selectedIndex = (
       return payload;
     case Types.TOGGLE_NEW_MEMOTEMPLATE_MODE:
       return payload ? -1 : 0;
-    case Types.SUCCESSED_POST_MEMO_TEMPLATE:
-      return -1;
+    case Types.SUCCESSED_HTTP_DELETE:
+      if (payload.key === 'memoTemplates') {
+        return -1;
+      }
+      return state;
     default:
       return state;
   }
@@ -24,8 +27,11 @@ const isNewMode = (state: boolean, action: Action): boolean => {
       return payload;
     case Types.SELECT_MEMO_TEMPLATE:
       return false;
-    case Types.SUCCESSED_POST_MEMO_TEMPLATE:
-      return true;
+    case Types.SUCCESSED_HTTP_DELETE:
+      if (payload.key === 'memoTemplates') {
+        return true;
+      }
+      return state;
     default:
       return state;
   }
@@ -42,7 +48,7 @@ const isOpenDeleteModal = (
         return payload.isOpen;
       }
       return state;
-    case Types.DELETE_MEMO_TEMPLATE:
+    case Types.HTTP_DELETE:
       return false;
     default:
       return state;
@@ -55,14 +61,36 @@ const isOpenUpdateModal = (
 ): boolean => {
   const { type, payload } = action;
   switch (type) {
-    case Types.POST_MEMO_TEMPLATE:
-      return true;
-    case Types.DELETE_MEMO_TEMPLATE:
-      return true;
-    case Types.PUT_MEMO_TEMPLATE:
-      return true;
-    case Types.SUCCESSED_POST_MEMO_TEMPLATE:
-      return false;
+    case Types.HTTP_POST:
+      if (payload.key === 'memoTemplates') {
+        return true;
+      }
+      return state;
+    case Types.SUCCESSED_HTTP_POST:
+      if (payload.key === 'memoTemplates') {
+        return false;
+      }
+      return state;
+    case Types.HTTP_DELETE:
+      if (payload.key === 'memoTemplates') {
+        return true;
+      }
+      return state;
+    case Types.SUCCESSED_HTTP_DELETE:
+      if (payload.key === 'memoTemplates') {
+        return false;
+      }
+      return state;
+    case Types.HTTP_PUT:
+      if (payload.key === 'memoTemplates') {
+        return true;
+      }
+      return state;
+    case Types.SUCCESSED_HTTP_PUT:
+      if (payload.key === 'memoTemplates') {
+        return false;
+      }
+      return state;
     default:
       return state;
   }
@@ -90,8 +118,16 @@ const inputValues = (
     }
     case Types.TOGGLE_NEW_MEMOTEMPLATE_MODE:
       return payload ? { title: '', msg: '' } : state;
-    case Types.SUCCESSED_POST_MEMO_TEMPLATE:
-      return { title: '', msg: '' };
+    case Types.SUCCESSED_HTTP_POST:
+      if (payload.key === 'memoTemplates') {
+        return { title: '', msg: '' };
+      }
+      return state;
+    case Types.SUCCESSED_HTTP_DELETE:
+      if (payload.key === 'memoTemplates') {
+        return { title: '', msg: '' };
+      }
+      return state;
     default:
       return state;
   }

@@ -1,8 +1,4 @@
-import {
-  SUCCESSED_FETCH_MEMOTEMPLATES,
-  FAILED_FETCH_MEMOTEMPLATES,
-  SUCCESSED_POST_MEMO_TEMPLATE,
-} from '../constants/ActionTypes';
+import * as Types from '../constants/ActionTypes';
 
 export default (
   state: Array<MemoTemplateType>,
@@ -10,11 +6,27 @@ export default (
 ): Array<MemoTemplateType> => {
   const { type, payload } = action;
   switch (type) {
-    case SUCCESSED_FETCH_MEMOTEMPLATES:
-      return payload;
-    case SUCCESSED_POST_MEMO_TEMPLATE:
-      return payload;
-    case FAILED_FETCH_MEMOTEMPLATES:
+    case Types.SUCCESSED_HTTP_GET:
+      if (payload.key === 'memoTemplates') {
+        return payload.value;
+      }
+      return state;
+    case Types.SUCCESSED_HTTP_PUT:
+      if (payload.key === 'memoTemplates') {
+        return payload.value;
+      }
+      return state;
+    case Types.SUCCESSED_HTTP_DELETE:
+      if (payload.key === 'memoTemplates') {
+        return payload.value;
+      }
+      return state;
+    case Types.SUCCESSED_HTTP_POST:
+      if (payload.key === 'memoTemplates') {
+        return payload.value;
+      }
+      return state;
+    case Types.FAILED_HTTP_GET:
       return state;
     default:
       return state;
