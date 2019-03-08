@@ -1,8 +1,3 @@
-export * from './Http/get';
-export * from './Http/put';
-export * from './Http/post';
-export * from './Http/delete';
-
 const host = 'http://localhost:8080';
 
 const makeUrl = (endpoint: string) => `${host}${endpoint}`;
@@ -42,13 +37,15 @@ export default function http({
   body: Object,
 }): Promise<any> {
   return fetch(makeUrl(endpoint), makeOption(method, headers, body))
-    .then(r => {
-      if (!r.ok) {
-        return r.json().then(err => {
-          throw err.toString();
-        });
+    .then(
+      (r): Response => {
+        if (!r.ok) {
+          return r.json().then(err => {
+            throw err.toString();
+          });
+        }
+        return r;
       }
-      return r;
-    })
+    )
     .then(r => r.json());
 }
