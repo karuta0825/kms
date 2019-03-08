@@ -1,8 +1,4 @@
-import {
-  TOGGLE_EDIT_MODE,
-  SUCCESSED_FETCH_USERINFO,
-  SELECT_LICENSE,
-} from '../../../constants/ActionTypes';
+import * as Types from '../../../constants/ActionTypes';
 
 const inputValues = (
   state: Object,
@@ -11,7 +7,7 @@ const inputValues = (
 ): Object => {
   const { type, payload } = action;
   switch (type) {
-    case SUCCESSED_FETCH_USERINFO: {
+    case Types.SUCCESSED_FETCH_USERINFO: {
       return payload.license[0];
     }
     default:
@@ -19,18 +15,16 @@ const inputValues = (
   }
 };
 
-const isEdit = (
-  state: boolean,
-  action,
-  tabName: string
-): boolean => {
+const isEdit = (state: boolean, action, tabName: string): boolean => {
   const { type, payload } = action;
   switch (type) {
-    case TOGGLE_EDIT_MODE:
+    case Types.TOGGLE_EDIT_MODE:
       if (payload.tabName === tabName) {
         return payload.isEdit;
       }
       return state;
+    case Types.HTTP_PUT_LICENSES:
+      return false;
     default:
       return state;
   }
@@ -43,10 +37,10 @@ const selection = (
 ): Array<number> => {
   const { type, payload } = action;
   switch (type) {
-    case SELECT_LICENSE: {
+    case Types.SELECT_LICENSE: {
       return payload;
     }
-    case TOGGLE_EDIT_MODE: {
+    case Types.TOGGLE_EDIT_MODE: {
       if (payload) {
         return Object.keys(inputData).filter(
           key => inputData[key] === 1
@@ -54,6 +48,8 @@ const selection = (
       }
       return state;
     }
+    case Types.HTTP_PUT_LICENSES:
+      return [];
     default:
       return state;
   }
@@ -65,14 +61,6 @@ export default (
   data: CombineDataType
 ): UserDetailTabLicenseType => ({
   isEdit: isEdit(state.isEdit, action, 'LICENSE'),
-  inputValues: inputValues(
-    state.inputValues,
-    action,
-    data.license
-  ),
-  selection: selection(
-    state.selection,
-    action,
-    state.inputValues
-  ),
+  inputValues: inputValues(state.inputValues, action, data.license),
+  selection: selection(state.selection, action, state.inputValues),
 });
