@@ -1,5 +1,9 @@
 // @flow
-import { location, header } from './containers/Common/reducers';
+import {
+  location,
+  header,
+  dialog,
+} from './containers/Common/reducers';
 import userRegisterPage from './containers/UserRegisterPage/reducers';
 import userMakePage from './containers/UserMakePage/reducers';
 import userListPage from './containers/UserListPage/reducers';
@@ -19,6 +23,7 @@ const reducers = (
     state.userRegisterPage,
     action
   ),
+  dialog: dialog(state.dialog, action),
   userMakePage: userMakePage(state.userMakePage, action),
   userListPage: userListPage(state.userListPage, action),
   userDetailPage: userDetailPage(

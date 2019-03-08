@@ -3,6 +3,11 @@ declare type StateType = {
   header: {
     title: string,
   },
+  dialog: {
+    title: string,
+    msg: string,
+    isOpen: boolean,
+  },
   topPage: TopPageType,
   userMakePage: UserMakePageType,
   userRegisterPage: UserRegisterPageType,

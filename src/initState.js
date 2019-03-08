@@ -4,6 +4,11 @@ const initState: StateType = {
   header: {
     title: 'ホーム',
   },
+  dialog: {
+    title: 'メッセージ',
+    isOpen: false,
+    msg: '',
+  },
   topPage: {},
   userMakePage: {
     showVersion: false,

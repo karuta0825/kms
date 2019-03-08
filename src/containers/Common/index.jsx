@@ -17,8 +17,9 @@ import Home from '../TopPage';
 import Server from '../ServerManagePage';
 import Template from '../TemplateManagePage';
 import Service from '../ServiceManagePage';
+import AlertModal from './AlertModal';
 
-export default function Frame(props): React.Node {
+export default function Frame(): React.Node {
   return (
     <Router>
       <div className={styles.wrapper}>
@@ -47,6 +48,7 @@ export default function Frame(props): React.Node {
             <Route path="/setting/service" component={Service} />
           </Switch>
         </main>
+        <AlertModal />
       </div>
     </Router>
   );
