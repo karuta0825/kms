@@ -26,10 +26,7 @@ function filterItems(
   filter: string
 ): Array<HistoryType> {
   if (filter === '') return historys;
-
-  return historys.filter(
-    history => history.item_name === filter
-  );
+  return historys.filter(history => history.item_name === filter);
 }
 
 function HistoryTable(props: PropsType): React.Node {
@@ -49,11 +46,7 @@ function HistoryTable(props: PropsType): React.Node {
         <IntegratedSelection />
         <VirtualTable height="auto" />
         <TableHeaderRow />
-        <TableSelection
-          showSelectAll
-          highlightRow
-          selectByRowClick
-        />
+        <TableSelection showSelectAll highlightRow selectByRowClick />
       </Grid>
     </div>
   );

@@ -13,6 +13,9 @@ type PropsType = {
 function getUniqueOptions(
   historys: Array<HistoryType>
 ): Array<string> {
+  if (!historys) {
+    return [];
+  }
   const options = historys.map(history => history.item_name);
   return options.filter(
     (value, idx, list) => list.indexOf(value) === idx
@@ -23,11 +26,7 @@ function FilterItem(props: PropsType): React.Node {
   const { value, options, onChange } = props;
   return (
     <FormControl style={{ position: 'absolute', left: '0px' }}>
-      <NativeSelect
-        value={value}
-        onChange={onChange}
-        name="history"
-      >
+      <NativeSelect value={value} onChange={onChange} name="history">
         <option value="">全て</option>
         {options &&
           options.map(opt => <option value={opt}>{opt}</option>)}

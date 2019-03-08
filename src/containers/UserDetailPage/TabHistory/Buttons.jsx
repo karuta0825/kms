@@ -6,20 +6,29 @@ import { toggleDeleteModal } from './actions';
 import FilterItem from './FilterItem';
 
 type PropsType = {
+  selection: Array<number>,
   onClick: Event => void,
 };
 
 function Buttons(props: PropsType): React.Node {
-  const { onClick } = props;
+  const { onClick, selection } = props;
   return (
     <React.Fragment>
       <FilterItem />
-      <Button variant="contained" onClick={onClick}>
+      <Button
+        variant="contained"
+        onClick={onClick}
+        disabled={selection.length < 1}
+      >
         削除
       </Button>
     </React.Fragment>
   );
 }
+
+const mapStateToProps = (state: StateType) => ({
+  selection: state.userDetailPage.historyTab.selection,
+});
 
 const mapDispatchToProps = dispatch => ({
   onClick: () => {
@@ -28,6 +37,6 @@ const mapDispatchToProps = dispatch => ({
 });
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(Buttons);

@@ -1,10 +1,5 @@
 // @flow
-import {
-  SUCCESSED_FETCH_USERINFO,
-  SELECT_HISTORY,
-  TOGGLE_DELETE_MODAL,
-  FILTER_HISTORY,
-} from '../../../constants/ActionTypes';
+import * as Types from '../../../constants/ActionTypes';
 
 const selection = (
   state: Array<number>,
@@ -12,10 +7,12 @@ const selection = (
 ): Array<number> => {
   const { type, payload } = action;
   switch (type) {
-    case SELECT_HISTORY: {
+    case Types.SELECT_HISTORY: {
       return payload;
     }
-    case SUCCESSED_FETCH_USERINFO:
+    case Types.HTTP_DELETE_HISTORYS:
+      return [];
+    case Types.SUCCESSED_FETCH_USERINFO:
       return [];
     default:
       return state;
@@ -28,8 +25,10 @@ const isOpenDeleteModal = (
 ): boolean => {
   const { type, payload } = action;
   switch (type) {
-    case TOGGLE_DELETE_MODAL:
+    case Types.TOGGLE_DELETE_MODAL:
       return payload;
+    case Types.HTTP_DELETE_HISTORYS:
+      return false;
     default:
       return state;
   }
@@ -38,17 +37,16 @@ const isOpenDeleteModal = (
 const filter = (state: string, action: Action): string => {
   const { type, payload } = action;
   switch (type) {
-    case FILTER_HISTORY:
+    case Types.FILTER_HISTORY:
       return payload;
+    case Types.HTTP_DELETE_HISTORYS:
+      return '';
     default:
       return state;
   }
 };
 
-export default (
-  state: UserDetailTabHistoryType,
-  action: Action
-) => ({
+export default (state: UserDetailTabHistoryType, action: Action) => ({
   selection: selection(state.selection, action),
   isOpenDeleteModal: isOpenDeleteModal(
     state.isOpenDeleteModal,
