@@ -41,8 +41,14 @@ export default function http({
   method: string,
   body: Object,
 }): Promise<any> {
-  return fetch(
-    makeUrl(endpoint),
-    makeOption(method, headers, body)
-  ).then(r => r.json());
+  return fetch(makeUrl(endpoint), makeOption(method, headers, body))
+    .then(r => {
+      if (!r.ok) {
+        return r.json().then(err => {
+          throw err.toString();
+        });
+      }
+      return r;
+    })
+    .then(r => r.json());
 }

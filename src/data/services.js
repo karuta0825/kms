@@ -11,21 +11,6 @@ export default (
         return payload.value;
       }
       return state;
-    case Types.SUCCESSED_HTTP_DELETE:
-      if (payload.key === 'services') {
-        return payload.value;
-      }
-      return state;
-    case Types.SUCCESSED_HTTP_PUT:
-      if (payload.key === 'services') {
-        return payload.value;
-      }
-      return state;
-    case Types.SUCCESSED_HTTP_POST:
-      if (payload.key === 'services') {
-        return payload.value;
-      }
-      return state;
     case Types.FAILED_HTTP_GET:
       return state;
     default:

@@ -1,5 +1,6 @@
 export const kids = {
-  GET: kids_id => `/api/v1/kids/${kids_id}`,
+  GET: kids_id =>
+    kids_id ? `/api/v1/kids/id/${kids_id}` : `/api/v1/kids/id`,
   PUT: kids_id => `/api/v1/kids/${kids_id}`,
   POST: () => `/api/v1/kids`,
   DELETE: kids_id => `/api/v1/kids/${kids_id}`,
@@ -21,16 +22,16 @@ export const licenses = {
 
 export const clients = {
   GET: kids_id => `/api/v1/clients/id/${kids_id}`,
-  PUT: client_id => `/api/v1/clients/${client_id}`,
+  PUT: () => `/api/v1/clients/`,
   POST: kids_id => `/api/v1/clients/${kids_id}`,
-  DELETE: client_id => `/api/v1/clients/${client_id}`,
+  DELETE: () => `/api/v1/clients/`,
 };
 
 export const fenics = {
   GET: kids_id => `/api/v1/fenics/id/${kids_id}`,
-  PUT: fenics_id => `/api/v1/fenics/${fenics_id}`,
+  PUT: () => `/api/v1/fenics`,
   POST: kids_id => `/api/v1/fenics/${kids_id}`,
-  DELETE: fenics_id => `/api/v1/fenics/${fenics_id}`,
+  DELETE: () => `/api/v1/fenics`,
 };
 
 export const busivs = {
@@ -57,12 +58,13 @@ export const mobiles = {
 export const memos = {
   GET: kids_id => `/api/v1/memos/id/${kids_id}`,
   PUT: id => `/api/v1/memos/${id}`,
-  POST: () => `/api/v1/memos`,
+  POST: kids_id => `/api/v1/memos/${kids_id}`,
   DELETE: id => `/api/v1/memos/${id}`,
 };
 
 export const historys = {
-  GET: kids_id => `/api/v1/historys/id/${kids_id}`,
+  GET: kids_id =>
+    kids_id ? `/api/v1/historys/id/${kids_id}` : `/api/v1/historys`,
   PUT: () => {},
   POST: () => {},
   DELETE: () => `/api/v1/historys`,

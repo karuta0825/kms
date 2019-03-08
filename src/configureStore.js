@@ -18,50 +18,11 @@ store.subscribe(() => console.log(store.getState()));
 
 sagaMiddleware.run(rootSaga);
 
-store.dispatch({
-  type: Types.HTTP_GET,
-  payload: {
-    key: 'kids',
-    options: {
-      endpoint: `/api/v1/kids/id`,
-    },
-  },
-});
-store.dispatch({
-  type: Types.HTTP_GET,
-  payload: {
-    key: 'servers',
-    options: {
-      endpoint: `/api/v1/servers`,
-    },
-  },
-});
-store.dispatch({
-  type: Types.HTTP_GET,
-  payload: {
-    key: 'environments',
-    options: {
-      endpoint: `/api/v1/environments`,
-    },
-  },
-});
-store.dispatch({
-  type: Types.HTTP_GET,
-  payload: {
-    key: 'services',
-    options: {
-      endpoint: `/api/v1/services`,
-    },
-  },
-});
-store.dispatch({
-  type: Types.HTTP_GET,
-  payload: {
-    key: 'memoTemplates',
-    options: {
-      endpoint: `/api/v1/memoTemplates`,
-    },
-  },
-});
+store.dispatch({ type: Types.HTTP_GET_SERVERS });
+store.dispatch({ type: Types.HTTP_GET_SERVICES });
+store.dispatch({ type: Types.HTTP_GET_MEMOTEMPLATES });
+store.dispatch({ type: Types.HTTP_GET_ENVIRONMENTS });
+store.dispatch({ type: Types.HTTP_GET_ACCOUNTS });
+store.dispatch({ type: Types.HTTP_GET_KIDS });
 
 export default store;
