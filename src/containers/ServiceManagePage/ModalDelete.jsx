@@ -17,14 +17,8 @@ const mergeProps = (state, { dispatch }) => ({
   onClickDelete: () => {
     const { selection } = state.serviceManagePage;
     dispatch({
-      type: Types.HTTP_DELETE,
-      payload: {
-        key: 'services',
-        options: {
-          endpoint: `/api/v1/services`,
-          body: selection,
-        },
-      },
+      type: Types.HTTP_DELETE_SERVICES,
+      payload: selection,
     });
   },
 });

@@ -96,14 +96,8 @@ const mergeProps = (state, { dispatch }) => ({
   },
   onClickSave: () => {
     dispatch({
-      type: Types.HTTP_PUT,
-      payload: {
-        key: 'services',
-        options: {
-          endpoint: '/api/v1/services',
-          body: state.serviceManagePage.rowChanges,
-        },
-      },
+      type: Types.HTTP_PUT_SERVICES,
+      payload: state.serviceManagePage.rowChanges,
     });
   },
   onClickDelete: () => {
