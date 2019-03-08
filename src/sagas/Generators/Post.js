@@ -28,11 +28,12 @@ export function* customers(
   action: Action
 ): Generator<Object, void, { done: boolean, value: any }> {
   try {
-    const { kids_id, values } = action.payload;
+    const { kids_id, inputValues } = action.payload;
+    delete inputValues.base_id;
     yield call(http, {
       method: 'POST',
       endpoint: EndPoints.customers.POST(kids_id),
-      body: values,
+      body: inputValues,
     });
     yield put({
       type: Types.SUCCESSED_HTTP_POST,

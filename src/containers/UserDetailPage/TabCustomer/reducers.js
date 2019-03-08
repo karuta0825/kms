@@ -1,11 +1,4 @@
-import {
-  TOGGLE_EDIT_MODE,
-  SUCCESSED_FETCH_USERINFO,
-  CHANGE_CUSTOMER_VALUE,
-  SELECT_BASE_INDEX,
-  CHANGE_NEWBASE_MODE,
-  FETCH_USERINFO,
-} from '../../../constants/ActionTypes';
+import * as Types from '../../../constants/ActionTypes';
 import inputChecks from '../../../utils/inputChecks';
 
 const inputCheck = {
@@ -15,17 +8,14 @@ const inputCheck = {
   email: inputChecks.email,
 };
 
-const choiceBaseIdx = (
-  state: number,
-  action: Action
-): number => {
+const choiceBaseIdx = (state: number, action: Action): number => {
   const { type, payload } = action;
   switch (type) {
-    case SELECT_BASE_INDEX:
+    case Types.SELECT_BASE_INDEX:
       return payload;
-    case CHANGE_NEWBASE_MODE:
+    case Types.CHANGE_NEWBASE_MODE:
       return payload ? -1 : 0;
-    case FETCH_USERINFO:
+    case Types.FETCH_USERINFO:
       return 0;
     default:
       return state;
@@ -40,14 +30,14 @@ const inputValues = (
 ): Object => {
   const { type, payload } = action;
   switch (type) {
-    case SUCCESSED_FETCH_USERINFO:
+    case Types.SUCCESSED_FETCH_USERINFO:
       return payload.customer[index];
-    case TOGGLE_EDIT_MODE:
+    case Types.TOGGLE_EDIT_MODE:
       if (payload.tabName === 'CUSTOMER' && !payload.isEdit) {
         return cache[index];
       }
       return state;
-    case CHANGE_NEWBASE_MODE: {
+    case Types.CHANGE_NEWBASE_MODE: {
       const initValue = {
         ...state,
         base_id: -1,
@@ -62,12 +52,16 @@ const inputValues = (
         has_busiv: 0,
         has_fenics: 0,
         has_mobile: 0,
+        is_new_contract: 0,
+        is_replaced_from_cj: 0,
+        is_replaced_from_wc: 0,
+        is_replaced_from_another: 0,
       };
       return payload ? initValue : cache[0];
     }
-    case SELECT_BASE_INDEX:
+    case Types.SELECT_BASE_INDEX:
       return cache[payload];
-    case CHANGE_CUSTOMER_VALUE: {
+    case Types.CHANGE_CUSTOMER_VALUE: {
       const obj = {};
       obj[payload.key] = payload.value;
       return {
@@ -80,22 +74,23 @@ const inputValues = (
   }
 };
 
-const isEdit = (
-  state: boolean,
-  action,
-  tabName: string
-): boolean => {
+const isEdit = (state: boolean, action, tabName: string): boolean => {
   const { type, payload } = action;
   switch (type) {
-    case TOGGLE_EDIT_MODE:
+    case Types.TOGGLE_EDIT_MODE:
       if (payload.tabName === tabName) {
         return payload.isEdit;
       }
       return state;
-    case SELECT_BASE_INDEX:
+    case Types.SELECT_BASE_INDEX:
       return false;
-    case CHANGE_NEWBASE_MODE:
+    case Types.CHANGE_NEWBASE_MODE:
       return payload;
+    case Types.SUCCESSED_HTTP_PUT:
+      if (payload.key === 'customers') {
+        return false;
+      }
+      return state;
     default:
       return state;
   }
@@ -104,7 +99,7 @@ const isEdit = (
 const isInputError = (state, action: Action): Object => {
   const { type, payload } = action;
   switch (type) {
-    case CHANGE_CUSTOMER_VALUE: {
+    case Types.CHANGE_CUSTOMER_VALUE: {
       const obj = {};
 
       if (!inputCheck[payload.key]) {
@@ -117,7 +112,7 @@ const isInputError = (state, action: Action): Object => {
         ...obj,
       };
     }
-    case TOGGLE_EDIT_MODE: {
+    case Types.TOGGLE_EDIT_MODE: {
       if (payload.tabName === 'CUSTOMER' && !payload.isEdit) {
         return {
           ...state,
@@ -134,15 +129,12 @@ const isInputError = (state, action: Action): Object => {
   }
 };
 
-const isAddBaseMode = (
-  state: boolean,
-  action: Action
-): boolean => {
+const isAddBaseMode = (state: boolean, action: Action): boolean => {
   const { type, payload } = action;
   switch (type) {
-    case CHANGE_NEWBASE_MODE:
+    case Types.CHANGE_NEWBASE_MODE:
       return payload;
-    case SELECT_BASE_INDEX:
+    case Types.SELECT_BASE_INDEX:
       return false;
     default:
       return state;
