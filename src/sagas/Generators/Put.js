@@ -20,7 +20,7 @@ export function* kids(
       type: Types.SUCCESSED_HTTP_PUT,
       payload: { key: 'kids' },
     });
-    yield Get.userInfoById(kids_id);
+    yield put({ type: Types.FETCH_USERINFO, payload: kids_id });
   } catch (e) {
     yield put({ type: Types.FAILED_HTTP_PUT, payload: e });
   }
@@ -40,7 +40,7 @@ export function* customers(
       type: Types.SUCCESSED_HTTP_PUT,
       payload: { key: 'customers' },
     });
-    yield Get.userInfoById(kids_id);
+    yield put({ type: Types.FETCH_USERINFO, payload: kids_id });
   } catch (e) {
     yield put({ type: Types.FAILED_HTTP_PUT, payload: e });
   }
@@ -61,7 +61,7 @@ export function* licenses(
       type: Types.SUCCESSED_HTTP_PUT,
       payload: { key: 'licenses' },
     });
-    yield Get.userInfoById(kids_id);
+    yield put({ type: Types.FETCH_USERINFO, payload: kids_id });
   } catch (e) {
     yield put({ type: Types.FAILED_HTTP_PUT, payload: e });
   }
@@ -82,7 +82,7 @@ export function* clients(
       type: Types.SUCCESSED_HTTP_PUT,
       payload: { key: 'clients' },
     });
-    yield Get.userInfoById(kids_id);
+    yield put({ type: Types.FETCH_USERINFO, payload: kids_id });
   } catch (e) {
     yield put({ type: Types.FAILED_HTTP_PUT, payload: e });
   }
@@ -102,7 +102,7 @@ export function* fenicses(
       type: Types.SUCCESSED_HTTP_PUT,
       payload: { key: 'fenicses' },
     });
-    yield Get.userInfoById(kids_id);
+    yield put({ type: Types.FETCH_USERINFO, payload: kids_id });
   } catch (e) {
     yield put({ type: Types.FAILED_HTTP_PUT, payload: e });
   }
@@ -122,7 +122,7 @@ export function* busivs(
       type: Types.SUCCESSED_HTTP_PUT,
       payload: { key: 'busivs' },
     });
-    yield Get.userInfoById(kids_id);
+    yield put({ type: Types.FETCH_USERINFO, payload: kids_id });
   } catch (e) {
     yield put({ type: Types.FAILED_HTTP_PUT, payload: e });
   }
@@ -142,7 +142,7 @@ export function* mobiles(
       type: Types.SUCCESSED_HTTP_PUT,
       payload: { key: 'mobiles' },
     });
-    yield Get.userInfoById(kids_id);
+    yield put({ type: Types.FETCH_USERINFO, payload: kids_id });
   } catch (e) {
     yield put({ type: Types.FAILED_HTTP_PUT, payload: e });
   }
@@ -162,7 +162,7 @@ export function* partners(
       type: Types.SUCCESSED_HTTP_PUT,
       payload: { key: 'partners' },
     });
-    yield Get.userInfoById(kids_id);
+    yield put({ type: Types.FETCH_USERINFO, payload: kids_id });
   } catch (e) {
     yield put({ type: Types.FAILED_HTTP_PUT, payload: e });
   }
@@ -173,6 +173,20 @@ export function* memos(
 ): Generator<Object, void, { done: boolean, value: any }> {
   try {
     const { kids_id, id, inputValues } = action.payload;
+    let priority_id = 4;
+    if (inputValues.priority === 'emergency') {
+      priority_id = 1;
+    }
+    if (inputValues.priority === 'important') {
+      priority_id = 2;
+    }
+    if (inputValues.priority === 'reminder') {
+      priority_id = 3;
+    }
+    inputValues.priority_id = priority_id;
+    delete inputValues.priority;
+    delete inputValues.short_msg;
+    delete inputValues.name;
     yield call(http, {
       method: 'PUT',
       endpoint: EndPoints.memos.PUT(id),
@@ -182,7 +196,7 @@ export function* memos(
       type: Types.SUCCESSED_HTTP_PUT,
       payload: { key: 'memos' },
     });
-    yield Get.userInfoById(kids_id);
+    yield put({ type: Types.FETCH_USERINFO, payload: kids_id });
   } catch (e) {
     yield put({ type: Types.FAILED_HTTP_PUT, payload: e });
   }

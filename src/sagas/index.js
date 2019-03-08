@@ -47,6 +47,7 @@ export default function* rootSage(): Generator<
   yield takeEvery(Types.HTTP_DELETE_CLIENTS, Delete.clients);
   yield takeEvery(Types.HTTP_DELETE_FENICSES, Delete.fenicses);
   yield takeEvery(Types.HTTP_DELETE_HISTORYS, Delete.historys);
+  yield takeEvery(Types.HTTP_DELETE_MEMOS, Delete.memos);
 
   // POST
   yield takeEvery(Types.HTTP_POST_KIDS, Post.kids);

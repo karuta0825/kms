@@ -38,7 +38,7 @@ export function* customers(
       type: Types.SUCCESSED_HTTP_POST,
       payload: { key: 'customers' },
     });
-    yield Get.userInfoById(kids_id);
+    yield put({ type: Types.FETCH_USERINFO, payload: kids_id });
   } catch (e) {
     yield put({ type: Types.FAILED_HTTP_POST, payload: e });
   }
@@ -48,17 +48,32 @@ export function* memos(
   action: Action
 ): Generator<Object, void, { done: boolean, value: any }> {
   try {
-    const { kids_id, values } = action.payload;
+    const { kids_id } = action.payload;
+    const { title, message, priority } = action.payload.inputValues;
+    let priority_id = 4;
+    if (priority === 'emergency') {
+      priority_id = 1;
+    }
+    if (priority === 'important') {
+      priority_id = 2;
+    }
+    if (priority === 'reminder') {
+      priority_id = 3;
+    }
     yield call(http, {
       method: 'POST',
       endpoint: EndPoints.memos.POST(kids_id),
-      body: values,
+      body: {
+        title,
+        message,
+        priority_id,
+      },
     });
     yield put({
       type: Types.SUCCESSED_HTTP_POST,
       payload: { key: 'memos' },
     });
-    yield Get.userInfoById(kids_id);
+    yield put({ type: Types.FETCH_USERINFO, payload: kids_id });
   } catch (e) {
     yield put({ type: Types.FAILED_HTTP_POST, payload: e });
   }

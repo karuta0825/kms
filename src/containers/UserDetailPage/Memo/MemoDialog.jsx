@@ -11,6 +11,7 @@ import InputMessage from './InputMessage';
 import RemainingChar from './RemainingChar';
 import SelectPriority from './SelectPriority';
 import { toggleModal } from '../../Common/actions';
+import { postMemo, deleteMemo, putMemo } from './actions';
 
 type PropsType = {
   title: string,
@@ -71,22 +72,36 @@ function MemoDialog(props: PropsType): React.Node {
   );
 }
 
-const mapStateToProps = (state: StateType) => ({
+const mapStateToProps = state => state;
+const mapDispatchToProps = dispatch => ({ dispatch });
+
+const mergeProps = (state: StateType, { dispatch }) => ({
   title: 'メモ',
   isNewMemo: state.userDetailPage.memo.isNew,
   isOpen: state.userDetailPage.memo.isModalOpen,
-});
-
-const mapDispatchToProps = dispatch => ({
-  onClickSave: () => {},
+  onClickSave: () => {
+    const kids_id = state.data.baseInfo.id;
+    const { inputValues } = state.userDetailPage.memo;
+    dispatch(postMemo(kids_id, inputValues));
+  },
   onClickCancel: () => {
     dispatch(toggleModal(false, 'memo'));
   },
-  onClickUpdate: () => {},
-  onClickDelete: () => {},
+  onClickUpdate: () => {
+    const kids_id = state.data.baseInfo.id;
+    const { id } = state.userDetailPage.memo.inputValues;
+    const { inputValues } = state.userDetailPage.memo;
+    dispatch(putMemo(kids_id, id, inputValues));
+  },
+  onClickDelete: () => {
+    const kids_id = state.data.baseInfo.id;
+    const { id } = state.userDetailPage.memo.inputValues;
+    dispatch(deleteMemo(kids_id, id));
+  },
 });
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
+  mergeProps
 )(MemoDialog);

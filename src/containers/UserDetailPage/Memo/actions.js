@@ -1,32 +1,45 @@
-import {
-  CHANGE_MEMO_VALUE,
-  SELECT_MEMO,
-  CREATE_MEMO,
-  FILTER_MEMO,
-  SET_MEMO_TEMPLATE,
-} from '../../../constants/ActionTypes';
+import * as Types from '../../../constants/ActionTypes';
 
 export const selectTemplate = (name: string) => ({
-  type: SET_MEMO_TEMPLATE,
+  type: Types.SET_MEMO_TEMPLATE,
   payload: name,
 });
 
 export const changeValue = (key: string, value: any) => ({
-  type: CHANGE_MEMO_VALUE,
+  type: Types.CHANGE_MEMO_VALUE,
   payload: { key, value },
 });
 
 export const selectMemo = (id: number) => ({
-  type: SELECT_MEMO,
+  type: Types.SELECT_MEMO,
   payload: id,
 });
 
 export const createMemo = () => ({
-  type: CREATE_MEMO,
+  type: Types.CREATE_MEMO,
   payload: {},
 });
 
 export const filterMemo = (name: MemoPriorityType) => ({
-  type: FILTER_MEMO,
+  type: Types.FILTER_MEMO,
   payload: name,
+});
+
+export const postMemo = (kids_id: number, inputValues: MemoType) => ({
+  type: Types.HTTP_POST_MEMOS,
+  payload: { kids_id, inputValues },
+});
+
+export const deleteMemo = (kids_id: number, id: number) => ({
+  type: Types.HTTP_DELETE_MEMOS,
+  payload: { kids_id, id },
+});
+
+export const putMemo = (
+  kids_id: number,
+  id: number,
+  inputValues
+) => ({
+  type: Types.HTTP_PUT_MEMOS,
+  payload: { kids_id, id, inputValues },
 });

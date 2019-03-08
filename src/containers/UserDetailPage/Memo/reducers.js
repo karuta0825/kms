@@ -1,13 +1,5 @@
 // @flow
-import {
-  TOGGLE_MEMO_MODAL,
-  SET_MEMO_TEMPLATE,
-  CHANGE_MEMO_VALUE,
-  SELECT_MEMO,
-  CREATE_MEMO,
-  FILTER_MEMO,
-  TOGGLE_MODAL,
-} from '../../../constants/ActionTypes';
+import * as Types from '../../../constants/ActionTypes';
 
 const memoFilter = (
   state: MemoPriorityType,
@@ -15,26 +7,29 @@ const memoFilter = (
 ): MemoPriorityType => {
   const { type, payload } = action;
   switch (type) {
-    case FILTER_MEMO:
+    case Types.FILTER_MEMO:
       return payload;
     default:
       return state;
   }
 };
 
-const isModalOpen = (
-  state: boolean,
-  action: Action
-): boolean => {
+const isModalOpen = (state: boolean, action: Action): boolean => {
   const { type, payload } = action;
   switch (type) {
-    case TOGGLE_MODAL:
+    case Types.TOGGLE_MODAL:
       if (payload.name === 'memo') {
         return payload.isOpen;
       }
       return state;
-    case CREATE_MEMO:
+    case Types.CREATE_MEMO:
       return true;
+    case Types.HTTP_PUT_MEMOS:
+      return false;
+    case Types.HTTP_POST_MEMOS:
+      return false;
+    case Types.HTTP_DELETE_MEMOS:
+      return false;
     default:
       return state;
   }
@@ -43,9 +38,11 @@ const isModalOpen = (
 const isNew = (state: boolean, action: Action): boolean => {
   const { type, payload } = action;
   switch (type) {
-    case CREATE_MEMO:
+    case Types.CREATE_MEMO:
       return true;
-    case TOGGLE_MEMO_MODAL:
+    case Types.SELECT_MEMO:
+      return false;
+    case Types.TOGGLE_MEMO_MODAL:
       return !payload ? false : state;
     default:
       return state;
@@ -59,24 +56,22 @@ const inputValues = (
 ): Object | MemoType => {
   const { type, payload } = action;
   switch (type) {
-    case CHANGE_MEMO_VALUE: {
+    case Types.CHANGE_MEMO_VALUE: {
       const obj = {};
       obj[payload.key] = payload.value;
       return { ...state, ...obj };
     }
-    case TOGGLE_MEMO_MODAL: {
+    case Types.TOGGLE_MEMO_MODAL: {
       const obj = {};
       return !payload ? obj : state;
     }
-    case CREATE_MEMO:
+    case Types.CREATE_MEMO:
       return { priority: 'emergency' };
-    case SELECT_MEMO: {
-      const [target] = data.memos.filter(
-        memo => memo.id === payload
-      );
+    case Types.SELECT_MEMO: {
+      const [target] = data.memos.filter(memo => memo.id === payload);
       return target;
     }
-    case SET_MEMO_TEMPLATE: {
+    case Types.SET_MEMO_TEMPLATE: {
       const [target] = data.memoTemplates.filter(
         template => template.title === payload
       );
@@ -90,16 +85,13 @@ const inputValues = (
   }
 };
 
-const selectedTemplate = (
-  state: string,
-  action: Action
-): string => {
+const selectedTemplate = (state: string, action: Action): string => {
   const { type, payload } = action;
   switch (type) {
-    case SET_MEMO_TEMPLATE: {
+    case Types.SET_MEMO_TEMPLATE: {
       return payload;
     }
-    case TOGGLE_MEMO_MODAL:
+    case Types.TOGGLE_MEMO_MODAL:
       return !payload ? '' : state;
     default:
       return state;
@@ -115,8 +107,5 @@ export default (
   isModalOpen: isModalOpen(state.isModalOpen, action),
   isNew: isNew(state.isNew, action),
   inputValues: inputValues(state.inputValues, action, data),
-  selectedTemplate: selectedTemplate(
-    state.selectedTemplate,
-    action
-  ),
+  selectedTemplate: selectedTemplate(state.selectedTemplate, action),
 });
