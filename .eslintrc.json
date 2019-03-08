@@ -82,7 +82,7 @@
         "semi": true,
         "bracketSpacing": true,
         "jsxBracketSameLine": false,
-        "printWidth": 65
+        "printWidth": 70
       }
     ]
   }
