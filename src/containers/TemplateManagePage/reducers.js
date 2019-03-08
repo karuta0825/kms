@@ -1,9 +1,6 @@
 import * as Types from '../../constants/ActionTypes';
 
-const selectedIndex = (
-  state: number,
-  action: Action
-): number => {
+const selectedIndex = (state: number, action: Action): number => {
   const { type, payload } = action;
   switch (type) {
     case Types.SELECT_MEMO_TEMPLATE:
@@ -48,7 +45,7 @@ const isOpenDeleteModal = (
         return payload.isOpen;
       }
       return state;
-    case Types.HTTP_DELETE:
+    case Types.HTTP_DELETE_MEMOTEMPLATES:
       return false;
     default:
       return state;

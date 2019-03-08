@@ -17,13 +17,8 @@ const mergeProps = (state: StateType, { dispatch }) => ({
   onClickDelete: () => {
     const { id } = state.templateManagePage.inputValues;
     dispatch({
-      type: Types.HTTP_DELETE,
-      payload: {
-        key: 'memoTemplates',
-        options: {
-          endpoint: `/api/v1/memoTemplates/${id}`,
-        },
-      },
+      type: Types.HTTP_DELETE_MEMOTEMPLATES,
+      payload: id,
     });
   },
 });

@@ -76,34 +76,18 @@ const mergeProps = (state, { dispatch }) => ({
   onClickSave: () => {
     const { inputValues } = state.templateManagePage;
     dispatch({
-      type: Types.HTTP_POST,
-      payload: {
-        key: 'memoTemplates',
-        options: {
-          endpoint: `/api/v1/memoTemplates`,
-          body: inputValues,
-        },
-      },
+      type: Types.HTTP_POST_MEMOTEMPLATES,
+      payload: inputValues,
     });
   },
   onClickDelete: () => {
     dispatch(toggleModal(true, 'memoTemplate'));
   },
   onClickUpdate: () => {
-    const {
-      id,
-      title,
-      msg,
-    } = state.templateManagePage.inputValues;
+    const { id, title, msg } = state.templateManagePage.inputValues;
     dispatch({
-      type: Types.HTTP_PUT,
-      payload: {
-        key: 'memoTemplates',
-        options: {
-          endpoint: `/api/v1/memoTemplates/${id}`,
-          body: { title, msg },
-        },
-      },
+      type: Types.HTTP_PUT_MEMOTEMPLATES,
+      payload: { id, title, msg },
     });
   },
 });
