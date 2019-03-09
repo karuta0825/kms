@@ -27,6 +27,8 @@ const selection = (
   switch (type) {
     case Types.SELECT_USER:
       return payload;
+    case Types.HTTP_DELETE_KIDS:
+      return [];
     default:
       return state;
   }
