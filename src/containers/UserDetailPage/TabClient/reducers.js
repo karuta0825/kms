@@ -1,25 +1,34 @@
 // @flow
-import {
-  TOGGLE_EDIT_MODE,
-  SUCCESSED_FETCH_USERINFO,
-  FAILED_FETCH_USERINFO,
-  SELECT_CLIENT,
-  CHANGE_CLIENT_INFO,
-  FETCH_USERINFO,
-} from '../../../constants/ActionTypes';
+import * as Types from '../../../constants/ActionTypes';
 
-const isEdit = (
-  state: boolean,
-  action,
-  tabName: string
-): boolean => {
+const isEdit = (state: boolean, action, tabName: string): boolean => {
   const { type, payload } = action;
   switch (type) {
-    case TOGGLE_EDIT_MODE:
+    case Types.TOGGLE_EDIT_MODE:
       if (payload.tabName === tabName) {
         return payload.isEdit;
       }
       return state;
+    case Types.HTTP_PUT_CLIENTS:
+      return false;
+    default:
+      return state;
+  }
+};
+
+const isOpenDeleteModal = (
+  state: boolean,
+  action: Action
+): boolean => {
+  const { type, payload } = action;
+  switch (type) {
+    case Types.TOGGLE_DELETE_MODAL:
+      if (payload.name === 'clients') {
+        return payload.isOpen;
+      }
+      return state;
+    case Types.HTTP_DELETE_CLIENTS:
+      return false;
     default:
       return state;
   }
@@ -32,11 +41,11 @@ const inputValues = (
 ): Array<ClientType> => {
   const { type, payload } = action;
   switch (type) {
-    case SUCCESSED_FETCH_USERINFO:
+    case Types.SUCCESSED_FETCH_USERINFO:
       return payload.client;
-    case FAILED_FETCH_USERINFO:
+    case Types.FAILED_FETCH_USERINFO:
       return [];
-    case TOGGLE_EDIT_MODE:
+    case Types.TOGGLE_EDIT_MODE:
       if (!payload) {
         return data;
       }
@@ -52,10 +61,10 @@ const selection = (
 ): Array<number> => {
   const { type, payload } = action;
   switch (type) {
-    case SELECT_CLIENT: {
+    case Types.SELECT_CLIENT: {
       return payload;
     }
-    case SUCCESSED_FETCH_USERINFO:
+    case Types.SUCCESSED_FETCH_USERINFO:
       return [];
     default:
       return state;
@@ -65,14 +74,14 @@ const selection = (
 const rowChanges = (state, action: Action): Object => {
   const { type, payload } = action;
   switch (type) {
-    case FETCH_USERINFO:
+    case Types.FETCH_USERINFO:
       return {};
-    case TOGGLE_EDIT_MODE:
+    case Types.TOGGLE_EDIT_MODE:
       if (payload.tabName === 'CLIENT') {
         return {};
       }
       return state;
-    case CHANGE_CLIENT_INFO:
+    case Types.CHANGE_CLIENT_INFO:
       return payload;
     default:
       return state;
@@ -85,10 +94,10 @@ export default (
   data: CombineDataType
 ) => ({
   isEdit: isEdit(state.isEdit, action, 'CLIENT'),
-  inputValues: inputValues(
-    state.inputValues,
-    action,
-    data.clients
+  inputValues: inputValues(state.inputValues, action, data.clients),
+  isOpenDeleteModal: isOpenDeleteModal(
+    state.isOpenDeleteModal,
+    action
   ),
   selection: selection(state.selection, action),
   rowChanges: rowChanges(state.rowChanges, action),

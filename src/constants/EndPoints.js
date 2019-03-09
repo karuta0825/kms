@@ -22,9 +22,9 @@ export const licenses = {
 
 export const clients = {
   GET: kids_id => `/api/v1/clients/id/${kids_id}`,
-  PUT: () => `/api/v1/clients/`,
+  PUT: () => `/api/v1/clients`,
   POST: kids_id => `/api/v1/clients/${kids_id}`,
-  DELETE: () => `/api/v1/clients/`,
+  DELETE: () => `/api/v1/clients`,
 };
 
 export const fenics = {

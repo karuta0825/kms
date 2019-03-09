@@ -3,4 +3,5 @@ declare type UserDetailTabClientType = {
   inputValues: Array<ClientType>,
   selection: Array<number>,
   rowChanges: Object,
+  isOpenDeleteModal: boolean,
 };

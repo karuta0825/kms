@@ -1,26 +1,18 @@
 // @flow
-import {
-  SET_TAB_POSITION,
-  FETCH_USERINFO,
-  TOGGLE_EDIT_MODE,
-  TOGGLE_PREV_NEXT_BUTTON,
-} from '../../constants/ActionTypes';
+import * as Types from '../../constants/ActionTypes';
 
 export const changeTabIndex = (index: number) => ({
-  type: SET_TAB_POSITION,
+  type: Types.SET_TAB_POSITION,
   payload: index,
 });
 
 export const getUserInfo = (id: number) => ({
-  type: FETCH_USERINFO,
+  type: Types.FETCH_USERINFO,
   payload: id,
 });
 
-export const toggleEditMode = (
-  isEdit: boolean,
-  tabName: string
-) => ({
-  type: TOGGLE_EDIT_MODE,
+export const toggleEditMode = (isEdit: boolean, tabName: string) => ({
+  type: Types.TOGGLE_EDIT_MODE,
   payload: { isEdit, tabName },
 });
 
@@ -31,9 +23,14 @@ export const togglePrevNexButton = ({
   hasPrev: boolean,
   hasNext: boolean,
 }) => ({
-  type: TOGGLE_PREV_NEXT_BUTTON,
+  type: Types.TOGGLE_PREV_NEXT_BUTTON,
   payload: {
     hasPrev,
     hasNext,
   },
+});
+
+export const toggleDeleteModal = (isOpen: boolean, name: string) => ({
+  type: Types.TOGGLE_DELETE_MODAL,
+  payload: { isOpen, name },
 });

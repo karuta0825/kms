@@ -119,6 +119,7 @@ const initState: StateType = {
       inputValues: [],
       selection: [],
       rowChanges: {},
+      isOpenDeleteModal: false,
     },
     fenicsTab: {
       isEdit: false,
