@@ -30,7 +30,7 @@ const initState: StateType = {
   },
   userListPage: {
     currentPage: 0,
-    selections: [],
+    selection: [],
     columnFilters: [],
     isFilterOpen: false,
     filter: {
@@ -138,7 +138,11 @@ const initState: StateType = {
       inputValues: {},
       isInputError: {},
     },
-    partnerTab: {},
+    partnerTab: {
+      isEdit: false,
+      inputValues: {},
+      isInputError: {},
+    },
     historyTab: {
       selection: [],
       isOpenDeleteModal: false,

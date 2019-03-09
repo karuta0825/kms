@@ -6,7 +6,7 @@ declare type CombineDataType = {
   fenics: Array<FenicsType>,
   busivs: Array<BusivType>,
   mobiles: Array<MobileType>,
-  partners: Array<PartnerType>,
+  partners: PartnerType,
   historys: Array<HistoryType>,
   servers: Array<ServerType>,
   services: Array<ServiceType>,

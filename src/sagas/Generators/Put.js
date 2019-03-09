@@ -154,6 +154,7 @@ export function* partners(
 ): Generator<Object, void, { done: boolean, value: any }> {
   try {
     const { kids_id, inputValues } = action.payload;
+    delete inputValues.kids_id;
     yield call(http, {
       method: 'PUT',
       endpoint: EndPoints.partners.PUT(kids_id),

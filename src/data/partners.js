@@ -1,14 +1,11 @@
-import {
-  SUCCESSED_FETCH_USERINFO,
-  FAILED_FETCH_USERINFO,
-} from '../constants/ActionTypes';
+import * as Types from '../constants/ActionTypes';
 
-export default (state, action) => {
+export default (state: PartnerType, action: Action): PartnerType => {
   const { type, payload } = action;
   switch (type) {
-    case SUCCESSED_FETCH_USERINFO:
-      return payload.partner;
-    case FAILED_FETCH_USERINFO:
+    case Types.SUCCESSED_FETCH_USERINFO:
+      return (payload.partner.length > 0 && payload.partner[0]) || {};
+    case Types.FAILED_FETCH_USERINFO:
       return state;
     default:
       return state;

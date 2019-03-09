@@ -9,12 +9,7 @@ declare type UserDetailPageType = {
   fenicsTab: UserDetailTabFenicsType,
   busivTab: UserDetailTabBusivType,
   licenseTab: UserDetailTabLicenseType,
-  partnerTab: {
-    inputValues: {},
-    canUpdate: boolean,
-    isEditing: boolean,
-    canCancel: boolean,
-  },
+  partnerTab: UserDetailTabPartnerType,
   memo: UserDetailMemoType,
   historyTab: UserDetailTabHistoryType,
 };

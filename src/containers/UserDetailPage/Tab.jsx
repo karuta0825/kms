@@ -14,6 +14,7 @@ import TabClient from './TabClient';
 import TabFenics from './TabFenics';
 import TabBuisv from './TabBuisv';
 import TabHistory from './TabHistory';
+import TabPartner from './TabPartner';
 
 function TabContainer(
   { children } = {
@@ -83,7 +84,7 @@ function TabManager(props: PropsType): React.Node {
       {value === 3 && <TabClient />}
       {value === 4 && <TabFenics />}
       {value === 5 && <TabBuisv />}
-      {value === 6 && <TabContainer>Item Seven</TabContainer>}
+      {value === 6 && <TabPartner />}
       {value === 7 && <TabContainer>Item Eigth</TabContainer>}
       {value === 8 && <TabHistory />}
     </Paper>
