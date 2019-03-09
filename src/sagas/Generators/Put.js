@@ -113,10 +113,11 @@ export function* busivs(
 ): Generator<Object, void, { done: boolean, value: any }> {
   try {
     const { kids_id, base_id, inputValues } = action.payload;
+    delete inputValues.base_id;
     yield call(http, {
       method: 'PUT',
       endpoint: EndPoints.busivs.PUT(base_id),
-      body: inputValues,
+      body: { information: JSON.stringify(inputValues) },
     });
     yield put({
       type: Types.SUCCESSED_HTTP_PUT,
