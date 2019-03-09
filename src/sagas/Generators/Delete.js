@@ -15,14 +15,7 @@ export function* kids(
       endpoint: EndPoints.kids.DELETE(),
       body: payload,
     });
-    const data = yield call(http, {
-      method: 'GET',
-      endpoint: EndPoints.kids.GET(),
-    });
-    yield put({
-      type: Types.SUCCESSED_HTTP_DELETE,
-      payload: { key: 'kids', value: data },
-    });
+    yield put({ type: Types.HTTP_GET_KIDS });
   } catch (e) {
     yield put({ type: Types.FAILED_HTTP_DELETE, payload: e });
   }

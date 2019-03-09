@@ -1,36 +1,31 @@
 // @flow
-import {
-  TOGGLE_FILTER_MENU,
-  SEARCH_KID_BY_KEYWORD,
-  FILTER_VERSION,
-  FILTER_NETWORK,
-  FILTER_MOBILE,
-  FILTER_SYSTEM_TYPE,
-  SUCCESSED_FETCH_USERINFO,
-  SELECT_USER,
-  CHANGE_USER_LIST_PAGE,
-  FILTER_USER_LIST_BY_COLUMN,
-} from '../../constants/ActionTypes';
+import * as Types from '../../constants/ActionTypes';
 
-const currentPage = (state: number, action: Action): number => {
+const isOpenDeleteModal = (
+  state: boolean,
+  action: Action
+): boolean => {
   const { type, payload } = action;
   switch (type) {
-    case CHANGE_USER_LIST_PAGE:
-      return payload;
-    case SEARCH_KID_BY_KEYWORD:
-      return 0;
+    case Types.TOGGLE_DELETE_MODAL:
+      if (payload.name === 'kids') {
+        return payload.isOpen;
+      }
+      return state;
+    case Types.HTTP_DELETE_KIDS:
+      return false;
     default:
       return state;
   }
 };
 
-const selections = (
+const selection = (
   state: Array<number>,
   action: Action
 ): Array<number> => {
   const { type, payload } = action;
   switch (type) {
-    case SELECT_USER:
+    case Types.SELECT_USER:
       return payload;
     default:
       return state;
@@ -43,7 +38,7 @@ const columnFilters = (
 ): Array<[{ columnName: string, value: string }]> => {
   const { type, payload } = action;
   switch (type) {
-    case FILTER_USER_LIST_BY_COLUMN: {
+    case Types.FILTER_USER_LIST_BY_COLUMN: {
       return payload;
     }
     default:
@@ -51,16 +46,13 @@ const columnFilters = (
   }
 };
 
-const isFilterOpen = (
-  state: boolean,
-  action: Action
-): boolean => {
+const isFilterOpen = (state: boolean, action: Action): boolean => {
   const { type } = action;
 
   switch (type) {
-    case TOGGLE_FILTER_MENU:
+    case Types.TOGGLE_FILTER_MENU:
       return !state;
-    case SUCCESSED_FETCH_USERINFO:
+    case Types.SUCCESSED_FETCH_USERINFO:
       return false;
     default:
       return state;
@@ -70,12 +62,12 @@ const isFilterOpen = (
 const setFilter = (state: Object, action: Action): Object => {
   const { type, payload } = action;
   switch (type) {
-    case SEARCH_KID_BY_KEYWORD:
+    case Types.SEARCH_KID_BY_KEYWORD:
       return {
         ...state,
         keyword: payload,
       };
-    case FILTER_SYSTEM_TYPE:
+    case Types.FILTER_SYSTEM_TYPE:
       if (payload === 'cloud') {
         return {
           ...state,
@@ -101,7 +93,7 @@ const setFilter = (state: Object, action: Action): Object => {
         ...state,
         isDemo: !state.isDemo,
       };
-    case FILTER_VERSION:
+    case Types.FILTER_VERSION:
       if (payload === 'ES') {
         return {
           ...state,
@@ -112,7 +104,7 @@ const setFilter = (state: Object, action: Action): Object => {
         ...state,
         isLM: !state.isLM,
       };
-    case FILTER_NETWORK:
+    case Types.FILTER_NETWORK:
       if (payload === 'fenics') {
         return {
           ...state,
@@ -123,7 +115,7 @@ const setFilter = (state: Object, action: Action): Object => {
         ...state,
         hasBusiv: !state.hasBusiv,
       };
-    case FILTER_MOBILE:
+    case Types.FILTER_MOBILE:
       return {
         ...state,
         hasMobile: !state.hasMobile,
@@ -134,9 +126,12 @@ const setFilter = (state: Object, action: Action): Object => {
 };
 
 export default (state: UserListPageType, action: Action) => ({
-  currentPage: currentPage(state.currentPage, action),
-  selections: selections(state.selections, action),
+  selection: selection(state.selection, action),
   columnFilters: columnFilters(state.columnFilters, action),
   isFilterOpen: isFilterOpen(state.isFilterOpen, action),
   filter: setFilter(state.filter, action),
+  isOpenDeleteModal: isOpenDeleteModal(
+    state.isOpenDeleteModal,
+    action
+  ),
 });

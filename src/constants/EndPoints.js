@@ -3,7 +3,7 @@ export const kids = {
     kids_id ? `/api/v1/kids/id/${kids_id}` : `/api/v1/kids/id`,
   PUT: kids_id => `/api/v1/kids/${kids_id}`,
   POST: () => `/api/v1/kids`,
-  DELETE: kids_id => `/api/v1/kids/${kids_id}`,
+  DELETE: () => `/api/v1/kids`,
 };
 
 export const customers = {
@@ -43,7 +43,7 @@ export const busivs = {
 
 export const partners = {
   GET: kids_id => `/api/v1/partners/id/${kids_id}`,
-  PUT: kids_id => `api/v1/partners/${kids_id}`,
+  PUT: kids_id => `/api/v1/partners/${kids_id}`,
   POST: () => {},
   DELETE: () => {},
 };

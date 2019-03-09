@@ -1,7 +1,7 @@
 declare type UserListPageType = {
-  currentPage: number,
+  selection: Array<number>,
+  isOpenDeleteModal: boolean,
   columnFilters: Array<[{ columnName: string, value: string }]>,
-  selections: Array<number>,
   isFilterOpen: boolean,
   filter: {
     keyword: ?string,
@@ -17,5 +17,4 @@ declare type UserListPageType = {
     isMarked: boolean,
     server: ?string,
   },
-  canDelete: boolean,
 };

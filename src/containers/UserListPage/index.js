@@ -7,6 +7,7 @@ import FilterInputText from './FilterInputText';
 import Filter from './Filter';
 import styles from './css/table.css';
 import KidTable from './KidTable';
+import ModalDeleteKid from './ModalDeleteKid';
 
 type PropsType = {};
 
@@ -28,6 +29,7 @@ class UserListPage extends React.Component<PropsType> {
           <KidTable />
         </Paper>
         <Filter />
+        <ModalDeleteKid />
       </div>
     );
   }

@@ -8,8 +8,6 @@ import {
   IntegratedSorting,
   FilteringState,
   IntegratedFiltering,
-  PagingState,
-  IntegratedPaging,
 } from '@devexpress/dx-react-grid';
 import {
   Grid,
@@ -19,26 +17,19 @@ import {
   TableFixedColumns,
   TableSelection,
   TableFilterRow,
-  PagingPanel,
 } from '@devexpress/dx-react-grid-material-ui';
 import BorderGrid from '../../components/BorderGrid';
 import KidTableCell from './KidTableCell';
 import KidTableRow from './KidTableRow';
 import { searchUser } from '../../utils';
-import {
-  selectUser,
-  changePage,
-  changeColumnFilters,
-} from './actions';
+import { selectUser, changeColumnFilters } from './actions';
 
 type PropsType = {
-  currentPage: number,
   rows: Array<KidType>,
   columns: Array<{ name: string, title: string }>,
-  selections: Array<number>,
+  selection: Array<number>,
   columnFilters: Array<{ [key: string]: string }>,
   onSelectionChange: (Array<number>) => void,
-  onCurrentPageChange: number => void,
   onFiltersChange: (Array<{ [key: string]: string }>) => void,
   defaultColumnWidths: Array<{
     columnName: string,
@@ -48,13 +39,11 @@ type PropsType = {
 
 function KidTable(props: PropsType): React.Node {
   const {
-    currentPage,
     rows,
     columns,
-    selections,
+    selection,
     columnFilters,
     onSelectionChange,
-    onCurrentPageChange,
     onFiltersChange,
     defaultColumnWidths,
   } = props;
@@ -70,7 +59,7 @@ function KidTable(props: PropsType): React.Node {
         onFiltersChange={onFiltersChange}
       />
       <SelectionState
-        selection={selections}
+        selection={selection}
         onSelectionChange={onSelectionChange}
       />
       <SortingState />
@@ -106,7 +95,7 @@ function KidTable(props: PropsType): React.Node {
 
 const mapStateToProps = (state: StateType) => ({
   currentPage: state.userListPage.currentPage,
-  selections: state.userListPage.selections,
+  selection: state.userListPage.selection,
   columnFilters: state.userListPage.columnFilters,
   rows: searchUser(state.data.kids, state.userListPage.filter),
   columns: [
@@ -146,11 +135,8 @@ const mapStateToProps = (state: StateType) => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  onSelectionChange: selections => {
-    dispatch(selectUser(selections));
-  },
-  onCurrentPageChange: (page: number) => {
-    dispatch(changePage(page));
+  onSelectionChange: selection => {
+    dispatch(selectUser(selection));
   },
   onFiltersChange: (
     filters: Array<[{ columnName: string, value: string }]>
