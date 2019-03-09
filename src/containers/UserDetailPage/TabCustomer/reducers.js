@@ -86,11 +86,8 @@ const isEdit = (state: boolean, action, tabName: string): boolean => {
       return false;
     case Types.CHANGE_NEWBASE_MODE:
       return payload;
-    case Types.SUCCESSED_HTTP_PUT:
-      if (payload.key === 'customers') {
-        return false;
-      }
-      return state;
+    case Types.HTTP_POST_CUSTOMERS:
+      return false;
     default:
       return state;
   }
