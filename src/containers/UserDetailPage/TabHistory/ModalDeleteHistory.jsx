@@ -1,8 +1,8 @@
 // @flow
 import { connect } from 'react-redux';
 import DeleteModal from '../../../components/DeleteModal';
-import { toggleDeleteModal } from './actions';
 import * as Types from '../../../constants/ActionTypes';
+import { toggleDeleteModal } from '../actions';
 
 const mapStateToProps = (state: StateType) => state;
 
@@ -20,7 +20,7 @@ const mergeProps = (state, { dispatch }) => ({
     });
   },
   onClickCancel: () => {
-    dispatch(toggleDeleteModal(false));
+    dispatch(toggleDeleteModal(false, 'historys'));
   },
 });
 

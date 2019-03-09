@@ -1,21 +1,12 @@
 // @flow
-import {
-  SELECT_HISTORY,
-  TOGGLE_DELETE_MODAL,
-  FILTER_HISTORY,
-} from '../../../constants/ActionTypes';
+import * as Types from '../../../constants/ActionTypes';
 
 export const selectHistory = (num: number) => ({
-  type: SELECT_HISTORY,
+  type: Types.SELECT_HISTORY,
   payload: num,
 });
 
-export const toggleDeleteModal = (isOpen: boolean) => ({
-  type: TOGGLE_DELETE_MODAL,
-  payload: isOpen,
-});
-
 export const filterHistory = (value: string) => ({
-  type: FILTER_HISTORY,
+  type: Types.FILTER_HISTORY,
   payload: value,
 });

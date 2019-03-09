@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { Button } from '@material-ui/core';
-import { toggleDeleteModal } from './actions';
+import { toggleDeleteModal } from '../actions';
 import FilterItem from './FilterItem';
 
 type PropsType = {
@@ -32,7 +32,7 @@ const mapStateToProps = (state: StateType) => ({
 
 const mapDispatchToProps = dispatch => ({
   onClick: () => {
-    dispatch(toggleDeleteModal(true));
+    dispatch(toggleDeleteModal(true, 'historys'));
   },
 });
 

@@ -26,7 +26,10 @@ const isOpenDeleteModal = (
   const { type, payload } = action;
   switch (type) {
     case Types.TOGGLE_DELETE_MODAL:
-      return payload;
+      if (payload.name === 'historys') {
+        return payload.isOpen;
+      }
+      return state;
     case Types.HTTP_DELETE_HISTORYS:
       return false;
     default:
