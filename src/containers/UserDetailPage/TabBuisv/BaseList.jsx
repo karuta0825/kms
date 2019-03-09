@@ -14,10 +14,18 @@ type PropsType = {
   onClick: number => void,
 };
 
-function setClassName(
-  selectedIndex: number,
-  idx: number
-): string {
+function getBusivUsedBases(
+  busivs: Array<BusivType>,
+  customers: Array<CustomerType>
+): Array<BusivType> {
+  return customers
+    .filter(customer => customer.has_busiv === 1)
+    .map(base =>
+      customers.find(customer => customer.base_id === base.base_id)
+    );
+}
+
+function setClassName(selectedIndex: number, idx: number): string {
   if (selectedIndex === idx) {
     return listStyles.selectedItem;
   }
@@ -49,7 +57,7 @@ function BaseList(props: PropsType): React.Node {
 }
 
 const mapStateToProps = (state: StateType) => ({
-  data: state.data.busivs,
+  data: getBusivUsedBases(state.data.busivs, state.data.customers),
   selectedIndex: state.userDetailPage.busivTab.selectedIndex,
 });
 

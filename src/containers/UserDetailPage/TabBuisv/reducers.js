@@ -4,6 +4,7 @@ import {
   SELECT_BUSIV_BASE_INDEX,
   SUCCESSED_FETCH_USERINFO,
   CHANGE_BUSIV_VALUE,
+  HTTP_PUT_BUSIVS,
 } from '../../../constants/ActionTypes';
 import checkers from '../../../utils/inputChecks';
 
@@ -20,10 +21,7 @@ const inputCheck = {
   virtual_dl_ip: checkers.isIP,
 };
 
-const choiceBaseIdx = (
-  state: number,
-  action: Action
-): number => {
+const choiceBaseIdx = (state: number, action: Action): number => {
   const { type, payload } = action;
   switch (type) {
     case SELECT_BUSIV_BASE_INDEX:
@@ -42,6 +40,8 @@ const isEdit = (state: boolean, action: Action): boolean => {
       }
       return state;
     }
+    case HTTP_PUT_BUSIVS:
+      return false;
     default:
       return state;
   }
