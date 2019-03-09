@@ -27,7 +27,7 @@ export const clients = {
   DELETE: () => `/api/v1/clients`,
 };
 
-export const fenics = {
+export const fenicses = {
   GET: kids_id => `/api/v1/fenics/id/${kids_id}`,
   PUT: () => `/api/v1/fenics`,
   POST: kids_id => `/api/v1/fenics/${kids_id}`,

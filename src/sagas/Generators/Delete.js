@@ -65,7 +65,7 @@ export function* fenicses(
     const { selection, kids_id } = action.payload;
     yield call(http, {
       method: 'DELETE',
-      endpoint: EndPoints.fenics.DELETE(),
+      endpoint: EndPoints.fenicses.DELETE(),
       body: selection,
     });
     yield put({ type: Types.FETCH_USERINFO, payload: kids_id });

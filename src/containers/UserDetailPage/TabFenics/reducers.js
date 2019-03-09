@@ -1,28 +1,34 @@
 // @flow
-import {
-  TOGGLE_EDIT_MODE,
-  SUCCESSED_FETCH_USERINFO,
-  FAILED_FETCH_USERINFO,
-  FETCH_USERINFO,
-  SELECT_FENICS,
-  CHANGE_FENICS_INFO,
-  TOGGLE_FENICS_DOWNLOAD_MODAL,
-  TOGGLE_DOWNLOAD_ITEM,
-  EXEC_FENICS_DOWNLOAD,
-} from '../../../constants/ActionTypes';
+import * as Types from '../../../constants/ActionTypes';
 
-const isEdit = (
-  state: boolean,
-  action,
-  tabName: string
-): boolean => {
+const isEdit = (state: boolean, action, tabName: string): boolean => {
   const { type, payload } = action;
   switch (type) {
-    case TOGGLE_EDIT_MODE:
+    case Types.TOGGLE_EDIT_MODE:
       if (payload.tabName === tabName) {
         return payload.isEdit;
       }
       return state;
+    case Types.HTTP_PUT_FENICSES:
+      return false;
+    default:
+      return state;
+  }
+};
+
+const isOpenDeleteModal = (
+  state: boolean,
+  action: Action
+): boolean => {
+  const { type, payload } = action;
+  switch (type) {
+    case Types.TOGGLE_DELETE_MODAL:
+      if (payload.name === 'fenics') {
+        return payload.isOpen;
+      }
+      return state;
+    case Types.HTTP_DELETE_FENICSES:
+      return false;
     default:
       return state;
   }
@@ -35,11 +41,11 @@ const inputValues = (
 ): Array<FenicsType> => {
   const { type, payload } = action;
   switch (type) {
-    case SUCCESSED_FETCH_USERINFO:
+    case Types.SUCCESSED_FETCH_USERINFO:
       return payload.fenics.filter(item => item.is_mobile === 0);
-    case FAILED_FETCH_USERINFO:
+    case Types.FAILED_FETCH_USERINFO:
       return [];
-    case TOGGLE_EDIT_MODE:
+    case Types.TOGGLE_EDIT_MODE:
       if (!payload) {
         return data;
       }
@@ -55,10 +61,10 @@ const selection = (
 ): Array<number> => {
   const { type, payload } = action;
   switch (type) {
-    case SELECT_FENICS: {
+    case Types.SELECT_FENICS: {
       return payload;
     }
-    case SUCCESSED_FETCH_USERINFO:
+    case Types.SUCCESSED_FETCH_USERINFO:
       return [];
     default:
       return state;
@@ -68,44 +74,41 @@ const selection = (
 const rowChanges = (state, action: Action): Object => {
   const { type, payload } = action;
   switch (type) {
-    case FETCH_USERINFO:
+    case Types.FETCH_USERINFO:
       return {};
-    case TOGGLE_EDIT_MODE:
+    case Types.TOGGLE_EDIT_MODE:
       if (payload.tabName === 'FENICS') {
         return {};
       }
       return state;
-    case CHANGE_FENICS_INFO:
+    case Types.CHANGE_FENICS_INFO:
       return payload;
     default:
       return state;
   }
 };
 
-const isDownloadOpen = (
+const isOpenDownloadModal = (
   state: boolean,
   action: Action
 ): boolean => {
   const { type, payload } = action;
   switch (type) {
-    case TOGGLE_FENICS_DOWNLOAD_MODAL:
+    case Types.TOGGLE_FENICS_DOWNLOAD_MODAL:
       return payload;
-    case EXEC_FENICS_DOWNLOAD:
+    case Types.EXEC_FENICS_DOWNLOAD:
       return false;
     default:
       return state;
   }
 };
 
-const canDownload = (
-  state: boolean,
-  action: Action
-): boolean => {
+const canDownload = (state: boolean, action: Action): boolean => {
   const { type, payload } = action;
   switch (type) {
-    case EXEC_FENICS_DOWNLOAD:
+    case Types.EXEC_FENICS_DOWNLOAD:
       return payload;
-    case TOGGLE_FENICS_DOWNLOAD_MODAL:
+    case Types.TOGGLE_FENICS_DOWNLOAD_MODAL:
       if (payload) {
         return false;
       }
@@ -121,7 +124,7 @@ const selectDownloadItem = (
 ): Object => {
   const { type, payload } = action;
   switch (type) {
-    case TOGGLE_DOWNLOAD_ITEM: {
+    case Types.TOGGLE_DOWNLOAD_ITEM: {
       const obj = {};
       obj[payload.itemName] = payload.isChecked;
       return {
@@ -140,14 +143,17 @@ export default (
   data: CombineDataType
 ) => ({
   isEdit: isEdit(state.isEdit, action, 'FENICS'),
-  inputValues: inputValues(
-    state.inputValues,
-    action,
-    data.fenics
+  isOpenDeleteModal: isOpenDeleteModal(
+    state.isOpenDeleteModal,
+    action
   ),
+  inputValues: inputValues(state.inputValues, action, data.fenics),
   selection: selection(state.selection, action),
   rowChanges: rowChanges(state.rowChanges, action),
-  isDownloadOpen: isDownloadOpen(state.isDownloadOpen, action),
+  isOpenDownloadModal: isOpenDownloadModal(
+    state.isOpenDownloadModal,
+    action
+  ),
   canDownload: canDownload(state.canDownload, action),
   download: selectDownloadItem(state.download, action),
 });

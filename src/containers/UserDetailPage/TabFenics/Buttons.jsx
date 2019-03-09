@@ -2,13 +2,15 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import Button from '@material-ui/core/Button';
-import { toggleEditMode } from '../actions';
-import { toggleDownloadModal } from './actions';
+import { toggleEditMode, toggleDeleteModal } from '../actions';
+import { putFenics, toggleDownloadModal } from './actions';
 
 type PropsType = {
   isEdit: boolean,
+  selection: Array<string>,
   onClickSave: Event => void,
   onClickCancel: Event => void,
+  onClickDelete: Event => void,
   onClickEdit: Event => void,
   onClickDownload: Event => void,
 };
@@ -16,23 +18,22 @@ type PropsType = {
 function Buttons(props: PropsType): React.Node {
   const {
     isEdit,
+    selection,
     onClickEdit,
     onClickCancel,
     onClickSave,
+    onClickDelete,
     onClickDownload,
   } = props;
   return (
     <React.Fragment>
       {isEdit && (
-        <Button variant="contained">
+        <Button variant="contained" onClick={onClickSave}>
           保存
         </Button>
       )}
       {isEdit && (
-        <Button
-          variant="contained"
-          onClick={onClickCancel}
-        >
+        <Button variant="contained" onClick={onClickCancel}>
           キャンセル
         </Button>
       )}
@@ -49,19 +50,15 @@ function Buttons(props: PropsType): React.Node {
       {!isEdit && (
         <Button
           variant="contained"
-          onClick={() => {
-            console.log('clicked');
-          }}
+          onClick={onClickDelete}
+          disabled={selection.length < 1}
         >
           削除
         </Button>
       )}
 
       {!isEdit && (
-        <Button
-          variant="contained"
-          onClick={onClickDownload}
-        >
+        <Button variant="contained" onClick={onClickDownload}>
           ダウンロード
         </Button>
       )}
@@ -69,16 +66,26 @@ function Buttons(props: PropsType): React.Node {
   );
 }
 
-const mapStateToProps = state => ({
-  isEdit: state.userDetailPage.fenicsTab.isEdit,
-});
+const mapStateToProps = state => state;
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = dispatch => ({ dispatch });
+
+const mergeProps = (state: StateType, { dispatch }) => ({
+  isEdit: state.userDetailPage.fenicsTab.isEdit,
+  selection: state.userDetailPage.fenicsTab.selection,
+  onClickSave: () => {
+    const kids_id = state.data.baseInfo.id;
+    const { rowChanges } = state.userDetailPage.fenicsTab;
+    dispatch(putFenics(kids_id, rowChanges));
+  },
   onClickCancel: () => {
     dispatch(toggleEditMode(false, 'FENICS'));
   },
   onClickEdit: () => {
     dispatch(toggleEditMode(true, 'FENICS'));
+  },
+  onClickDelete: () => {
+    dispatch(toggleDeleteModal(true, 'fenics'));
   },
   onClickDownload: () => {
     dispatch(toggleDownloadModal(true));
@@ -87,5 +94,6 @@ const mapDispatchToProps = dispatch => ({
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
+  mergeProps
 )(Buttons);

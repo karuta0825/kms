@@ -218,7 +218,7 @@ export function* userInfoById(
       }),
       call(http, {
         method: 'GET',
-        endpoint: EndPoints.fenics.GET(payload),
+        endpoint: EndPoints.fenicses.GET(payload),
       }),
       call(http, {
         method: 'GET',

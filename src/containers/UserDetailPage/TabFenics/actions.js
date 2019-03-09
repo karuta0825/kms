@@ -1,23 +1,17 @@
-import {
-  CHANGE_FENICS_INFO,
-  SELECT_FENICS,
-  TOGGLE_FENICS_DOWNLOAD_MODAL,
-  TOGGLE_DOWNLOAD_ITEM,
-  EXEC_FENICS_DOWNLOAD,
-} from '../../../constants/ActionTypes';
+import * as Types from '../../../constants/ActionTypes';
 
 export const selectFenics = num => ({
-  type: SELECT_FENICS,
+  type: Types.SELECT_FENICS,
   payload: num,
 });
 
 export const updateRows = changeRowsInfo => ({
-  type: CHANGE_FENICS_INFO,
+  type: Types.CHANGE_FENICS_INFO,
   payload: changeRowsInfo,
 });
 
 export const toggleDownloadModal = isOpen => ({
-  type: TOGGLE_FENICS_DOWNLOAD_MODAL,
+  type: Types.TOGGLE_FENICS_DOWNLOAD_MODAL,
   payload: isOpen,
 });
 
@@ -25,11 +19,24 @@ export const toggleDownloadItem = (
   isChecked: boolean,
   itemName: string
 ) => ({
-  type: TOGGLE_DOWNLOAD_ITEM,
+  type: Types.TOGGLE_DOWNLOAD_ITEM,
   payload: { isChecked, itemName },
 });
 
 export const execDownload = isExec => ({
-  type: EXEC_FENICS_DOWNLOAD,
+  type: Types.EXEC_FENICS_DOWNLOAD,
   payload: isExec,
+});
+
+export const putFenics = (kids_id: number, rowChanges) => ({
+  type: Types.HTTP_PUT_FENICSES,
+  payload: { kids_id, rowChanges },
+});
+
+export const deleteFenics = (
+  kids_id: number,
+  selection: Array<string>
+) => ({
+  type: Types.HTTP_DELETE_FENICSES,
+  payload: { kids_id, selection },
 });
