@@ -13,7 +13,7 @@ import initState from '../../initState';
 const { userMakePage } = initState;
 
 type inputType = {
-  systemType: string,
+  system_type: string,
   version: string,
   server: string,
   kid: string,
@@ -35,7 +35,7 @@ type Action = {
 
 export const inputValues = (
   state: inputType,
-  action: Action,
+  action: Action
 ): inputType => {
   const { type, payload } = action;
   switch (type) {
@@ -43,7 +43,7 @@ export const inputValues = (
       if (payload === 'docomo') {
         return {
           ...state,
-          systemType: payload,
+          system_type: payload,
           version: 'LM',
           server: '',
           kid: '',
@@ -51,7 +51,7 @@ export const inputValues = (
       }
       return {
         ...state,
-        systemType: payload,
+        system_type: payload,
         version: '',
         server: '',
         kid: '',
@@ -80,7 +80,7 @@ export const inputValues = (
 export const canMakeUser = (
   state: boolean,
   action: Action,
-  { inputValues }: { inputValues: inputType },
+  { inputValues }: { inputValues: inputType }
 ): boolean => {
   const { type, payload } = action;
   switch (type) {
@@ -100,14 +100,14 @@ export const canMakeUser = (
 export const showServer = (
   state: boolean,
   action: Action,
-  { inputValues }: { inputValues: inputType },
+  { inputValues }: { inputValues: inputType }
 ): boolean => {
   const { type, payload } = action;
   switch (type) {
     case SELECT_SYSTEM_TYPE:
       return payload !== 'onpre';
     case SELECT_VERSION:
-      return inputValues.systemType !== 'onpre' && payload !== '';
+      return inputValues.system_type !== 'onpre' && payload !== '';
     default:
       return state;
   }
@@ -115,7 +115,7 @@ export const showServer = (
 
 export const showVersion = (
   state: boolean,
-  action: Action,
+  action: Action
 ): boolean => {
   const { type, payload } = action;
   switch (type) {
@@ -126,10 +126,7 @@ export const showVersion = (
   }
 };
 
-export const showKid = (
-  state: boolean,
-  action: Action,
-): boolean => {
+export const showKid = (state: boolean, action: Action): boolean => {
   const { type, payload } = action;
   switch (type) {
     case SELECT_SYSTEM_TYPE:
@@ -141,7 +138,7 @@ export const showKid = (
 
 export const showDialog = (
   state: boolean,
-  action: Action,
+  action: Action
 ): boolean => {
   const { type, payload } = action;
   switch (type) {
@@ -154,10 +151,7 @@ export const showDialog = (
   }
 };
 
-export const showKID = (
-  state: string,
-  action: Action,
-): boolean => {
+export const showKID = (state: string, action: Action): boolean => {
   const { type, payload } = action;
   switch (type) {
     case SUCCESSED_MAKE_USER:
@@ -167,7 +161,7 @@ export const showKID = (
     default:
       return state;
   }
-}
+};
 
 // reducer結合
 export default (state: StateType = userMakePage, action: Action) => ({

@@ -19,6 +19,7 @@ export function* kids(
       type: Types.SUCCESSED_HTTP_POST,
       payload: { key: 'kids' },
     });
+    yield put({ type: Types.HTTP_GET_KIDS });
   } catch (e) {
     yield put({ type: Types.FAILED_HTTP_POST, payload: e });
   }
