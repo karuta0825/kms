@@ -136,6 +136,8 @@ const isAddBaseMode = (state: boolean, action: Action): boolean => {
       return payload;
     case Types.SELECT_BASE_INDEX:
       return false;
+    case Types.HTTP_POST_CUSTOMERS:
+      return false;
     default:
       return state;
   }
