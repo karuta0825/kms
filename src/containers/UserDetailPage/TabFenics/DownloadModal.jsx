@@ -42,7 +42,7 @@ function DonwloadModal(props: PropsType): React.Node {
 
 const mapStateToProps = state => ({
   title: 'ファイルダウンロード',
-  isOpen: state.userDetailPage.fenicsTab.isDownloadOpen,
+  isOpen: state.userDetailPage.fenicsTab.isOpenDownloadModal,
 });
 
 const mapDispatchToProps = dispatch => ({
