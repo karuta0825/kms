@@ -1,16 +1,5 @@
 // @flow
-import {
-  SELECT_SYSTEM_TYPE,
-  SELECT_VERSION,
-  SELECT_SERVER,
-  POST_MAKE_USER,
-  SUCCESSED_MAKE_USER,
-  INPUT_KID,
-  TOGGLE_DIALOG,
-} from '../../constants/ActionTypes';
-import initState from '../../initState';
-
-const { userMakePage } = initState;
+import * as Types from '../../constants/ActionTypes';
 
 type inputType = {
   system_type: string,
@@ -19,27 +8,13 @@ type inputType = {
   kid: string,
 };
 
-type StateType = {
-  showVersion: boolean,
-  showServer: boolean,
-  showKid: boolean,
-  showDialog: boolean,
-  canMakeUser: boolean,
-  inputValues: inputType,
-};
-
-type Action = {
-  type: string,
-  payload: any,
-};
-
 export const inputValues = (
   state: inputType,
   action: Action
 ): inputType => {
   const { type, payload } = action;
   switch (type) {
-    case SELECT_SYSTEM_TYPE:
+    case Types.SELECT_SYSTEM_TYPE:
       if (payload === 'docomo') {
         return {
           ...state,
@@ -56,18 +31,18 @@ export const inputValues = (
         server: '',
         kid: '',
       };
-    case SELECT_VERSION:
+    case Types.SELECT_VERSION:
       return {
         ...state,
         version: payload,
         server: '',
       };
-    case SELECT_SERVER:
+    case Types.SELECT_SERVER:
       return {
         ...state,
         server: payload,
       };
-    case INPUT_KID:
+    case Types.INPUT_KID:
       return {
         ...state,
         kid: payload,
@@ -79,18 +54,17 @@ export const inputValues = (
 
 export const canMakeUser = (
   state: boolean,
-  action: Action,
-  { inputValues }: { inputValues: inputType }
+  action: Action
 ): boolean => {
   const { type, payload } = action;
   switch (type) {
-    case SELECT_SYSTEM_TYPE:
+    case Types.SELECT_SYSTEM_TYPE:
       return payload === 'docomo';
-    case SELECT_VERSION:
+    case Types.SELECT_VERSION:
       return payload !== '';
-    case POST_MAKE_USER:
+    case Types.POST_MAKE_USER:
       return false;
-    case SUCCESSED_MAKE_USER:
+    case Types.SUCCESSED_MAKE_USER:
       return true;
     default:
       return state;
@@ -100,14 +74,14 @@ export const canMakeUser = (
 export const showServer = (
   state: boolean,
   action: Action,
-  { inputValues }: { inputValues: inputType }
+  values: inputType
 ): boolean => {
   const { type, payload } = action;
   switch (type) {
-    case SELECT_SYSTEM_TYPE:
+    case Types.SELECT_SYSTEM_TYPE:
       return payload !== 'onpre';
-    case SELECT_VERSION:
-      return inputValues.system_type !== 'onpre' && payload !== '';
+    case Types.SELECT_VERSION:
+      return values.system_type !== 'onpre' && payload !== '';
     default:
       return state;
   }
@@ -119,7 +93,7 @@ export const showVersion = (
 ): boolean => {
   const { type, payload } = action;
   switch (type) {
-    case SELECT_SYSTEM_TYPE:
+    case Types.SELECT_SYSTEM_TYPE:
       return payload !== 'docomo';
     default:
       return state;
@@ -129,7 +103,7 @@ export const showVersion = (
 export const showKid = (state: boolean, action: Action): boolean => {
   const { type, payload } = action;
   switch (type) {
-    case SELECT_SYSTEM_TYPE:
+    case Types.SELECT_SYSTEM_TYPE:
       return payload === 'onpre';
     default:
       return state;
@@ -142,21 +116,27 @@ export const showDialog = (
 ): boolean => {
   const { type, payload } = action;
   switch (type) {
-    case SUCCESSED_MAKE_USER:
-      return true;
-    case TOGGLE_DIALOG:
+    case Types.SUCCESSED_HTTP_POST:
+      if (payload.key === 'kids') {
+        return true;
+      }
+      return state;
+    case Types.TOGGLE_DIALOG:
       return payload;
     default:
       return state;
   }
 };
 
-export const showKID = (state: string, action: Action): boolean => {
+export const showKID = (state: string, action: Action): string => {
   const { type, payload } = action;
   switch (type) {
-    case SUCCESSED_MAKE_USER:
-      return `${payload}が作成されました`;
-    case TOGGLE_DIALOG:
+    case Types.SUCCESSED_HTTP_POST:
+      if (payload.key === 'kids') {
+        return `KID${payload.value}が作成されました`;
+      }
+      return state;
+    case Types.TOGGLE_DIALOG:
       return '';
     default:
       return state;
@@ -164,12 +144,16 @@ export const showKID = (state: string, action: Action): boolean => {
 };
 
 // reducer結合
-export default (state: StateType = userMakePage, action: Action) => ({
+export default (state: UserMakePageType, action: Action) => ({
   inputValues: inputValues(state.inputValues, action),
   showVersion: showVersion(state.showVersion, action),
-  showServer: showServer(state.showServer, action, state),
+  showServer: showServer(state.showServer, action, state.inputValues),
   showKid: showKid(state.showKid, action),
   showDialog: showDialog(state.showDialog, action),
-  canMakeUser: canMakeUser(state.canMakeUser, action, state),
+  canMakeUser: canMakeUser(
+    state.canMakeUser,
+    action,
+    state.inputValues
+  ),
   makedUserKID: showKID(state.makedUserKID, action),
 });

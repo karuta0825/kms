@@ -5,7 +5,7 @@ declare type UserMakePageType = {
   showDialog: boolean,
   canMakeUser: boolean,
   inputValues: {
-    systemType: string,
+    system_type: string,
     version: string,
     server: string,
     kid: string,

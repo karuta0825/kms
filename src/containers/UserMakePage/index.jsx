@@ -17,22 +17,18 @@ type PropsType = {
 };
 
 const UserMake = (props: PropsType): React.Node => {
-  const {
-    showVersion,
-    showServer,
-    showKid,
-  } = props;
+  const { showVersion, showServer, showKid } = props;
   return (
     <div className={styles.body}>
       <div className={styles.wrapper}>
         <div className={styles.title}>ユーザー作成</div>
         <Paper className={styles.paper}>
           <SelectSystemType />
-          { showVersion && <SelectVersion /> }
-          { showServer && <SelectServer /> }
-          { showKid && <InputKid /> }
+          {showVersion && <SelectVersion />}
+          {showServer && <SelectServer />}
+          {showKid && <InputKid />}
           <div className={styles.action}>
-            <MakeButton>作成</MakeButton>
+            <MakeButton />
           </div>
         </Paper>
         <Dialog />
@@ -47,6 +43,4 @@ const mapStateToProps = state => ({
   showKid: state.userMakePage.showKid,
 });
 
-export default connect(
-  mapStateToProps,
-)(UserMake);
+export default connect(mapStateToProps)(UserMake);

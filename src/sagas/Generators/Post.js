@@ -10,14 +10,14 @@ export function* kids(
 ): Generator<Object, void, { done: boolean, value: any }> {
   try {
     const { payload } = action;
-    yield call(http, {
+    const { kid } = yield call(http, {
       method: 'POST',
       endpoint: EndPoints.kids.POST(),
       body: payload,
     });
     yield put({
       type: Types.SUCCESSED_HTTP_POST,
-      payload: { key: 'kids' },
+      payload: { key: 'kids', value: kid },
     });
     yield put({ type: Types.HTTP_GET_KIDS });
   } catch (e) {
