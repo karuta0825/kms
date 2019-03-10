@@ -218,7 +218,7 @@ export function* servers(
       type: Types.SUCCESSED_HTTP_PUT,
       payload: { key: 'servers' },
     });
-    yield Get.servers();
+    yield put({ type: Types.HTTP_GET_SERVERS });
   } catch (e) {
     yield put({ type: Types.FAILED_HTTP_PUT, payload: e });
   }

@@ -12,11 +12,6 @@ export default (
         return payload.value;
       }
       return state;
-    case Types.SUCCESSED_HTTP_PUT:
-      if (payload.key === 'servers') {
-        return payload.value;
-      }
-      return state;
     case Types.FAILED_HTTP_GET:
       return state;
     default:

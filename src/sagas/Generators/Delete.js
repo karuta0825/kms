@@ -132,13 +132,14 @@ export function* servers(
     const { payload } = action;
     yield call(http, {
       method: 'DELETE',
-      endpoint: EndPoints.servers.DELETE(payload),
+      endpoint: EndPoints.servers.DELETE(),
+      body: payload,
     });
     yield put({
       type: Types.SUCCESSED_HTTP_DELETE,
       payload: { key: 'servers' },
     });
-    yield Get.servers();
+    yield put({ type: Types.HTTP_GET_SERVERS });
   } catch (e) {
     yield put({ type: Types.FAILED_HTTP_DELETE, payload: e });
   }

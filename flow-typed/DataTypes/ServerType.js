@@ -8,4 +8,5 @@ declare type ServerType = {
   domain: ?string,
   capacity: number,
   environment_id: number,
+  project: string,
 };

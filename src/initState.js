@@ -17,7 +17,7 @@ const initState: StateType = {
     showDialog: false,
     canMakeUser: false,
     inputValues: {
-      systemType: '',
+      system_type: '',
       version: '',
       server: '',
       kid: '',
@@ -156,7 +156,14 @@ const initState: StateType = {
       selectedTemplate: '',
     },
   },
-  serverManagePage: {},
+  serverManagePage: {
+    isEdit: false,
+    selection: [],
+    rowChanges: {},
+    selectedProject: '',
+    isOpenDeleteModal: false,
+    inputValues: {},
+  },
   serviceManagePage: {
     isEdit: false,
     selection: [],
