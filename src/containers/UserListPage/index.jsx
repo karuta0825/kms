@@ -1,5 +1,7 @@
 import * as React from 'react';
+import { connect } from 'react-redux';
 import Paper from '@material-ui/core/Paper';
+import * as Types from '../../constants/ActionTypes';
 import ButtonDelete from './ButtonDelete';
 import ButtonFilter from './ButtonFilter';
 import ButtonDownload from './ButtonDownload';
@@ -13,7 +15,8 @@ type PropsType = {};
 
 class UserListPage extends React.Component<PropsType> {
   componentWillMount() {
-    console.log('will mount');
+    const { dispatch } = this.props;
+    dispatch({ type: Types.HTTP_GET_KIDS });
   }
 
   render(): React.Node {
@@ -35,4 +38,4 @@ class UserListPage extends React.Component<PropsType> {
   }
 }
 
-export default UserListPage;
+export default connect()(UserListPage);

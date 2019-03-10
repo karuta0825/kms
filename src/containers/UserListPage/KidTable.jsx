@@ -94,7 +94,6 @@ function KidTable(props: PropsType): React.Node {
 }
 
 const mapStateToProps = (state: StateType) => ({
-  currentPage: state.userListPage.currentPage,
   selection: state.userListPage.selection,
   columnFilters: state.userListPage.columnFilters,
   rows: searchUser(state.data.kids, state.userListPage.filter),
