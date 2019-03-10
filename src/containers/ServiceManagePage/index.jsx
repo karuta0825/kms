@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import styles from '../TemplateManagePage/css/index.css';
+import styles from './css/index.css';
 import VersionList from './VersionList';
 import ModalDelete from './ModalDelete';
 import EditorHeader from './EditorHeader';
