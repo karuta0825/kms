@@ -1,9 +1,10 @@
+const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 
 const config = {
   mode: 'production',
-  entry: './src/app.js',
+  entry: ['babel-polyfill', './src/app.js'],
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'app.js',
@@ -37,6 +38,7 @@ const config = {
     new HtmlWebpackPlugin({
       template: 'src/index.html',
     }),
+    new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
   ],
   resolve: {
     extensions: ['.js', '.jsx'],
