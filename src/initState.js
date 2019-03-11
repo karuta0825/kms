@@ -158,11 +158,15 @@ const initState: StateType = {
   },
   serverManagePage: {
     isEdit: false,
+    isCreateMode: false,
     selection: [],
     rowChanges: {},
     selectedProject: '',
     isOpenDeleteModal: false,
     inputValues: {},
+    isInputError: {
+      ip: false,
+    },
   },
   serviceManagePage: {
     isEdit: false,

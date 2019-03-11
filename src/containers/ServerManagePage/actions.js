@@ -10,9 +10,19 @@ export const toggleEditMode = (isEdit: boolean) => ({
   payload: isEdit,
 });
 
+export const toggleCreateMode = (isCreate: boolean) => ({
+  type: Types.TOGGLE_SERVER_CREATE_MODE,
+  payload: isCreate,
+});
+
 export const selectServers = (selection: Array<number>) => ({
   type: Types.SELECT_SERVERS,
   payload: selection,
+});
+
+export const changeValue = (key: string, value: string) => ({
+  type: Types.INPUT_SERVER_VALUE,
+  payload: { key, value },
 });
 
 export const updateRows = rowChanges => ({

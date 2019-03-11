@@ -1,8 +1,10 @@
 declare type ServerManagePageType = {
   isEdit: boolean,
+  isCreateMode: boolean,
   selection: Array<number>,
-  rowChanges: Array<ServerType>,
+  rowChanges: { [key: number]: ServerType },
   selectedProject: string,
   isOpenDeleteModal: boolean,
-  inputValues: ServerType,
+  inputValues: { [key: string]: string },
+  isInputError: { [key: string]: boolean },
 };

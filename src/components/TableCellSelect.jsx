@@ -55,6 +55,7 @@ const EditCellBase = ({
   className,
   items,
   inputProps,
+  nothing = true,
   ...restProps
 }: PropsType): React.Node => {
   const inputClasses = classNames({
@@ -63,11 +64,11 @@ const EditCellBase = ({
     [classes.inputCenter]:
       tableColumn && tableColumn.align === 'center',
   });
-
   return (
     <TableCell
       className={classNames(classes.cell, className)}
       style={style}
+      editingEnabled
       {...restProps}
     >
       {children || (
@@ -77,9 +78,11 @@ const EditCellBase = ({
           onChange={e => onValueChange(e.target.value)}
           inputProps={inputProps}
         >
-          <MenuItem value="">
-            <em>None</em>
-          </MenuItem>
+          {nothing && (
+            <MenuItem value="">
+              <em>なし</em>
+            </MenuItem>
+          )}
           {items &&
             items.map(item => (
               <MenuItem key={item.id} value={item.value}>
@@ -92,6 +95,4 @@ const EditCellBase = ({
   );
 };
 
-export default withStyles(styles, { name: 'EditCell' })(
-  EditCellBase
-);
+export default withStyles(styles, { name: 'EditCell' })(EditCellBase);

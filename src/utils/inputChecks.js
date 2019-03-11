@@ -1,6 +1,9 @@
 // @flow
 const inputChecks = {};
 
+inputChecks.isNull = (value: string): boolean => value === '';
+inputChecks.isNull.MSG = '必須入力項目です';
+
 inputChecks.alphaNum = (value: string): boolean => {
   const reg = new RegExp(/^[0-9a-zA-Z]+$/);
   if (value === '') return false;

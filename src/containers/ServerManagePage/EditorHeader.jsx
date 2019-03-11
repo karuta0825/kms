@@ -2,7 +2,11 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { Button } from '@material-ui/core';
-import { toggleEditMode, putServers } from './actions';
+import {
+  toggleEditMode,
+  putServers,
+  toggleCreateMode,
+} from './actions';
 import { toggleModal } from '../Common/actions';
 import styles from './css/editor.css';
 
@@ -22,9 +26,9 @@ function EditorHeader(props: PropsType): React.Node {
     selection,
     onClickAdd,
     onClickSave,
-    onClickCancel,
     onClickDelete,
     onClickEdit,
+    onClickCancel,
   } = props;
   return (
     <div className={styles.header}>
@@ -91,7 +95,7 @@ const mergeProps = (state: StateType, { dispatch }) => ({
   isEdit: state.serverManagePage.isEdit,
   selection: state.serverManagePage.selection,
   onClickAdd: () => {
-    dispatch(toggleModal(true, 'create-servers'));
+    dispatch(toggleCreateMode(true));
   },
   onClickSave: () => {
     const { rowChanges } = state.serverManagePage;

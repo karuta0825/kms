@@ -13,6 +13,7 @@ import {
   TableEditRow,
 } from '@devexpress/dx-react-grid-material-ui';
 import BorderGrid from '../../components/BorderGrid';
+import TableCells from './TableCells';
 import styles from './css/editor.css';
 import { selectServers, updateRows } from './actions';
 
@@ -51,7 +52,7 @@ function ServersTable(props: PropsType): React.Node {
         />
         <VirtualTable />
         <TableHeaderRow />
-        <TableEditRow />
+        <TableEditRow cellComponent={TableCells} />
       </Grid>
     );
   }
