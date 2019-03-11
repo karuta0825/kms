@@ -7,8 +7,8 @@ declare type UserMakePageType = {
   inputValues: {
     system_type: string,
     version: string,
-    server: string,
-    kid: string,
+    server?: string,
+    kid?: string,
   },
   makedUserKID: string,
 };
