@@ -11,7 +11,9 @@ import styles from './css/table.css';
 import KidTable from './KidTable';
 import ModalDeleteKid from './ModalDeleteKid';
 
-type PropsType = {};
+type PropsType = {
+  dispatch : () => void,
+};
 
 class UserListPage extends React.Component<PropsType> {
   componentWillMount() {

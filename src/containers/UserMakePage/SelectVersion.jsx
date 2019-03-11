@@ -1,20 +1,16 @@
 // @flow
 import { connect } from 'react-redux';
-import {
-  selectVersion,
-} from './actions';
+import { selectVersion } from './actions';
 import SelectWithPlacefolder from '../../components/SelectWithPlacefolder';
 import styles from './css/index.css';
 import { getUniqueItemByKey } from '../../utils';
 
-import { type Environment } from '../../data/environments';
-
-const getUniqueVersion = (environments: Array<Environment>) => (
-  getUniqueItemByKey(environments, 'version')
-    .map(item => (
-      { id: item.id, name: item.version, value: item.version }
-    ))
-);
+const getUniqueVersion = (environments: Array<EnvironmentType>) =>
+  getUniqueItemByKey(environments, 'version').map(item => ({
+    id: item.id,
+    name: item.version,
+    value: item.version,
+  }));
 
 const mapStateToProps = state => ({
   title: 'バージョン',
@@ -25,12 +21,12 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  handleChange: (e) => {
+  handleChange: e => {
     dispatch(selectVersion(e.target.value));
   },
 });
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps,
+  mapDispatchToProps
 )(SelectWithPlacefolder);

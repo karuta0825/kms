@@ -4,8 +4,8 @@ import * as Types from '../../constants/ActionTypes';
 type inputType = {
   system_type: string,
   version: string,
-  server: string,
-  kid: string,
+  server?: string,
+  kid?: string,
 };
 
 export const inputValues = (
@@ -150,10 +150,6 @@ export default (state: UserMakePageType, action: Action) => ({
   showServer: showServer(state.showServer, action, state.inputValues),
   showKid: showKid(state.showKid, action),
   showDialog: showDialog(state.showDialog, action),
-  canMakeUser: canMakeUser(
-    state.canMakeUser,
-    action,
-    state.inputValues
-  ),
+  canMakeUser: canMakeUser(state.canMakeUser, action),
   makedUserKID: showKID(state.makedUserKID, action),
 });

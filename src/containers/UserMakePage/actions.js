@@ -36,8 +36,12 @@ export const toggleDialog = (isOpen: boolean) => ({
   payload: isOpen,
 });
 
-// どうやってstateの値を渡せるか?
-export const makeUser = inputValues => ({
+export const makeUser = (inputValues: {
+  system_type: string,
+  version: string,
+  kid?: string,
+  server?: string,
+}) => ({
   type: Types.HTTP_POST_KIDS,
   payload: inputValues,
 });

@@ -4,13 +4,13 @@ import styles from './css/index.css';
 import { selectSystemType } from './actions';
 import SelectWithPlacefolder from '../../components/SelectWithPlacefolder';
 import { getUniqueItemByKey } from '../../utils';
-import { type Environment } from '../../data/environments';
 
-const getUniqueSystemType = (environments: Array<Environment>) => (
-  getUniqueItemByKey(environments, 'name').map(item => (
-    { id: item.id, name: item.name, value: item.system_type }
-  ))
-);
+const getUniqueSystemType = (environments: Array<EnvironmentType>) =>
+  getUniqueItemByKey(environments, 'name').map(item => ({
+    id: item.id,
+    name: item.name,
+    value: item.system_type,
+  }));
 
 const mapStateToProps = state => ({
   title: 'システム環境',
@@ -21,12 +21,12 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  handleChange: (e) => {
+  handleChange: e => {
     dispatch(selectSystemType(e.target.value));
   },
 });
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps,
+  mapDispatchToProps
 )(SelectWithPlacefolder);
