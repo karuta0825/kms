@@ -29,7 +29,7 @@ const mapStateToProps = (state: StateType) => ({
 
 const mapDispatchToProps = dispatch => ({
   onChange: e => {
-    dispatch(changeValue('start_on', e.target.value));
+    dispatch(changeValue('register_on', e.target.value));
   },
 });
 
