@@ -9,13 +9,35 @@ export function* kids(
   action: Action
 ): Generator<Object, void, { done: boolean, value: any }> {
   try {
+    const { kids_id, inputValues, diff } = action.payload;
     // 入力チェック
-    const { kids_id, inputValues } = action.payload;
+    console.log(kids_id, inputValues, diff);
+
+    // KID更新;
     yield call(http, {
       method: 'PUT',
       endpoint: EndPoints.kids.PUT(kids_id),
       body: inputValues,
     });
+
+    // Fenics数追加
+    if (diff.fenicses > 0) {
+      yield call(http, {
+        method: 'POST',
+        endpoint: EndPoints.fenicses.POST(kids_id),
+        body: { is_mobile: false, number: diff.fenicses },
+      });
+    }
+
+    // clients数追加;
+    if (diff.clients > 0) {
+      yield call(http, {
+        method: 'POST',
+        endpoint: EndPoints.clients.POST(kids_id),
+        body: { number: diff.clients },
+      });
+    }
+
     yield put({
       type: Types.SUCCESSED_HTTP_PUT,
       payload: { key: 'kids' },
