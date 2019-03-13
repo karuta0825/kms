@@ -17,9 +17,9 @@ function InputRangeId(props: PropsType): React.Node {
 }
 
 const mapStateToProps = state => ({
-  title: '端末ID収容数',
+  title: '端末開始id',
   isEdit: state.userDetailPage.baseInfoTab.isEdit,
-  value: state.userDetailPage.baseInfoTab.inputValues.range_id,
+  value: state.userDetailPage.baseInfoTab.inputValues.start_id,
   customProps: {
     onInput: ({ target }) => {
       if (target.value.length > 4)
@@ -30,7 +30,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   onChange: e => {
-    dispatch(changeValue('range_id', e.target.value));
+    dispatch(changeValue('start_id', e.target.value));
   },
 });
 

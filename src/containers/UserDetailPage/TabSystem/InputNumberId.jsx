@@ -19,7 +19,9 @@ function InputNumberId(props: PropsType): React.Node {
 const mapStateToProps = state => ({
   title: '端末ID収容数',
   isEdit: state.userDetailPage.baseInfoTab.isEdit,
-  value: state.userDetailPage.baseInfoTab.inputValues.number_id,
+  value: String(
+    state.userDetailPage.baseInfoTab.inputValues.number_id
+  ),
   customProps: {
     onInput: ({ target }) => {
       if (target.value.length > 3)

@@ -1,11 +1,8 @@
 // @flow
-import {
-  CHANGE_BASEINFO_VALUE,
-  ADD_BASEINFO_VALUE,
-} from '../../../constants/ActionTypes';
+import * as Types from '../../../constants/ActionTypes';
 
 export const changeValue = (key: string, value: any) => ({
-  type: CHANGE_BASEINFO_VALUE,
+  type: Types.CHANGE_BASEINFO_VALUE,
   payload: {
     key,
     value,
@@ -13,9 +10,14 @@ export const changeValue = (key: string, value: any) => ({
 });
 
 export const addValue = (key: string, num: number) => ({
-  type: ADD_BASEINFO_VALUE,
+  type: Types.ADD_BASEINFO_VALUE,
   payload: {
     key,
     num,
   },
+});
+
+export const putKids = inputValues => ({
+  type: Types.HTTP_PUT_KIDS,
+  payload: inputValues,
 });

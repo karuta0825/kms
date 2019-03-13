@@ -1,11 +1,17 @@
 // @flow
-import {
-  TOGGLE_EDIT_MODE,
-  SUCCESSED_FETCH_USERINFO,
-  CHANGE_BASEINFO_VALUE,
-  ADD_BASEINFO_VALUE,
-} from '../../../constants/ActionTypes';
+import * as Types from '../../../constants/ActionTypes';
 import checkers from '../../../utils/inputChecks';
+
+function getStartNumberId(range_id: string): string {
+  const [start_id, end_id] = (range_id && range_id.split('-')) || [
+    '',
+    '',
+  ];
+  if (start_id === '') {
+    return '0';
+  }
+  return start_id;
+}
 
 function isDecreae(value: string, cache: number): boolean {
   const fmt = Number(value);
@@ -21,18 +27,16 @@ const inputCheck = {
   fenics_number: isDecreae,
 };
 
-const isEdit = (
-  state: boolean,
-  action,
-  tabName: string
-): boolean => {
+const isEdit = (state: boolean, action, tabName: string): boolean => {
   const { type, payload } = action;
   switch (type) {
-    case TOGGLE_EDIT_MODE:
+    case Types.TOGGLE_EDIT_MODE:
       if (payload.tabName === tabName) {
         return payload.isEdit;
       }
       return state;
+    case Types.HTTP_PUT_KIDS:
+      return false;
     default:
       return state;
   }
@@ -45,14 +49,21 @@ const inputValues = (
 ): Object => {
   const { type, payload } = action;
   switch (type) {
-    case SUCCESSED_FETCH_USERINFO:
-      return payload.baseInfo[0];
-    case TOGGLE_EDIT_MODE:
+    case Types.SUCCESSED_FETCH_USERINFO:
+      const inputValues = payload.baseInfo[0];
+      return {
+        ...inputValues,
+        start_id: getStartNumberId(inputValues.range_id),
+      };
+    case Types.TOGGLE_EDIT_MODE:
       if (payload.tabName === 'BASEINFO' && !payload.isEdit) {
-        return cache;
+        return {
+          ...cache,
+          start_id: getStartNumberId(cache.range_id),
+        };
       }
       return state;
-    case CHANGE_BASEINFO_VALUE: {
+    case Types.CHANGE_BASEINFO_VALUE: {
       const obj = {};
       obj[payload.key] = payload.value;
       return {
@@ -60,10 +71,9 @@ const inputValues = (
         ...obj,
       };
     }
-    case ADD_BASEINFO_VALUE: {
+    case Types.ADD_BASEINFO_VALUE: {
       const obj = {};
-      obj[payload.key] =
-        Number(state[payload.key]) + payload.num;
+      obj[payload.key] = Number(state[payload.key]) + payload.num;
       return {
         ...state,
         ...obj,
@@ -82,7 +92,7 @@ const isInputError = (
 ): Object => {
   const { type, payload } = action;
   switch (type) {
-    case CHANGE_BASEINFO_VALUE: {
+    case Types.CHANGE_BASEINFO_VALUE: {
       const obj = {};
 
       if (!inputCheck[payload.key]) {
@@ -98,7 +108,7 @@ const isInputError = (
         ...obj,
       };
     }
-    case ADD_BASEINFO_VALUE: {
+    case Types.ADD_BASEINFO_VALUE: {
       const obj = {};
 
       if (!inputCheck[payload.key]) {
@@ -114,7 +124,7 @@ const isInputError = (
         ...obj,
       };
     }
-    case TOGGLE_EDIT_MODE: {
+    case Types.TOGGLE_EDIT_MODE: {
       if (payload.tabName === 'BASEINFO' && !payload.isEdit) {
         const obj = {};
         Object.keys(state).forEach(key => {
@@ -136,11 +146,7 @@ export default (
   data: CombineDataType
 ) => ({
   isEdit: isEdit(state.isEdit, action, 'BASEINFO'),
-  inputValues: inputValues(
-    state.inputValues,
-    action,
-    data.baseInfo
-  ),
+  inputValues: inputValues(state.inputValues, action, data.baseInfo),
   isInputError: isInputError(
     state.isInputError,
     action,
