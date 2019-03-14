@@ -1,13 +1,13 @@
 .wrapper {
   width: 100%;
-  height: calc(99% - 64px);
+  height: calc(99% - 75px);
   display: flex;
 }
 
 .userinfo {
-  width: calc(100% - 360px);
+  width: calc(100% - 400px);
   height: 100%;
-  margin: 0 20px 0 20px;
+  margin: 0 35px 0 35px;
 }
 
 .memo {
