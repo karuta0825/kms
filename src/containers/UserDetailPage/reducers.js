@@ -45,6 +45,40 @@ const isFetching = (state, action: Action): boolean => {
   switch (type) {
     case Types.FETCH_USERINFO:
       return true;
+
+    case Types.HTTP_DELETE_CLIENTS:
+      return true;
+    case Types.HTTP_DELETE_FENICSES:
+      return true;
+    case Types.HTTP_DELETE_HISTORYS:
+      return true;
+    case Types.HTTP_DELETE_MEMOS:
+      return true;
+
+    case Types.HTTP_PUT_KIDS:
+      return true;
+    case Types.HTTP_PUT_CUSTOMERS:
+      return true;
+    case Types.HTTP_PUT_LICENSES:
+      return true;
+    case Types.HTTP_PUT_CLIENTS:
+      return true;
+    case Types.HTTP_PUT_FENICSES:
+      return true;
+    case Types.HTTP_PUT_BUSIVS:
+      return true;
+    case Types.HTTP_PUT_MOBILES:
+      return true;
+    case Types.HTTP_PUT_PARTNERS:
+      return true;
+    case Types.HTTP_PUT_MEMOS:
+      return true;
+
+    case Types.HTTP_POST_CUSTOMERS:
+      return true;
+    case Types.HTTP_POST_MEMOS:
+      return true;
+
     case Types.SUCCESSED_FETCH_USERINFO:
       return false;
     case Types.FAILED_FETCH_USERINFO:
