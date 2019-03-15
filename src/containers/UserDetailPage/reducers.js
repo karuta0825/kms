@@ -1,11 +1,5 @@
 // @flow
-import {
-  SET_TAB_POSITION,
-  FETCH_USERINFO,
-  SUCCESSED_FETCH_USERINFO,
-  FAILED_FETCH_USERINFO,
-  TOGGLE_PREV_NEXT_BUTTON,
-} from '../../constants/ActionTypes';
+import * as Types from '../../constants/ActionTypes';
 import customerTab from './TabCustomer/reducers';
 import baseInfoTab from './TabSystem/reducers';
 import liceseTab from './TabLicense/reducers';
@@ -19,7 +13,7 @@ import memo from './Memo/reducers';
 const tabIndex = (state: number, action): number => {
   const { type, payload } = action;
   switch (type) {
-    case SET_TAB_POSITION:
+    case Types.SET_TAB_POSITION:
       return payload;
     default:
       return state;
@@ -29,7 +23,7 @@ const tabIndex = (state: number, action): number => {
 const buttonPrevIsActive = (state, action): boolean => {
   const { type, payload } = action;
   switch (type) {
-    case TOGGLE_PREV_NEXT_BUTTON:
+    case Types.TOGGLE_PREV_NEXT_BUTTON:
       return payload.hasPrev;
     default:
       return state;
@@ -39,7 +33,7 @@ const buttonPrevIsActive = (state, action): boolean => {
 const buttonNextIsActive = (state, action): boolean => {
   const { type, payload } = action;
   switch (type) {
-    case TOGGLE_PREV_NEXT_BUTTON:
+    case Types.TOGGLE_PREV_NEXT_BUTTON:
       return payload.hasNext;
     default:
       return state;
@@ -49,11 +43,11 @@ const buttonNextIsActive = (state, action): boolean => {
 const isFetching = (state, action: Action): boolean => {
   const { type } = action;
   switch (type) {
-    case FETCH_USERINFO:
+    case Types.FETCH_USERINFO:
       return true;
-    case SUCCESSED_FETCH_USERINFO:
+    case Types.SUCCESSED_FETCH_USERINFO:
       return false;
-    case FAILED_FETCH_USERINFO:
+    case Types.FAILED_FETCH_USERINFO:
       return false;
     default:
       return state;

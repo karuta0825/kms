@@ -1,11 +1,5 @@
 // @flow
-import {
-  TOGGLE_EDIT_MODE,
-  SELECT_BUSIV_BASE_INDEX,
-  SUCCESSED_FETCH_USERINFO,
-  CHANGE_BUSIV_VALUE,
-  HTTP_PUT_BUSIVS,
-} from '../../../constants/ActionTypes';
+import * as Types from '../../../constants/ActionTypes';
 import checkers from '../../../utils/inputChecks';
 
 const inputCheck = {
@@ -24,7 +18,7 @@ const inputCheck = {
 const choiceBaseIdx = (state: number, action: Action): number => {
   const { type, payload } = action;
   switch (type) {
-    case SELECT_BUSIV_BASE_INDEX:
+    case Types.SELECT_BUSIV_BASE_INDEX:
       return payload;
     default:
       return state;
@@ -34,13 +28,13 @@ const choiceBaseIdx = (state: number, action: Action): number => {
 const isEdit = (state: boolean, action: Action): boolean => {
   const { type, payload } = action;
   switch (type) {
-    case TOGGLE_EDIT_MODE: {
+    case Types.TOGGLE_EDIT_MODE: {
       if (payload.tabName === 'BUSIV') {
         return payload.isEdit;
       }
       return state;
     }
-    case HTTP_PUT_BUSIVS:
+    case Types.HTTP_PUT_BUSIVS:
       return false;
     default:
       return state;
@@ -55,16 +49,16 @@ const inputValues = (
 ): Object => {
   const { type, payload } = action;
   switch (type) {
-    case SUCCESSED_FETCH_USERINFO:
+    case Types.SUCCESSED_FETCH_USERINFO:
       return payload.busiv[index];
-    case TOGGLE_EDIT_MODE:
+    case Types.TOGGLE_EDIT_MODE:
       if (payload.tabName === 'BUSIV' && !payload.isEdit) {
         return (cache[index] && cache[index]) || {};
       }
       return state;
-    case SELECT_BUSIV_BASE_INDEX:
+    case Types.SELECT_BUSIV_BASE_INDEX:
       return (cache[payload] && cache[payload]) || {};
-    case CHANGE_BUSIV_VALUE: {
+    case Types.CHANGE_BUSIV_VALUE: {
       const obj = {};
       obj[payload.key] = payload.value;
       return {
@@ -80,7 +74,7 @@ const inputValues = (
 const isInputError = (state, action: Action): Object => {
   const { type, payload } = action;
   switch (type) {
-    case CHANGE_BUSIV_VALUE: {
+    case Types.CHANGE_BUSIV_VALUE: {
       const obj = {};
       if (!inputCheck[payload.key]) return state;
       obj[payload.key] = inputCheck[payload.key](payload.value);
