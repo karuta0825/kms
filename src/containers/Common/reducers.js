@@ -67,6 +67,12 @@ export const dialog = (
         isOpen: true,
         msg: payload,
       };
+    case Types.FAILED_FETCH_USERINFO:
+      return {
+        title: 'データ取得失敗',
+        isOpen: true,
+        msg: payload,
+      };
     default:
       return state;
   }
