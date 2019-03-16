@@ -29,11 +29,7 @@ class UserDetail extends React.Component<PropsType> {
 
   componentWillUnmount() {
     const { dispatch } = this.props;
-    dispatch(
-      togglePrevNexButton({ hasPrev: true, hasNext: true })
-    );
-    dispatch(toggleEditMode(false, 'BASEINFO'));
-    dispatch(toggleEditMode(false, 'CUSTOMER'));
+    dispatch(togglePrevNexButton({ hasPrev: true, hasNext: true }));
   }
 
   render(): React.Node {

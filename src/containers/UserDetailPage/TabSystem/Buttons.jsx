@@ -82,7 +82,6 @@ const mergeProps = (state: StateType, { dispatch }) => ({
       client_number,
       fenics_number,
       busiv_number,
-      version,
       start_id,
       number_id,
     } = inputValues;

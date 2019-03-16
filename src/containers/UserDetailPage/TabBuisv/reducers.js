@@ -34,6 +34,8 @@ const isEdit = (state: boolean, action: Action): boolean => {
       }
       return state;
     }
+    case Types.FETCH_USERINFO:
+      return false;
     case Types.HTTP_PUT_BUSIVS:
       return false;
     default:

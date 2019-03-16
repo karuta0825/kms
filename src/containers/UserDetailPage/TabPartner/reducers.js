@@ -25,6 +25,8 @@ const isEdit = (state: boolean, action, tabName: string): boolean => {
       return state;
     case Types.HTTP_PUT_PARTNERS:
       return false;
+    case Types.FETCH_USERINFO:
+      return false;
     default:
       return state;
   }

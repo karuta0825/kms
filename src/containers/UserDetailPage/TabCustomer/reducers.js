@@ -88,6 +88,8 @@ const isEdit = (state: boolean, action, tabName: string): boolean => {
       return payload;
     case Types.HTTP_POST_CUSTOMERS:
       return false;
+    case Types.FETCH_USERINFO:
+      return false;
     default:
       return state;
   }
