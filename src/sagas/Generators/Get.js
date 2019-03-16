@@ -256,3 +256,37 @@ export function* userInfoById(
     yield put({ type: Types.FAILED_FETCH_USERINFO, payload: e });
   }
 }
+
+export function* template() {
+  try {
+    const localhost = `http://localhost:8080/template`;
+    const fetchTemplate = url => fetch(url).then(r => r.text());
+
+    const [publicApps, apUserSet, dbUserSet, webUserSet] = yield all([
+      call(fetchTemplate, `${localhost}/public_apps.txt`),
+      call(
+        fetchTemplate,
+        `${localhost}/template_AP_WinUserSet_KIDXXXXX.txt`
+      ),
+      call(
+        fetchTemplate,
+        `${localhost}/template_DB_WinUserSet_KIDXXXXX.txt`
+      ),
+      call(fetchTemplate, `${localhost}/template_SaaSWebUserAdd.txt`),
+    ]);
+
+    const result = {
+      publicApps,
+      apUserSet,
+      dbUserSet,
+      webUserSet,
+    };
+
+    yield put({
+      type: Types.SUCCESSED_HTTP_GET,
+      payload: { key: 'templates', result },
+    });
+  } catch (e) {
+    yield put({ type: Types.FAILED_HTTP_GET });
+  }
+}

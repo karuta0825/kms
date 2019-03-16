@@ -3,7 +3,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import Button from '@material-ui/core/Button';
 import { toggleEditMode, toggleDeleteModal } from '../actions';
-import { putClient } from './actions';
+import { putClient, toggleDownloadModal } from './actions';
 
 type PropsType = {
   isEdit: boolean,
@@ -87,7 +87,9 @@ const mergeProps = (state: StateType, { dispatch }) => ({
   onClickDelete: () => {
     dispatch(toggleDeleteModal(true, 'clients'));
   },
-  onClickDownload: () => {},
+  onClickDownload: () => {
+    dispatch(toggleDownloadModal(true));
+  },
 });
 
 export default connect(

@@ -4,6 +4,7 @@ import styles from '../css/tab.css';
 import Buttons from './Buttons';
 import ClientTable from './ClientTable';
 import ModalDeleteClients from './ModalDeleteClients';
+import ModalDownload from './ModalDownload';
 
 export default function TabClient(): React.Node {
   return (
@@ -15,6 +16,7 @@ export default function TabClient(): React.Node {
         <ClientTable />
       </div>
       <ModalDeleteClients />
+      <ModalDownload />
     </div>
   );
 }

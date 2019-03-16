@@ -12,4 +12,10 @@ declare type CombineDataType = {
   services: Array<ServiceType>,
   memos: Array<MemoType>,
   memoTemplates: Array<MemoTemplateType>,
+  templates: {
+    apUserSet: string,
+    dbUserSet: string,
+    webUserSet: string,
+    publicApps: string,
+  },
 };

@@ -33,6 +33,7 @@ export default function* rootSage(): Generator<
   yield takeEvery(Types.HTTP_GET_ENVIRONMENTS, Get.environments);
   yield takeEvery(Types.HTTP_GET_ACCOUNTS, Get.accounts);
   yield takeEvery(Types.HTTP_GET_KIDS, Get.kids);
+  yield takeEvery(Types.HTTP_GET_TEMPLATES, Get.template);
 
   // Delete
   yield takeEvery(Types.HTTP_DELETE_SERVERS, Delete.servers);

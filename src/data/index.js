@@ -16,11 +16,9 @@ import memoTemplates from './memoTemplates';
 import environments from './environments';
 import events from './events';
 import columns from './columns';
-import initState from '../initState';
+import templates from './templates';
 
-const { data } = initState;
-
-export default (state = data, action) => ({
+export default (state: StateType, action: Action) => ({
   kids: kids(state.kids, action),
   baseInfo: baseInfo(state.baseInfo, action),
   customers: customers(state.customers, action),
@@ -39,4 +37,5 @@ export default (state = data, action) => ({
   environments: environments(state.environments, action),
   events: events(state.events, action),
   columns: columns(state.columns, action),
+  templates: templates(state.templates, action),
 });

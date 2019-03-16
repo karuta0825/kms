@@ -56,9 +56,9 @@ const inputValues = (
 };
 
 const selection = (
-  state: Array<number>,
+  state: Array<string>,
   action: Action
-): Array<number> => {
+): Array<string> => {
   const { type, payload } = action;
   switch (type) {
     case Types.SELECT_CLIENT: {
@@ -88,6 +88,55 @@ const rowChanges = (state, action: Action): Object => {
   }
 };
 
+const isOpenDownloadModal = (
+  state: boolean,
+  action: Action
+): boolean => {
+  const { type, payload } = action;
+  switch (type) {
+    case Types.TOGGLE_CLIENT_DOWNLOAD_MODAL:
+      return payload;
+    case Types.EXEC_CLIENT_DOWNLOAD:
+      return false;
+    default:
+      return state;
+  }
+};
+
+const selectDownloadItem = (
+  state: Object,
+  action: Action
+): Object => {
+  const { type, payload } = action;
+  switch (type) {
+    case Types.TOGGLE_CLIENT_DOWNLOAD_ITEM: {
+      const obj = {};
+      obj[payload.itemName] = payload.isChecked;
+      return {
+        ...state,
+        ...obj,
+      };
+    }
+    default:
+      return state;
+  }
+};
+
+const canDownload = (state: boolean, action: Action): boolean => {
+  const { type, payload } = action;
+  switch (type) {
+    case Types.EXEC_CLIENT_DOWNLOAD:
+      return payload;
+    case Types.TOGGLE_CLIENT_DOWNLOAD_MODAL:
+      if (payload) {
+        return false;
+      }
+      return state;
+    default:
+      return state;
+  }
+};
+
 export default (
   state: UserDetailTabClientType,
   action: Action,
@@ -101,4 +150,10 @@ export default (
   ),
   selection: selection(state.selection, action),
   rowChanges: rowChanges(state.rowChanges, action),
+  isOpenDownloadModal: isOpenDownloadModal(
+    state.isOpenDownloadModal,
+    action
+  ),
+  download: selectDownloadItem(state.download, action),
+  canDownload: canDownload(state.canDownload, action),
 });

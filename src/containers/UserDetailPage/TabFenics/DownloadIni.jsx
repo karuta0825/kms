@@ -1,6 +1,6 @@
 // @flow
 import { connect } from 'react-redux';
-import moment from 'moment';
+import Moment from 'moment';
 import Download from '../../../components/Download';
 import { toggleDownloadItem } from './actions';
 import { makeBlobFromObjList } from '../../../utils/download';
@@ -21,7 +21,7 @@ function makeBlob(state: StateType): Blob {
     access_control_group: 'お客様用　システム１',
     start_date:
       (fenics.start_on &&
-        moment(fenics.start_on).format('YYYYMMDD')) ||
+        Moment(fenics.start_on).format('YYYYMMDD')) ||
       '',
     end_date: '',
     comment1: state.data.baseInfo.user_name,
@@ -33,7 +33,7 @@ function makeBlob(state: StateType): Blob {
 }
 
 const mapStateToProps = (state: StateType): Object => {
-  const filename = `${new moment().format('YYYYMMDD')}_${
+  const filename = `${new Moment().format('YYYYMMDD')}_${
     state.data.baseInfo.kid
   }_fenicsAccount.csv`;
   return {

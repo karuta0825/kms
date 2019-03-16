@@ -23,5 +23,6 @@ store.dispatch({ type: Types.HTTP_GET_SERVICES });
 store.dispatch({ type: Types.HTTP_GET_MEMOTEMPLATES });
 store.dispatch({ type: Types.HTTP_GET_ENVIRONMENTS });
 store.dispatch({ type: Types.HTTP_GET_ACCOUNTS });
+store.dispatch({ type: Types.HTTP_GET_TEMPLATES });
 
 export default store;

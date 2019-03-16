@@ -120,6 +120,8 @@ const initState: StateType = {
       selection: [],
       rowChanges: {},
       isOpenDeleteModal: false,
+      isOpenDownloadModal: false,
+      download: {},
     },
     fenicsTab: {
       isEdit: false,
