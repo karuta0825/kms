@@ -8,7 +8,7 @@ import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import TabSystem from './TabSystem';
 import TabCustomer from './TabCustomer';
-import { changeTabIndex } from './actions';
+import { changeTabPosition } from './actions';
 import TabLicense from './TabLicense';
 import TabClient from './TabClient';
 import TabFenics from './TabFenics';
@@ -39,7 +39,6 @@ function TabContainer(
 const styles = theme => ({
   root: {
     flexGrow: 1,
-    // width: '100%',
     height: 'calc(100% - 52px)',
     backgroundColor: theme.palette.background.paper,
     marginTop: '3px',
@@ -51,57 +50,116 @@ const styles = theme => ({
 
 type PropsType = {
   classes: Object,
-  value: number,
-  handleChange: (any, number) => void,
+  value: string,
+  hasFenics: boolean,
+  hasBusiv: boolean,
+  hasMobile: boolean,
+  dispatch: () => void,
 };
 
 function TabManager(props: PropsType): React.Node {
-  const { classes, value, handleChange } = props;
+  const {
+    classes,
+    value,
+    hasFenics,
+    hasBusiv,
+    hasMobile,
+    dispatch,
+  } = props;
+
+  const position = value;
+  if (
+    (!hasFenics && value === 'fenics') ||
+    (!hasBusiv && value === 'busivs') ||
+    (!hasMobile && value === 'mobile')
+  ) {
+    dispatch(changeTabPosition('baseInfo'));
+  }
+
   return (
     <Paper className={classes.root}>
       <Tabs
         value={value}
-        onChange={handleChange}
+        onChange={(event, tabName) => {
+          dispatch(changeTabPosition(tabName));
+        }}
         scrollable
         scrollButtons="auto"
       >
-        <Tab label="システム情報" className={classes.tabTitle} />
-        <Tab label="拠点情報" className={classes.tabTitle} />
-        <Tab label="ライセンス" className={classes.tabTitle} />
+        <Tab
+          label="システム情報"
+          className={classes.tabTitle}
+          value="baseInfo"
+        />
+        <Tab
+          label="拠点情報"
+          className={classes.tabTitle}
+          value="customers"
+        />
+        <Tab
+          label="ライセンス"
+          className={classes.tabTitle}
+          value="license"
+        />
         <Tab
           label="クライアント(Citrix数)"
           className={classes.tabTitle}
+          value="clients"
         />
-        <Tab label="Fenics" className={classes.tabTitle} />
-        <Tab label="ビジV" className={classes.tabTitle} />
-        <Tab label="パートナ" className={classes.tabTitle} />
-        <Tab label="モバイル" className={classes.tabTitle} />
-        <Tab label="履歴" className={classes.tabTitle} />
+        {hasFenics && (
+          <Tab
+            label="Fenics"
+            className={classes.tabTitle}
+            value="fenics"
+          />
+        )}
+        {hasBusiv && (
+          <Tab
+            label="ビジV"
+            className={classes.tabTitle}
+            value="busivs"
+          />
+        )}
+        <Tab
+          label="パートナ"
+          className={classes.tabTitle}
+          value="partners"
+        />
+        {hasMobile && (
+          <Tab
+            label="モバイル"
+            className={classes.tabTitle}
+            value="mobiles"
+          />
+        )}
+        <Tab
+          label="履歴"
+          className={classes.tabTitle}
+          value="historys"
+        />
       </Tabs>
-      {value === 0 && <TabSystem />}
-      {value === 1 && <TabCustomer />}
-      {value === 2 && <TabLicense />}
-      {value === 3 && <TabClient />}
-      {value === 4 && <TabFenics />}
-      {value === 5 && <TabBuisv />}
-      {value === 6 && <TabPartner />}
-      {value === 7 && <TabContainer>Item Eigth</TabContainer>}
-      {value === 8 && <TabHistory />}
+      {position === 'baseInfo' && <TabSystem />}
+      {position === 'customers' && <TabCustomer />}
+      {position === 'license' && <TabLicense />}
+      {position === 'clients' && <TabClient />}
+      {position === 'fenics' && <TabFenics />}
+      {position === 'busivs' && <TabBuisv />}
+      {position === 'partners' && <TabPartner />}
+      {position === 'mobiles' && (
+        <TabContainer>Item Eigth</TabContainer>
+      )}
+      {position === 'historys' && <TabHistory />}
     </Paper>
   );
 }
 
-const mapStateToProps = state => ({
-  value: state.userDetailPage.tabIndex,
+const mapStateToProps = (state: StateType) => ({
+  value: state.userDetailPage.tabPosition,
+  hasBusiv: state.data.baseInfo.has_busiv,
+  hasFenics: state.data.baseInfo.has_fenics,
+  hasMobile: state.data.baseInfo.has_mobile,
 });
 
-const mapDispatchToProps = (dispatch): Object => ({
-  handleChange: (event, value) => {
-    dispatch(changeTabIndex(value));
-  },
-});
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(withStyles(styles)(TabManager));
+export default connect(mapStateToProps)(
+  withStyles(styles)(TabManager)
+);

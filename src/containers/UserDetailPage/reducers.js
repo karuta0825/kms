@@ -10,7 +10,7 @@ import historyTab from './TabHistory/reducers';
 import partnerTab from './TabPartner/reducers';
 import memo from './Memo/reducers';
 
-const tabIndex = (state: number, action): number => {
+const tabPosition = (state: number, action): number => {
   const { type, payload } = action;
   switch (type) {
     case Types.SET_TAB_POSITION:
@@ -93,7 +93,7 @@ export default (
   action: Action,
   data: CombineDataType
 ) => ({
-  tabIndex: tabIndex(state.tabIndex, action),
+  tabPosition: tabPosition(state.tabPosition, action),
   isFetching: isFetching(state.isFetching, action),
   buttonPrevIsActive: buttonPrevIsActive(
     state.buttonPrevIsActive,

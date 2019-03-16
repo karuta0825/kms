@@ -1,5 +1,5 @@
 declare type UserDetailPageType = {
-  tabIndex: number,
+  tabPosition: string,
   buttonPrevIsActive: boolean,
   buttonNextIsActive: boolean,
   isFetching: boolean,

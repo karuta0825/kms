@@ -50,7 +50,7 @@ const initState: StateType = {
     canDelete: true,
   },
   userDetailPage: {
-    tabIndex: 0,
+    tabPosition: 'baseInfo',
     isFetching: false,
     buttonPrevIsActive: true,
     buttonNextIsActive: true,

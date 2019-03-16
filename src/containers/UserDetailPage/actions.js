@@ -1,7 +1,7 @@
 // @flow
 import * as Types from '../../constants/ActionTypes';
 
-export const changeTabIndex = (index: number) => ({
+export const changeTabPosition = (index: string) => ({
   type: Types.SET_TAB_POSITION,
   payload: index,
 });
