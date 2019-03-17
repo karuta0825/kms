@@ -164,13 +164,34 @@
 - [] 履歴管理
 - [] モバイル画面
 - [x] 詳細画面のタブ表示
+- [x] 詳細画面の編集状態をもどすこと
 - [] 入力チェック系(kids の重複、fenics の IP 重複)
 - [] ボタンの位置
 - [] 移行用 SQL 作成(ビジ V)
 - [] ライセンステキスト編集機能
-- [] 詳細画面の編集状態をもどすこと
 - [] ユーザー登録機能の実装
 - [] cache の名前をかえる(usr を先頭にいれる)
+
+### 履歴管理方法
+
+生成しないといけないオブジェクト
+
+```js
+  {
+    kids_id: string, // req.params
+    content_name: string,
+    item_name: string,
+    before: string,
+    after: string,
+    create_on: string, // server create
+    create_user_id: number // req.sessions
+  }
+```
+
+1. isDiff でレコード追加するかどうかをきめる
+2. レコード生成(kids_id, before, after, create_on, create_user_id は生成可能)
+3. content_name はテーブルごとに固定値
+4. item_name は、変換テーブルが必要なのでテーブルに持たせる
 
 ### 実装したい機能
 
