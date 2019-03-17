@@ -2,17 +2,6 @@
 import * as Types from '../../../constants/ActionTypes';
 import checkers from '../../../utils/inputChecks';
 
-function getStartNumberId(range_id: string): string {
-  const [start_id, end_id] = (range_id && range_id.split('-')) || [
-    '',
-    '',
-  ];
-  if (start_id === '') {
-    return '0';
-  }
-  return start_id;
-}
-
 function isDecreae(value: string, cache: number): boolean {
   const fmt = Number(value);
   return fmt < cache;
@@ -52,17 +41,10 @@ const inputValues = (
   const { type, payload } = action;
   switch (type) {
     case Types.SUCCESSED_FETCH_USERINFO:
-      const inputValues = payload.baseInfo[0];
-      return {
-        ...inputValues,
-        start_id: getStartNumberId(inputValues.range_id),
-      };
+      return payload.baseInfo[0];
     case Types.TOGGLE_EDIT_MODE:
       if (payload.tabName === 'BASEINFO' && !payload.isEdit) {
-        return {
-          ...cache,
-          start_id: getStartNumberId(cache.range_id),
-        };
+        return cache;
       }
       return state;
     case Types.CHANGE_BASEINFO_VALUE: {
